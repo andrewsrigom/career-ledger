@@ -1,0 +1,27 @@
+{
+  "files.exclude": {
+    "dist": true
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["/content/public/profile.json"],
+      "url": "./schemas/profile.schema.json"
+    },
+    {
+      "fileMatch": ["/content/public/taxonomy.json"],
+      "url": "./schemas/taxonomy.schema.json"
+    },
+    {
+      "fileMatch": ["/content/public/entries/*.json"],
+      "url": "./schemas/public-entry.schema.json"
+    },
+    {
+      "fileMatch": ["/content/public/projects/*.json"],
+      "url": "./schemas/public-project.schema.json"
+    },
+    {
+      "fileMatch": ["/career.local.json"],
+      "url": "./schemas/local-config.schema.json"
+    }
+  ]
+}

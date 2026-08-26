@@ -1,0 +1,49 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "career-ledger-foundation",
+  "slug": "career-ledger-foundation",
+  "title": "Career Ledger Foundation",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-08-26",
+    "end": null,
+    "label": "August 2026–present"
+  },
+  "summary": "Designed a private-first publishing system that turns local engineering evidence into reviewed, sanitized career records and a static public website.",
+  "context": "Engineering work is spread across repositories, tickets, notes, and long-running initiatives. The project creates a durable career memory without making confidential source material part of the public portfolio.",
+  "contributions": [
+    "Defined an evidence-to-initiative workflow that separates raw activity, private analysis, sanitized candidates, and approved public records.",
+    "Created repository-scoped Codex instructions and skills for project analysis, consolidation, sanitization, publication review, and site maintenance.",
+    "Implemented validation, privacy auditing, incremental local Git scans, staged-file guards, static generation, and GitHub Pages deployment without runtime dependencies."
+  ],
+  "outcomes": [
+    {
+      "text": "Established a reusable offline workflow for recording engineering work while keeping publication deliberate and privacy-gated.",
+      "evidenceLevel": "observed"
+    }
+  ],
+  "areas": [
+    "Developer Experience",
+    "AI Engineering",
+    "Product Engineering",
+    "System Design"
+  ],
+  "technologies": [
+    "Node.js",
+    "Git",
+    "GitHub Pages",
+    "Codex",
+    "JSON"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-26",
+    "approvedBy": "owner"
+  },
+  "links": []
+}

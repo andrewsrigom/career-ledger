@@ -1,0 +1,34 @@
+{
+  "$schema": "./schemas/local-config.schema.json",
+  "schemaVersion": 1,
+  "owner": {
+    "name": "Andrews",
+    "gitIdentities": [
+      {
+        "name": "Andrews",
+        "emails": [
+          "your-email@example.com"
+        ]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "example-local-project",
+      "label": "Example local project",
+      "path": "../example-local-project",
+      "kind": "personal",
+      "visibility": "private",
+      "contextFile": ".career/private/contexts/example-local-project.md",
+      "scan": {
+        "since": "2026-01-01",
+        "maxCommits": 200,
+        "includeUncommitted": true
+      }
+    }
+  ],
+  "privacy": {
+    "blockedTerms": [],
+    "blockedPatterns": []
+  }
+}

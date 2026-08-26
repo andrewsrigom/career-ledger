@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "public-entry-slug",
+  "slug": "public-entry-slug",
+  "title": "Public entry title",
+  "kind": "improvement",
+  "status": "completed",
+  "period": {
+    "start": "2026-01-01",
+    "end": "2026-02-01",
+    "label": "January–February 2026"
+  },
+  "summary": "A clear public summary that contains no confidential detail and makes no unsupported claim.",
+  "context": "Optional public context that explains why the effort mattered without identifying the private system.",
+  "contributions": [
+    "A specific, correctly attributed contribution."
+  ],
+  "outcomes": [],
+  "areas": ["Product Engineering"],
+  "technologies": [],
+  "featured": false,
+  "publication": {
+    "status": "candidate",
+    "sanitized": true,
+    "reviewedAt": null,
+    "approvedBy": null
+  },
+  "links": []
+}

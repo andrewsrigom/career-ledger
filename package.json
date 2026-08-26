@@ -1,0 +1,28 @@
+{
+  "name": "career-ledger",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A private-first engineering career ledger with a sanitized static public portfolio.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "setup": "node scripts/career.mjs init && node scripts/career.mjs hooks",
+    "dev": "node scripts/dev-server.mjs",
+    "build": "node scripts/career.mjs build",
+    "test": "node --test",
+    "check": "node scripts/career.mjs validate && node scripts/career.mjs audit && node --test && node scripts/career.mjs build",
+    "career": "node scripts/career.mjs",
+    "career:init": "node scripts/career.mjs init",
+    "career:doctor": "node scripts/career.mjs doctor",
+    "career:scan": "node scripts/career.mjs scan",
+    "career:review": "node scripts/career.mjs review",
+    "career:validate": "node scripts/career.mjs validate",
+    "career:audit": "node scripts/career.mjs audit",
+    "career:publish": "node scripts/career.mjs publish",
+    "career:approve": "node scripts/career.mjs approve",
+    "career:hooks": "node scripts/career.mjs hooks",
+    "career:validate-private": "node scripts/career.mjs validate-private"
+  }
+}

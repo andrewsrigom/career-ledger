@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schemas/private-initiative.schema.json",
+  "schemaVersion": 1,
+  "id": "initiative-id",
+  "projectId": "project-id",
+  "title": "Private initiative title",
+  "period": {
+    "start": "2026-01-01",
+    "end": null,
+    "label": "January 2026–present"
+  },
+  "status": "detected",
+  "attribution": {
+    "scope": "contributed",
+    "confidence": "medium",
+    "notes": "Explain what supports this attribution and what remains uncertain."
+  },
+  "evidence": [],
+  "contributions": [
+    "Describe a contribution supported by the private evidence."
+  ],
+  "potentialOutcomes": [
+    {
+      "text": "Describe a possible outcome that still needs confirmation.",
+      "status": "needs-confirmation",
+      "evidenceLevel": "unknown",
+      "notes": "State what evidence or owner confirmation is required."
+    }
+  ],
+  "areas": ["Product Engineering"],
+  "technologies": [],
+  "sensitivity": {
+    "level": "high",
+    "blockedTerms": [],
+    "notes": "Explain what must be generalized or removed before publication."
+  },
+  "sourceScans": [],
+  "updatedAt": "2026-08-26"
+}

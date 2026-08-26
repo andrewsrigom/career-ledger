@@ -1,0 +1,29 @@
+name: Verify Career Ledger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - name: Run validation, privacy audit, tests, and build
+        run: npm run check
+        env:
+          SITE_URL: https://example.github.io
+          BASE_PATH: /career-ledger

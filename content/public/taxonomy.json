@@ -1,0 +1,143 @@
+{
+  "$schema": "../../schemas/taxonomy.schema.json",
+  "schemaVersion": 1,
+  "areas": [
+    {
+      "slug": "frontend-architecture",
+      "label": "Frontend Architecture",
+      "description": "UI foundations, rendering systems, design systems, and maintainable frontend structure.",
+      "order": 1
+    },
+    {
+      "slug": "backend-architecture",
+      "label": "Backend Architecture",
+      "description": "Services, APIs, domain boundaries, asynchronous workflows, and backend runtime design.",
+      "order": 2
+    },
+    {
+      "slug": "product-engineering",
+      "label": "Product Engineering",
+      "description": "Turning product goals into usable, maintainable, and measurable software.",
+      "order": 3
+    },
+    {
+      "slug": "system-design",
+      "label": "System Design",
+      "description": "End-to-end architecture, tradeoffs, boundaries, scalability, and integration design.",
+      "order": 4
+    },
+    {
+      "slug": "authentication-security",
+      "label": "Authentication & Security",
+      "description": "Identity, authorization, secure integration, and application security controls.",
+      "order": 5
+    },
+    {
+      "slug": "observability-reliability",
+      "label": "Observability & Reliability",
+      "description": "Telemetry, diagnostics, resilience, failure handling, and production confidence.",
+      "order": 6
+    },
+    {
+      "slug": "developer-experience",
+      "label": "Developer Experience",
+      "description": "Tooling, automation, standards, workflows, and systems that improve engineering effectiveness.",
+      "order": 7
+    },
+    {
+      "slug": "data-databases",
+      "label": "Data & Databases",
+      "description": "Data modeling, storage, querying, migrations, and data-intensive application design.",
+      "order": 8
+    },
+    {
+      "slug": "cloud-infrastructure",
+      "label": "Cloud & Infrastructure",
+      "description": "Deployment, hosting, delivery, cloud services, and operational architecture.",
+      "order": 9
+    },
+    {
+      "slug": "ai-engineering",
+      "label": "AI Engineering",
+      "description": "AI-assisted products, agent workflows, retrieval, generation, and evaluation systems.",
+      "order": 10
+    },
+    {
+      "slug": "performance",
+      "label": "Performance",
+      "description": "Runtime efficiency, loading behavior, profiling, and system-level performance improvements.",
+      "order": 11
+    },
+    {
+      "slug": "accessibility",
+      "label": "Accessibility",
+      "description": "Inclusive interaction, semantic interfaces, assistive technology support, and accessible product quality.",
+      "order": 12
+    },
+    {
+      "slug": "leadership",
+      "label": "Technical Leadership",
+      "description": "Technical direction, decision-making, coordination, mentoring, and engineering alignment.",
+      "order": 13
+    },
+    {
+      "slug": "commerce",
+      "label": "Commerce",
+      "description": "Commerce platforms, payments, storefront architecture, and transaction-oriented product systems.",
+      "order": 14
+    },
+    {
+      "slug": "mobile",
+      "label": "Mobile",
+      "description": "Mobile product architecture, native integration, responsive behavior, and device-specific experiences.",
+      "order": 15
+    }
+  ],
+  "kinds": [
+    {
+      "value": "architecture",
+      "label": "Architecture",
+      "description": "A substantial system, boundary, or technical-direction effort."
+    },
+    {
+      "value": "improvement",
+      "label": "Improvement",
+      "description": "A meaningful enhancement to quality, maintainability, experience, or capability."
+    },
+    {
+      "value": "investigation",
+      "label": "Investigation",
+      "description": "A structured diagnosis or evaluation that produced evidence and direction."
+    },
+    {
+      "value": "launch",
+      "label": "Launch",
+      "description": "A product, feature, platform, or operational capability brought into use."
+    },
+    {
+      "value": "leadership",
+      "label": "Leadership",
+      "description": "Technical direction, coordination, mentoring, or decision ownership."
+    },
+    {
+      "value": "learning",
+      "label": "Learning",
+      "description": "A practical learning effort that produced reusable understanding or artifacts."
+    },
+    {
+      "value": "project",
+      "label": "Project",
+      "description": "A coherent product, tool, experiment, or platform built over time."
+    },
+    {
+      "value": "reliability",
+      "label": "Reliability",
+      "description": "Work that improved diagnostics, resilience, recoverability, or operational safety."
+    },
+    {
+      "value": "research",
+      "label": "Research",
+      "description": "Technical exploration, comparison, or prototyping used to reduce uncertainty."
+    }
+  ]
+}

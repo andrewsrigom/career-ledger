@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/scan.schema.json",
+  "title": "Private repository scan",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "scanId",
+    "project",
+    "repository",
+    "window",
+    "commits",
+    "uncommitted",
+    "summary",
+    "warnings",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "scanId": {
+      "type": "string"
+    },
+    "project": {
+      "type": "object"
+    },
+    "repository": {
+      "type": "object"
+    },
+    "window": {
+      "type": "object"
+    },
+    "commits": {
+      "type": "array"
+    },
+    "uncommitted": {
+      "type": "array"
+    },
+    "summary": {
+      "type": "object"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "../../schemas/profile.schema.json",
+  "schemaVersion": 1,
+  "name": "Andrews",
+  "headline": "Senior Full-Stack Software Engineer",
+  "location": "Maricá, Rio de Janeiro, Brazil",
+  "intro": "A versioned record of the systems, products, investigations, and engineering outcomes I have worked on.",
+  "bio": [
+    "I am a senior full-stack software engineer focused on frontend architecture, product engineering, and scalable web systems.",
+    "This ledger captures meaningful work over time without exposing confidential project data. Entries are selected, sanitized, and reviewed before publication."
+  ],
+  "links": [],
+  "principles": [
+    {
+      "title": "Outcomes over activity",
+      "description": "Commits are supporting evidence. Public records focus on the initiative, contribution, and result."
+    },
+    {
+      "title": "Evidence before claims",
+      "description": "Implementation, ownership, and impact are described only as strongly as the available evidence supports."
+    },
+    {
+      "title": "Privacy by construction",
+      "description": "Private project analysis and public publishing are separated by an explicit review and approval boundary."
+    }
+  ],
+  "updatedAt": "2026-08-26"
+}

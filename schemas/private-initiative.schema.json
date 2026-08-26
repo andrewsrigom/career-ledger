@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/private-initiative.schema.json",
+  "title": "Private career initiative",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "projectId",
+    "title",
+    "period",
+    "status",
+    "attribution",
+    "evidence",
+    "contributions",
+    "potentialOutcomes",
+    "areas",
+    "technologies",
+    "sensitivity",
+    "sourceScans",
+    "updatedAt"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 160
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "label"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "end": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 80
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "detected",
+        "active",
+        "completed",
+        "ready-for-sanitization",
+        "archived"
+      ]
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "confidence",
+        "notes"
+      ],
+      "properties": {
+        "scope": {
+          "enum": [
+            "implemented",
+            "contributed",
+            "designed",
+            "led",
+            "owned",
+            "investigated"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1500
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "reference",
+          "supports"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "commit",
+              "file",
+              "test",
+              "document",
+              "manual-note",
+              "public-source"
+            ]
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "supports": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "contributions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 15,
+        "maxLength": 500
+      }
+    },
+    "potentialOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "text",
+          "status",
+          "evidenceLevel",
+          "notes"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 500
+          },
+          "status": {
+            "enum": [
+              "needs-confirmation",
+              "confirmed",
+              "rejected"
+            ]
+          },
+          "evidenceLevel": {
+            "enum": [
+              "unknown",
+              "observed",
+              "measured",
+              "self-reported",
+              "public"
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "areas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "technologies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sensitivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "blockedTerms",
+        "notes"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "blockedTerms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1500
+        }
+      }
+    },
+    "sourceScans": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "updatedAt": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    }
+  }
+}

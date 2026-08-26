@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "career-ledger",
+  "slug": "career-ledger",
+  "name": "Career Ledger",
+  "kind": "tool",
+  "status": "active",
+  "summary": "A private-first engineering career ledger with a sanitized static public portfolio.",
+  "description": "Career Ledger reads local project evidence through an offline workflow, uses agent-guided analysis to maintain private initiatives, and publishes only manually approved records. The public site and JSON feed are generated statically for GitHub Pages.",
+  "areas": [
+    "Developer Experience",
+    "AI Engineering",
+    "Product Engineering",
+    "System Design"
+  ],
+  "technologies": [
+    "Node.js",
+    "Git",
+    "GitHub Actions",
+    "GitHub Pages",
+    "Codex",
+    "JSON"
+  ],
+  "relatedEntries": [
+    "career-ledger-foundation"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-26",
+    "approvedBy": "owner"
+  },
+  "links": []
+}
