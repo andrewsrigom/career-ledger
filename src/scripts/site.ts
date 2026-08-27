@@ -2,6 +2,21 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 document.documentElement.classList.add('has-js');
 
+function setupHeaderScrollState() {
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  if (!header) return;
+  const threshold = 32;
+  let scrolled = false;
+  const evaluate = () => {
+    const next = window.scrollY > threshold;
+    if (next === scrolled) return;
+    scrolled = next;
+    header.dataset.scrolled = String(scrolled);
+  };
+  evaluate();
+  window.addEventListener('scroll', evaluate, { passive: true });
+}
+
 function setupSectionProgress() {
   const navigation = document.querySelector<HTMLElement>('[data-section-progress]');
   if (!navigation) return;
@@ -137,6 +152,7 @@ function setupInteractiveHome() {
 setupSectionProgress();
 setupProjectPreviews();
 setupTimelineFilters();
+setupHeaderScrollState();
 setupInteractiveHome();
 
 window.addEventListener('pagehide', () => window.__careerArchitecture?.destroy());

@@ -37,7 +37,7 @@ export function mountArchitectureScene(container: HTMLElement) {
     const material = new THREE.LineBasicMaterial({
       color: colors[index],
       transparent: true,
-      opacity: index === 0 ? .95 : .08
+      opacity: index === 0 ? .95 : .12
     });
     const layer = new THREE.LineSegments(layerGeometry(width!, depth!), material);
     layer.position.y = 2.5 - index * 1.25;
@@ -46,20 +46,38 @@ export function mountArchitectureScene(container: HTMLElement) {
   });
 
   const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xb44d2f });
+  const nodeHaloMaterial = new THREE.MeshBasicMaterial({
+    color: 0xb44d2f,
+    transparent: true,
+    opacity: .28,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
   const nodes = new THREE.Group();
   const points = [
     [-1.4, 2.55, -.7], [1.4, 2.55, .7], [-2, 1.3, 1], [2, 1.3, -1],
     [-2.5, .05, -1.2], [0, .05, 1.5], [2.5, .05, .3], [-2.8, -1.2, 1.6],
     [1.2, -1.2, -1.8], [3, -2.45, 1.4], [-1.5, -2.45, -1.7]
   ];
+  const nodeGeometry = new THREE.SphereGeometry(.11, 12, 12);
+  const haloGeometry = new THREE.SphereGeometry(.24, 14, 14);
   points.forEach(([x, y, z]) => {
-    const node = new THREE.Mesh(new THREE.SphereGeometry(.09, 10, 10), nodeMaterial);
+    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
     node.position.set(x!, y!, z!);
     nodes.add(node);
+    const halo = new THREE.Mesh(haloGeometry, nodeHaloMaterial);
+    halo.position.set(x!, y!, z!);
+    nodes.add(halo);
   });
   root.add(nodes);
 
-  const pathMaterial = new THREE.LineBasicMaterial({ color: 0x769589, transparent: true, opacity: .55 });
+  const pathMaterial = new THREE.LineBasicMaterial({
+    color: 0x8fb4a4,
+    transparent: true,
+    opacity: .55,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
   const pathPoints: number[] = [];
   for (let index = 0; index < points.length - 1; index += 1) {
     pathPoints.push(...points[index]!, ...points[index + 1]!);
@@ -71,8 +89,13 @@ export function mountArchitectureScene(container: HTMLElement) {
   let progress = 0;
   let pointerX = 0;
   let pointerY = 0;
+  let idleAngle = 0;
   let destroyed = false;
   let frame = 0;
+  let lastTime = performance.now();
+  let visible = true;
+  let idleActive = false;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const resize = () => {
     if (destroyed) return;
@@ -87,25 +110,42 @@ export function mountArchitectureScene(container: HTMLElement) {
     requestRender();
   };
 
-  const render = () => {
+  const render = (time?: number) => {
     frame = 0;
     if (destroyed || document.hidden) return;
-    root.rotation.y = -.22 + progress * .3 + pointerX * .08;
-    root.rotation.x = -.06 + pointerY * .04;
+    if (idleActive && time !== undefined) {
+      const now = time;
+      const delta = Math.min(.1, (now - lastTime) / 1000);
+      lastTime = now;
+      idleAngle += delta * .05;
+    } else {
+      lastTime = performance.now();
+    }
+    root.rotation.y = -.22 + progress * .3 + pointerX * .08 + idleAngle;
+    root.rotation.x = -.06 + pointerY * .04 + Math.sin(idleAngle * .8) * .02;
     camera.position.y = 8 - progress * 1.1;
     camera.lookAt(0, -.15 - progress * .4, 0);
     layers.forEach((layer, index) => {
       const threshold = index / layers.length;
       const opacity = THREE.MathUtils.smoothstep(progress + .2, threshold, Math.min(1, threshold + .32));
-      (layer.material as THREE.LineBasicMaterial).opacity = index === 0 ? .9 : .08 + opacity * .78;
+      (layer.material as THREE.LineBasicMaterial).opacity = index === 0 ? .95 : .14 + opacity * .78;
       layer.position.y = 2.5 - index * (1.25 - progress * .08);
     });
     renderer.render(scene, camera);
+    if (idleActive) frame = requestAnimationFrame(render);
   };
 
-  // Coalesce input events into at most one frame. No self-scheduling render loop.
   const requestRender = () => {
     if (!frame && !destroyed && !document.hidden) frame = requestAnimationFrame(render);
+  };
+
+  const setIdle = (active: boolean) => {
+    if (active === idleActive) return;
+    idleActive = active && !reducedMotion.matches;
+    if (idleActive) {
+      lastTime = performance.now();
+      requestRender();
+    }
   };
 
   const setProgress = (value: number) => {
@@ -123,29 +163,47 @@ export function mountArchitectureScene(container: HTMLElement) {
     if (document.hidden) {
       cancelAnimationFrame(frame);
       frame = 0;
-    } else requestRender();
+    } else if (visible) requestRender();
   };
   const observer = new ResizeObserver(resize);
   observer.observe(container);
+  const viewObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      visible = entry.isIntersecting;
+      setIdle(visible);
+    }
+  }, { threshold: .1 });
+  viewObserver.observe(container);
   container.addEventListener('pointermove', onPointer, { passive: true });
   window.addEventListener('career:architecture-progress', onProgress);
   document.addEventListener('visibilitychange', onVisibility);
+  const onReducedMotion = () => setIdle(visible);
+  reducedMotion.addEventListener('change', onReducedMotion);
 
   const destroy = () => {
     if (destroyed) return;
     destroyed = true;
+    idleActive = false;
     cancelAnimationFrame(frame);
     observer.disconnect();
+    viewObserver.disconnect();
     container.removeEventListener('pointermove', onPointer);
     window.removeEventListener('career:architecture-progress', onProgress);
     document.removeEventListener('visibilitychange', onVisibility);
+    reducedMotion.removeEventListener('change', onReducedMotion);
     canvas.removeEventListener('webglcontextlost', destroy);
+    nodeGeometry.dispose();
+    haloGeometry.dispose();
+    nodeMaterial.dispose();
+    nodeHaloMaterial.dispose();
     root.traverse((object: THREE.Object3D) => {
       const mesh = object as THREE.Mesh;
-      if (mesh.geometry) mesh.geometry.dispose();
+      if (mesh.geometry && mesh.geometry !== nodeGeometry && mesh.geometry !== haloGeometry) mesh.geometry.dispose();
       const material = mesh.material;
-      if (Array.isArray(material)) material.forEach((item) => item.dispose());
-      else material?.dispose();
+      if (material && material !== nodeMaterial && material !== nodeHaloMaterial) {
+        if (Array.isArray(material)) material.forEach((item) => item.dispose());
+        else material.dispose();
+      }
     });
     renderer.dispose();
     renderer.domElement.remove();
