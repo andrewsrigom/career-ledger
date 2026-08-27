@@ -1,0 +1,33 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import SectionProgress from '../SectionProgress.astro';
+import Hero from '../home/Hero.astro';
+import ProjectIndex from '../home/ProjectIndex.astro';
+import EngineeringLandscape from '../home/EngineeringLandscape.astro';
+import ExperienceTimeline from '../home/ExperienceTimeline.astro';
+import Principles from '../home/Principles.astro';
+import Toolbox from '../home/Toolbox.astro';
+
+interface Props { context: SiteContext; }
+const { context } = Astro.props;
+const { data, urls, copy, locale } = context;
+---
+
+<BaseLayout
+  data={data}
+  urls={urls}
+  copy={copy}
+  locale={locale}
+  description={data.profile.intro}
+  active="home"
+  pageType="home"
+>
+  <SectionProgress locale={locale} hasExperience={Boolean(data.resume)} />
+  <Hero data={data} urls={urls} copy={copy} locale={locale} />
+  <ProjectIndex data={data} urls={urls} copy={copy} locale={locale} />
+  <EngineeringLandscape data={data} urls={urls} locale={locale} />
+  {data.resume && <ExperienceTimeline data={data} urls={urls} copy={copy} locale={locale} />}
+  <Principles data={data} locale={locale} />
+  <Toolbox data={data} locale={locale} />
+</BaseLayout>

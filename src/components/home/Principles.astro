@@ -1,0 +1,23 @@
+---
+import type { CareerDataset } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+interface Props { data: CareerDataset; locale: 'en' | 'pt-BR'; }
+const { data, locale } = Astro.props;
+const p = portfolioCopy(locale);
+---
+
+<section class="principles-section shell" id="about" aria-labelledby="principles-heading" data-section="about">
+  <header class="section-heading principles-section__heading" data-reveal>
+    <span class="eyebrow">05 / {p.principlesKicker}</span>
+    <h2 id="principles-heading">{p.principlesTitle}</h2>
+  </header>
+  <ol class="principle-list">
+    {data.profile.principles.map((principle, index: number) => (
+      <li data-reveal>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <h3>{principle.title}</h3>
+        <p>{principle.description}</p>
+      </li>
+    ))}
+  </ol>
+</section>

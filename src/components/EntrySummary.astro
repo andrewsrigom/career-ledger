@@ -1,0 +1,29 @@
+---
+import type { UrlContext, SiteCopy, Entry } from '../lib/types';
+import TagList from './TagList.astro';
+interface Props { entry: Entry; urls: UrlContext; copy: SiteCopy; }
+const { entry, urls, copy } = Astro.props;
+---
+
+<article
+  class="record-row"
+  data-timeline-entry
+  data-kind={entry.kind}
+  data-significance={entry.significance}
+  data-activity-types={entry.activityTypes.join(' ')}
+  data-search={`${entry.title} ${entry.summary} ${entry.areas.join(' ')} ${entry.technologies.join(' ')}`.toLowerCase()}
+>
+  <a href={urls.href(`entries/${entry.slug}/`)}>
+    <div class="record-row__date">
+      <time datetime={entry.period.start}>{entry.period.label}</time>
+      <span>{copy.significances[entry.significance] ?? entry.significance}</span>
+    </div>
+    <div class="record-row__body">
+      <span>{copy.activityTypeLabels[entry.activityTypes[0] ?? ''] ?? copy.recordType}</span>
+      <h2>{entry.title}</h2>
+      <p>{entry.summary}</p>
+      <TagList items={entry.areas} label={copy.engineeringAreas} />
+    </div>
+    <span class="record-row__arrow" aria-hidden="true">↗</span>
+  </a>
+</article>

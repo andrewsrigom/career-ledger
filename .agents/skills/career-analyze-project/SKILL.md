@@ -1,13 +1,13 @@
 ---
 name: career-analyze-project
-description: Analyze a configured local software project and its latest private Git scan to identify meaningful engineering workstreams. Use for repository analysis, career evidence extraction, or updating private drafts. Never use it to publish public content.
+description: Analyze a configured local software project and its latest private Git scan to capture meaningful chronological activities and update evidence-backed workstreams. Use for repository analysis or career evidence extraction. Never use it to publish public content.
 ---
 
 # Analyze a Local Project
 
 ## Goal
 
-Convert local implementation evidence into conservative private drafts that explain meaningful engineering work without copying source code or creating public portfolio copy.
+Convert local implementation evidence into dated private activities and evolving workstreams without copying source code or creating public portfolio copy.
 
 ## Preconditions
 
@@ -26,14 +26,14 @@ npm run career:scan -- --project <project-id>
 
 1. Read `AGENTS.md`, `docs/privacy-model.md`, and `docs/data-model.md`.
 2. Read the latest scan and prior scans needed to understand continuity.
-3. Read existing drafts and initiatives for this project before creating anything new.
+3. Read existing activities, workstreams, legacy drafts, and initiatives for this project before creating anything new.
 4. Inspect the local project directly, beginning with changed files, tests, documentation, and nearby architecture.
-5. Identify workstreams that are meaningful beyond a single commit.
-6. Separate routine implementation noise from architecture, investigation, product delivery, reliability, developer experience, or other durable work.
-7. Determine what the evidence supports about the owner's contribution.
-8. Capture uncertain attribution or impact explicitly.
-9. Create or update private drafts only.
-10. Run private validation before finishing.
+5. Capture a new activity only when the evidence shows meaningful professional work or meaningful progression in an existing workstream.
+6. Group related changes by problem, system boundary, technical objective, and timeline; never use the commit as the unit of career meaning.
+7. Classify activities with semantic types, normalized technical domains, progression, and the least promotional supported significance.
+8. Record evidence provenance as `observed`, `provided`, `derived`, `inferred`, or `unverified`; do not blur inference into fact.
+9. Determine what the evidence supports about the owner's contribution and keep attribution uncertainty explicit.
+10. Create or update private activities and workstreams only, then run private validation.
 
 ## Evidence hierarchy
 
@@ -60,7 +60,9 @@ Use these scopes precisely:
 
 Never infer `led` or `owned` from repository breadth alone.
 
-## Outcomes
+## Significance and outcomes
+
+Use `activity` for normal meaningful work and `notable` when scope, complexity, ownership, or expertise is unusually informative. Use `milestone` only for completed, supported progress. Use `achievement` only when at least one outcome is confirmed and evidence-backed.
 
 Implementation evidence can support a delivered capability. It cannot by itself support claims about adoption, incident reduction, revenue, conversion, latency, cost, reliability, or user satisfaction.
 
@@ -75,21 +77,33 @@ Write unverified results under `potentialOutcomes` with:
 
 ## Output
 
-Write drafts to:
+Write dated activities to:
 
 ```text
-.career/private/drafts/<project-id>/<initiative-id>.json
+.career/private/activities/<project-id>/<activity-id>.json
 ```
 
-Use `schemas/private-initiative.schema.json`.
+Use `schemas/private-activity.schema.json`. Evidence IDs must be unique within the project. Set `workstreamId` when the activity clearly belongs to an existing or newly created workstream.
 
-A draft should include evidence references but must not copy full source files, secrets, customer data, or large code fragments.
+Classify `domains` by the technical surfaces materially changed, using only the schema enum. Represent full-stack work with both `frontend` and `backend`; never invent a `full-stack` domain. Do not tag a supporting test or deployment surface unless it was itself a meaningful part of the activity.
+
+Create or update the corresponding workstream at:
+
+```text
+.career/private/workstreams/<project-id>/<workstream-id>.json
+```
+
+Use `schemas/private-workstream.schema.json`. Preserve activities as separate chronological records and reference them through `activityIds`.
+
+Private records may include detailed references but must not copy full source files, secrets, customer data, or large code fragments.
 
 ## Completion checks
 
-- The draft represents an initiative, not a commit list.
-- Existing initiatives were updated instead of duplicated when appropriate.
+- Each activity represents professional meaning or progression, not a commit.
+- Each activity has evidence-supported normalized domains suitable for a recorded-activity mix.
+- Related work updates an existing workstream instead of creating a duplicate.
+- Milestones and achievements pass their stronger evidence gates.
 - Attribution language is conservative.
 - Unsupported outcomes remain unconfirmed.
 - No public file changed.
-- `node scripts/career.mjs validate-private` passes.
+- `npm run career:validate-private` passes.

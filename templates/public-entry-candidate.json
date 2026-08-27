@@ -6,6 +6,8 @@
   "slug": "public-entry-slug",
   "title": "Public entry title",
   "kind": "improvement",
+  "significance": "activity",
+  "activityTypes": ["implementation"],
   "status": "completed",
   "period": {
     "start": "2026-01-01",

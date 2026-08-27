@@ -4,6 +4,8 @@
 
 - Local project configuration
 - Incremental Git scans
+- Chronological private activities with evidence provenance
+- Evolving workstreams with milestones and confirmed achievements
 - Private Codex analysis workflows
 - Sanitized candidates
 - Explicit approval gate
@@ -15,10 +17,10 @@
 ## Phase 2 — Better evidence management
 
 - Outcome follow-up reminders
-- Initiative lifecycle history
+- Richer workstream lifecycle history and legacy-initiative migration assistance
 - Richer diff summaries without storing source
 - Cross-project duplicate detection
-- STAR story generation from approved private initiatives
+- Resume, portfolio, summary, and interview-story projections from ledger evidence
 - Resume and performance-review exports
 
 ## Phase 3 — Optional personal GitHub enrichment

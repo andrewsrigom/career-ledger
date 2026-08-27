@@ -1,0 +1,26 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+interface Props { context: SiteContext; }
+const { context } = Astro.props;
+const { data, urls, copy, locale } = context;
+---
+
+<BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={copy.areas} description={copy.areasDescription(data.profile.name)} path="areas/" pageType="directory">
+  <header class="page-hero shell">
+    <span class="eyebrow">01 / {copy.engineeringCoverage}</span>
+    <h1>{copy.areas}</h1>
+    <p>{copy.areasIntro}</p>
+  </header>
+  <ol class="area-directory shell">
+    {data.taxonomy.areas.map((area, index: number) => (
+      <li>
+        <a href={urls.href(`areas/${area.slug}/`)}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div><h2>{area.label}</h2><p>{area.description}</p></div>
+          <strong>{copy.recordCount(area.count)}</strong>
+        </a>
+      </li>
+    ))}
+  </ol>
+</BaseLayout>

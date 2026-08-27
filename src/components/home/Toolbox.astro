@@ -1,0 +1,49 @@
+---
+import type { CareerDataset } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+interface Props { data: CareerDataset; locale: 'en' | 'pt-BR'; }
+const { data, locale } = Astro.props;
+const p = portfolioCopy(locale);
+const source = [...new Set(data.technologies.map((item) => item.label))];
+const groups = [
+  { label: locale === 'pt-BR' ? 'Linguagens' : 'Languages', test: /^(typescript|javascript|python|go|rust|java|c#|php|html|css|json)$/i },
+  { label: 'Interface', test: /react|next|astro|vue|angular|svelte|frontend|front-end|storybook|tailwind|accessib|web component|browser extension|gsap|\blit\b/i },
+  { label: locale === 'pt-BR' ? 'Dados e IA' : 'Data & AI', test: /sql|postgres|redis|mongo|database|prisma|drizzle|storage|openai|llm|vector|\brag\b|codex|ollama|model context/i },
+  { label: locale === 'pt-BR' ? 'Sistemas' : 'Systems', test: /node|api|graphql|rest|microservice|backend|nest|express|zod|system design|arquitetura de sistemas/i },
+  { label: locale === 'pt-BR' ? 'Entrega e qualidade' : 'Delivery & quality', test: /git|docker|kubernetes|aws|azure|cloud|test|playwright|vitest|jest|ansible|terraform|github|ci\/cd|telemetry|proxy|shell/i },
+  { label: 'DX', test: /vite|changesets|wxt|eslint|prettier/i }
+];
+const used = new Set<string>();
+const categorized = groups.map((group) => {
+  const items = source.filter((item) => !used.has(item) && group.test.test(item));
+  items.forEach((item) => used.add(item));
+  return { ...group, items };
+});
+const other = source.filter((item: string) => !used.has(item));
+if (other.length) categorized.push({ label: locale === 'pt-BR' ? 'Produto e ferramentas' : 'Product & tools', test: /.*/, items: other });
+---
+
+{source.length > 0 && (
+  <section class="toolbox shell" aria-labelledby="toolbox-heading">
+    <header class="section-heading" data-reveal>
+      <span class="eyebrow">06 / {p.toolboxKicker}</span>
+      <h2 id="toolbox-heading">{p.toolboxTitle}</h2>
+    </header>
+    <div class="toolbox__groups">
+      {categorized.filter((group) => group.items.length).map((group) => (
+        <section data-reveal>
+          <h3>{group.label}</h3>
+          <p>{group.items.join(' · ')}</p>
+        </section>
+      ))}
+    </div>
+    {data.resume && data.resume.education.length > 0 && (
+      <div class="education-list">
+        <h3>{locale === 'pt-BR' ? 'Formação acadêmica' : 'Education'}</h3>
+        {data.resume.education.map((item) => (
+          <p><strong>{item.credential}</strong><span>{item.institution} · {item.period.label}</span></p>
+        ))}
+      </div>
+    )}
+  </section>
+)}

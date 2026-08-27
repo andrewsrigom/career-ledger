@@ -102,6 +102,12 @@
     "featured": {
       "type": "boolean"
     },
+    "presentation": {
+      "$ref": "public-presentation.schema.json#/$defs/presentation"
+    },
+    "activityMix": {
+      "$ref": "public-presentation.schema.json#/$defs/activityMix"
+    },
     "publication": {
       "type": "object",
       "additionalProperties": false,
@@ -159,6 +165,9 @@
           }
         }
       }
+    },
+    "localizations": {
+      "$ref": "public-localizations.schema.json#/$defs/project"
     }
   }
 }

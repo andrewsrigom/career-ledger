@@ -1,0 +1,55 @@
+---
+import type { CareerDataset, UrlContext, SiteCopy } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; locale: 'en' | 'pt-BR'; }
+const { data, urls, copy, locale } = Astro.props;
+const p = portfolioCopy(locale);
+const experiences = data.resume?.experiences ?? [];
+---
+
+<section class="experience-section shell" id="experience" aria-labelledby="experience-heading" data-section="experience">
+  <header class="section-heading" data-reveal>
+    <span class="eyebrow">04 / {p.experienceKicker}</span>
+    <h2 id="experience-heading">{p.experienceTitle}</h2>
+    {data.resume && <p class="experience-count">{data.resume.experienceYears === null ? '' : `${copy.yearCount(data.resume.experienceYears)} · `}{copy.roleCount(experiences.length)}</p>}
+    {data.resume?.summary && <p>{data.resume.summary}</p>}
+  </header>
+  {data.resume && data.resume.highlights.length > 0 && (
+    <div class="experience-highlights">
+      <span class="eyebrow">{copy.selectedOutcomes}</span>
+      <ul>{data.resume.highlights.map((outcome) => <li>{outcome.text}</li>)}</ul>
+    </div>
+  )}
+  {experiences.length ? (
+    <ol class="experience-timeline" id="experience-records">
+      {experiences.map((experience) => (
+        <li data-reveal>
+          <div class="experience-timeline__date">
+            <span>{experience.period.start.slice(0, 4)}</span>
+            <small>{experience.period.end ? experience.period.end.slice(0, 4) : copy.active}</small>
+          </div>
+          <article>
+            <div class="experience-timeline__role">
+              <span>{experience.organization}</span>
+              <h3>{experience.role}</h3>
+              <p>{experience.domain} · {experience.location}</p>
+            </div>
+            <p class="experience-timeline__summary">{experience.summary}</p>
+            <details>
+              <summary>{copy.keyWork}</summary>
+              <ul>
+                {experience.contributions.map((item: string) => <li>{item}</li>)}
+                {experience.outcomes.map((outcome) => <li>{outcome.text}</li>)}
+              </ul>
+            </details>
+          </article>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <div class="experience-empty" data-reveal>
+      <p>{p.noExperience}</p>
+      <a class="text-link" href={urls.href('timeline/')}>{copy.viewTimeline}<span aria-hidden="true">→</span></a>
+    </div>
+  )}
+</section>

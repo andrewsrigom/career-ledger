@@ -1,0 +1,46 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import EntrySummary from '../EntrySummary.astro';
+interface Props { context: SiteContext; }
+const { context } = Astro.props;
+const { data, urls, copy, locale } = context;
+const activityTypes: string[] = [...new Set<string>(data.entries.flatMap((entry) => entry.activityTypes as string[]))];
+---
+
+<BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={copy.timeline} description={copy.timelineDescription(data.profile.name)} path="timeline/" active="timeline" pageType="timeline">
+  <header class="page-hero shell">
+    <span class="eyebrow">01 / {copy.chronologicalRecord}</span>
+    <h1>{copy.timeline}</h1>
+    <p>{copy.timelineIntro}</p>
+  </header>
+  <section class="timeline-layout shell" aria-label={copy.timelineFilters}>
+    <form class="timeline-filters" data-timeline-filters>
+      <label>
+        <span>{copy.searchRecord}</span>
+        <input type="search" placeholder={copy.searchPlaceholder} data-timeline-search />
+      </label>
+      <fieldset data-timeline-filter-group="significance">
+        <legend>{copy.filterBySignificance}</legend>
+        <label><input type="radio" name="significance" value="all" checked />{copy.all}</label>
+        {['activity', 'notable', 'milestone', 'achievement'].map((value) => (
+          <label><input type="radio" name="significance" value={value} />{copy.significances[value]}</label>
+        ))}
+      </fieldset>
+      {activityTypes.length > 0 && (
+        <fieldset data-timeline-filter-group="activity-type">
+          <legend>{copy.filterByActivityType}</legend>
+          <label><input type="radio" name="activity-type" value="all" checked />{copy.all}</label>
+          {activityTypes.map((value: string) => (
+            <label><input type="radio" name="activity-type" value={value} />{copy.activityTypeLabels[value] ?? value}</label>
+          ))}
+        </fieldset>
+      )}
+    </form>
+    <div class="timeline-records">
+      <p class="timeline-count" aria-live="polite" data-timeline-count>{copy.entryCount(data.entries.length)}</p>
+      {data.entries.map((entry) => <EntrySummary entry={entry} urls={urls} copy={copy} />)}
+      <p class="empty-state" data-timeline-empty hidden>{copy.noFilterResults}</p>
+    </div>
+  </section>
+</BaseLayout>

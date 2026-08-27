@@ -11,12 +11,12 @@ Prevent real results from being forgotten while refusing to manufacture impact t
 
 ## Workflow
 
-1. Read private initiatives with `potentialOutcomes` marked `needs-confirmation`.
-2. Prioritize completed or mature initiatives whose results may now be observable.
+1. Read private activities and workstreams with outcomes marked `needs-confirmation`.
+2. Prioritize completed or mature workstreams whose results may now be observable.
 3. Check project context, owner notes, public sources, tests, telemetry summaries, or other explicitly available evidence.
 4. Do not inspect confidential systems beyond the access granted for the task.
 5. Produce questions the owner can answer quickly.
-6. Mark an outcome `confirmed` only when the owner or evidence supports it.
+6. Mark an outcome `confirmed` only when the owner or evidence supports it, retaining its evidence level and provenance.
 7. Mark false or overstated outcomes `rejected` and preserve the reason privately.
 8. Keep metrics private unless publication is explicitly cleared.
 
@@ -37,11 +37,12 @@ Write a review under:
 .career/private/outcome-reviews/<year>/<date>-review.md
 ```
 
-Update private initiatives only when evidence or owner confirmation changes their status.
+Update private activities or workstreams only when evidence or owner confirmation changes their status. Promote a workstream achievement only when a referenced activity contains a confirmed outcome and the supporting evidence is explicit.
 
 ## Completion checks
 
 - Questions are specific and answerable.
 - No metric or outcome was inferred from implementation alone.
 - Rejected claims are not silently removed from history.
+- Activities are not promoted to achievements merely because implementation is complete.
 - No public file changed.

@@ -1,0 +1,90 @@
+---
+import type { CareerDataset, UrlContext, SiteCopy } from '../lib/types';
+import '../styles/global.css';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import PreviewBanner from './PreviewBanner.astro';
+
+interface Props {
+  data: CareerDataset;
+  urls: UrlContext;
+  copy: SiteCopy;
+  locale: 'en' | 'pt-BR';
+  title?: string;
+  description: string;
+  path?: string;
+  active?: 'home' | 'timeline' | 'projects' | 'about';
+  pageType?: string;
+  structuredData?: Record<string, unknown>[];
+}
+
+const {
+  data,
+  urls,
+  copy,
+  locale,
+  title,
+  description,
+  path = '',
+  active,
+  pageType = 'page',
+  structuredData = []
+} = Astro.props;
+const pageTitle = title ? `${title} — ${data.profile.name}` : `${data.profile.name} — ${copy.portfolioTitle}`;
+const canonical = urls.absolute(path);
+const alternateLocale = locale === 'pt-BR' ? 'en' : 'pt-BR';
+const alternate = urls.alternateAbsolute(alternateLocale, path);
+const robots = data.preview ? 'noindex,nofollow' : 'index,follow';
+const defaultStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: data.profile.name,
+  jobTitle: data.profile.headline,
+  description: data.profile.intro,
+  url: urls.absolute('')
+};
+const serializeJsonLd = (value: Record<string, unknown>) => JSON.stringify(value).replaceAll('<', '\\u003c');
+---
+
+<!doctype html>
+<html lang={locale} data-page={pageType}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Reserve enhanced hero geometry before first paint and anchor positioning.
+      document.documentElement.classList.add('has-js');
+      if (matchMedia('(min-width: 821px) and (prefers-reduced-motion: no-preference)').matches) {
+        document.documentElement.classList.add('has-motion');
+      }
+    </script>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#f2efe6" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={alternateLocale} href={alternate} />
+    <link rel="alternate" hreflang="x-default" href={urls.alternateAbsolute('en', path)} />
+    <link rel="icon" href={urls.rootHref('assets/favicon.svg')} type="image/svg+xml" />
+    <link rel="manifest" href={urls.href('manifest.webmanifest')} />
+    <link rel="alternate" href={urls.href('feed.xml')} type="application/rss+xml" title={copy.rssTitle(data.profile.name)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <title>{pageTitle}</title>
+    <script is:inline type="application/ld+json" set:html={serializeJsonLd(defaultStructuredData)} />
+    {structuredData.map((item) => <script is:inline type="application/ld+json" set:html={serializeJsonLd(item)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{copy.skipToContent}</a>
+    {data.preview && <PreviewBanner copy={copy} />}
+    <SiteHeader data={data} urls={urls} copy={copy} locale={locale} active={active} path={path} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter data={data} urls={urls} copy={copy} />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+interface Props { context: SiteContext; }
+const { context } = Astro.props;
+const { data, urls, copy, locale } = context;
+---
+
+<BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={copy.notFound} description={copy.notFoundDescription} path="404.html" pageType="not-found">
+  <section class="not-found shell"><span class="eyebrow">404</span><h1>{copy.notFoundTitle}</h1><p>{copy.notFoundText}</p><a class="text-link" href={urls.href('')}>{copy.returnHighlights}<span aria-hidden="true">→</span></a></section>
+</BaseLayout>

@@ -1,6 +1,6 @@
 # ADR 0003: Zero-dependency public generator
 
-- Status: Accepted
+- Status: Superseded for frontend generation by [ADR 0004](0004-bounded-static-frontend.md). The private engine remains dependency-free.
 - Date: 2026-08-26
 
 ## Context

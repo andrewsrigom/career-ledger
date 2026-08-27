@@ -1,0 +1,25 @@
+---
+import type { SiteContext } from '../../lib/types';
+import HomePage from './HomePage.astro';
+import TimelinePage from './TimelinePage.astro';
+import ProjectsPage from './ProjectsPage.astro';
+import AreasPage from './AreasPage.astro';
+import AreaPage from './AreaPage.astro';
+import ProjectPage from './ProjectPage.astro';
+import EntryPage from './EntryPage.astro';
+import AboutPage from './AboutPage.astro';
+import NotFoundPage from './NotFoundPage.astro';
+import type { PageDescriptor } from '../../lib/build-context';
+interface Props { context: SiteContext; descriptor: PageDescriptor; }
+const { context, descriptor } = Astro.props;
+---
+
+{descriptor.kind === 'home' && <HomePage context={context} />}
+{descriptor.kind === 'timeline' && <TimelinePage context={context} />}
+{descriptor.kind === 'projects' && <ProjectsPage context={context} />}
+{descriptor.kind === 'areas' && <AreasPage context={context} />}
+{descriptor.kind === 'area' && <AreaPage context={context} slug={descriptor.slug!} />}
+{descriptor.kind === 'project' && <ProjectPage context={context} slug={descriptor.slug!} />}
+{descriptor.kind === 'entry' && <EntryPage context={context} slug={descriptor.slug!} />}
+{descriptor.kind === 'about' && <AboutPage context={context} />}
+{descriptor.kind === 'not-found' && <NotFoundPage context={context} />}

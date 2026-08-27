@@ -1,0 +1,35 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import EntrySummary from '../EntrySummary.astro';
+import ProjectSummary from '../ProjectSummary.astro';
+interface Props { context: SiteContext; slug: string; }
+const { context, slug } = Astro.props;
+const { data, urls, copy, locale } = context;
+const area = data.taxonomy.areas.find((item) => item.slug === slug);
+if (!area) throw new Error(`Unknown area route: ${slug}`);
+const entries = data.entries.filter((entry) => entry.areas.includes(area.label));
+const projects = data.projects.filter((project) => project.areas.includes(area.label));
+---
+
+<BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={area.label} description={area.description} path={`areas/${area.slug}/`} pageType="area">
+  <header class="page-hero shell">
+    <span class="eyebrow">{copy.engineeringArea}</span>
+    <h1>{area.label}</h1>
+    <p>{area.description}</p>
+  </header>
+  <section class="detail-section shell">
+    <h2>{copy.projects}</h2>
+    <div class="directory-list directory-list--compact">
+      {projects.map((project, index: number) => <ProjectSummary project={project} urls={urls} copy={copy} index={index} />)}
+      {!projects.length && <p class="empty-state">{copy.noPublicProjects}</p>}
+    </div>
+  </section>
+  <section class="detail-section shell">
+    <h2>{copy.entries}</h2>
+    <div class="timeline-records">
+      {entries.map((entry) => <EntrySummary entry={entry} urls={urls} copy={copy} />)}
+      {!entries.length && <p class="empty-state">{copy.noAreaEntries}</p>}
+    </div>
+  </section>
+</BaseLayout>

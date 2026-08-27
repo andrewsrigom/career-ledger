@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/public-presentation.schema.json",
+  "title": "Reviewed portfolio presentation metadata",
+  "$defs": {
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preview"],
+      "properties": {
+        "preview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "alt"],
+          "properties": {
+            "kind": { "enum": ["image", "diagram"] },
+            "src": {
+              "type": "string",
+              "pattern": "^assets/projects/[a-z0-9][a-z0-9._-]*\\.(?:avif|webp)$"
+            },
+            "alt": { "type": "string", "minLength": 8, "maxLength": 240 },
+            "width": { "type": "integer", "minimum": 320, "maximum": 2400 },
+            "height": { "type": "integer", "minimum": 180, "maximum": 1800 },
+            "approval": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["approvedBy", "reviewedAt"],
+              "properties": {
+                "approvedBy": { "const": "owner" },
+                "reviewedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "kind": { "const": "image" } } },
+              "then": { "required": ["src", "width", "height", "approval"] },
+              "else": { "not": { "anyOf": [{ "required": ["src"] }, { "required": ["width"] }, { "required": ["height"] }, { "required": ["approval"] }] } }
+            }
+          ]
+        }
+      }
+    },
+    "activityMix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basis", "activityCount", "items"],
+      "properties": {
+        "basis": { "const": "recorded-activities" },
+        "activityCount": { "type": "integer", "minimum": 1 },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 14,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["domain", "percentage"],
+            "properties": {
+              "domain": {
+                "enum": ["frontend", "backend", "devops", "infrastructure", "data", "ai-ml", "mobile", "desktop", "embedded", "quality-engineering", "security", "developer-experience", "product-design", "other"]
+              },
+              "percentage": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

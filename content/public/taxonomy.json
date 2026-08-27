@@ -139,5 +139,133 @@
       "label": "Research",
       "description": "Technical exploration, comparison, or prototyping used to reduce uncertainty."
     }
-  ]
+  ],
+  "localizations": {
+    "pt-BR": {
+      "areas": [
+        {
+          "slug": "frontend-architecture",
+          "label": "Arquitetura Frontend",
+          "description": "Fundações de interface, sistemas de renderização, design systems e estruturas frontend sustentáveis."
+        },
+        {
+          "slug": "backend-architecture",
+          "label": "Arquitetura Backend",
+          "description": "Serviços, APIs, limites de domínio, fluxos assíncronos e desenho de runtimes backend."
+        },
+        {
+          "slug": "product-engineering",
+          "label": "Engenharia de Produto",
+          "description": "Transformação de objetivos de produto em software útil, sustentável e mensurável."
+        },
+        {
+          "slug": "system-design",
+          "label": "Arquitetura de Sistemas",
+          "description": "Arquitetura ponta a ponta, decisões técnicas, limites, escalabilidade e desenho de integrações."
+        },
+        {
+          "slug": "authentication-security",
+          "label": "Autenticação e Segurança",
+          "description": "Identidade, autorização, integrações seguras e controles de segurança em aplicações."
+        },
+        {
+          "slug": "observability-reliability",
+          "label": "Observabilidade e Confiabilidade",
+          "description": "Telemetria, diagnóstico, resiliência, tratamento de falhas e confiança em produção."
+        },
+        {
+          "slug": "developer-experience",
+          "label": "Experiência de Desenvolvimento",
+          "description": "Ferramentas, automação, padrões e fluxos que aumentam a efetividade da engenharia."
+        },
+        {
+          "slug": "data-databases",
+          "label": "Dados e Bancos de Dados",
+          "description": "Modelagem, armazenamento, consultas, migrações e desenho de aplicações orientadas a dados."
+        },
+        {
+          "slug": "cloud-infrastructure",
+          "label": "Nuvem e Infraestrutura",
+          "description": "Deploy, hospedagem, entrega, serviços de nuvem e arquitetura operacional."
+        },
+        {
+          "slug": "ai-engineering",
+          "label": "Engenharia de IA",
+          "description": "Produtos com IA, fluxos de agentes, recuperação de informação, geração e avaliação."
+        },
+        {
+          "slug": "performance",
+          "label": "Desempenho",
+          "description": "Eficiência em runtime, carregamento, profiling e melhorias de desempenho sistêmico."
+        },
+        {
+          "slug": "accessibility",
+          "label": "Acessibilidade",
+          "description": "Interações inclusivas, interfaces semânticas, tecnologias assistivas e qualidade acessível."
+        },
+        {
+          "slug": "leadership",
+          "label": "Liderança Técnica",
+          "description": "Direção técnica, tomada de decisão, coordenação, mentoria e alinhamento de engenharia."
+        },
+        {
+          "slug": "commerce",
+          "label": "Comércio Digital",
+          "description": "Plataformas de comércio, pagamentos, arquitetura de lojas e sistemas transacionais."
+        },
+        {
+          "slug": "mobile",
+          "label": "Mobile",
+          "description": "Arquitetura de produtos mobile, integrações nativas, responsividade e experiências específicas por dispositivo."
+        }
+      ],
+      "kinds": [
+        {
+          "value": "architecture",
+          "label": "Arquitetura",
+          "description": "Um esforço relevante de sistema, limites ou direção técnica."
+        },
+        {
+          "value": "improvement",
+          "label": "Melhoria",
+          "description": "Uma evolução relevante de qualidade, manutenção, experiência ou capacidade."
+        },
+        {
+          "value": "investigation",
+          "label": "Investigação",
+          "description": "Um diagnóstico ou uma avaliação estruturada que produziu evidências e direcionamento."
+        },
+        {
+          "value": "launch",
+          "label": "Lançamento",
+          "description": "Um produto, recurso, plataforma ou capacidade operacional colocado em uso."
+        },
+        {
+          "value": "leadership",
+          "label": "Liderança",
+          "description": "Direção técnica, coordenação, mentoria ou responsabilidade por decisões."
+        },
+        {
+          "value": "learning",
+          "label": "Aprendizado",
+          "description": "Um esforço prático de aprendizado que produziu conhecimento ou artefatos reutilizáveis."
+        },
+        {
+          "value": "project",
+          "label": "Projeto",
+          "description": "Um produto, ferramenta, experimento ou plataforma desenvolvida ao longo do tempo."
+        },
+        {
+          "value": "reliability",
+          "label": "Confiabilidade",
+          "description": "Trabalho que aprimorou diagnóstico, resiliência, recuperação ou segurança operacional."
+        },
+        {
+          "value": "research",
+          "label": "Pesquisa",
+          "description": "Exploração, comparação ou prototipação técnica usada para reduzir incerteza."
+        }
+      ]
+    }
+  }
 }

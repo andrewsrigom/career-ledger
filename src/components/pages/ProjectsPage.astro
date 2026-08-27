@@ -1,0 +1,20 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import ProjectSummary from '../ProjectSummary.astro';
+interface Props { context: SiteContext; }
+const { context } = Astro.props;
+const { data, urls, copy, locale } = context;
+---
+
+<BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={copy.projects} description={copy.projectsDescription(data.profile.name)} path="projects/" active="projects" pageType="directory">
+  <header class="page-hero shell">
+    <span class="eyebrow">01 / {copy.productsAndPlatforms}</span>
+    <h1>{copy.projects}</h1>
+    <p>{copy.projectsIntro}</p>
+  </header>
+  <section class="directory-list shell" aria-label={copy.projects}>
+    {data.projects.map((project, index: number) => <ProjectSummary project={project} urls={urls} copy={copy} index={index} />)}
+    {!data.projects.length && <p class="empty-state">{copy.noPublicProjects}</p>}
+  </section>
+</BaseLayout>

@@ -1,7 +1,10 @@
 # Tooling Rules
 
-- Keep scripts dependency-free and ESM-only.
-- Use Node.js standard-library APIs.
+- Keep the private ledger engine dependency-free and ESM-only.
+- Author active modules in TypeScript with explicit `.ts` imports and erasable syntax. Run through the npm commands, which enable native Node type stripping on the supported minimum version.
+- Keep `readJson` results unknown until runtime validation. Share domain contracts through `lib/model.ts`; do not replace validation with casts or disable strict checks to make a migration pass.
+- Use Node.js standard-library APIs for ledger processing; the site-build adapter may invoke the owner-approved Astro compiler.
+- Build frontend output in an isolated temporary workspace and never make candidate data an input to public `dist/`.
 - Make filesystem writes atomic when practical.
 - Never follow symlinks while collecting public files or building `dist/`.
 - Never read `.career/private/` or `career.local.json` from public generation functions.

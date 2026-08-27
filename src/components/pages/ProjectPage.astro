@@ -1,0 +1,48 @@
+---
+import type { SiteContext } from '../../lib/types';
+import { isPresent } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import TagList from '../TagList.astro';
+import EntrySummary from '../EntrySummary.astro';
+import ActivityMix from '../ActivityMix.astro';
+interface Props { context: SiteContext; slug: string; }
+const { context, slug } = Astro.props;
+const { data, urls, copy, locale } = context;
+const project = data.projects.find((item) => item.slug === slug);
+if (!project) throw new Error(`Unknown project route: ${slug}`);
+const related = project.relatedEntries.map((id: string) => data.entries.find((entry) => entry.id === id)).filter(isPresent);
+---
+
+<BaseLayout
+  data={data} urls={urls} copy={copy} locale={locale}
+  title={project.name} description={project.summary} path={`projects/${project.slug}/`} active="projects" pageType="project"
+  structuredData={[{ '@context': 'https://schema.org', '@type': 'CreativeWork', name: project.name, description: project.summary, url: urls.absolute(`projects/${project.slug}/`) }]}
+>
+  <article class="detail-article shell">
+    <header class="detail-hero">
+      <span class="eyebrow">{copy.projectKinds[project.kind] ?? project.kind} / {copy.statuses[project.status] ?? project.status}</span>
+      <h1 style={`view-transition-name: project-${project.slug}`}>{project.name}</h1>
+      <p>{project.summary}</p>
+      <TagList items={project.areas} label={copy.projectAreas} />
+      {project.links.length > 0 && <ul class="external-links">{project.links.map((link) => <li><a href={link.href} rel="noopener noreferrer">{link.label} ↗</a></li>)}</ul>}
+    </header>
+    <div class="detail-grid">
+      <section>
+        <h2>{copy.aboutProject}</h2>
+        <p>{project.description}</p>
+      </section>
+      <aside>
+        <div><span>{copy.technologies}</span><p>{project.technologies.join(' · ')}</p></div>
+        <div><span>{copy.status}</span><p>{copy.statuses[project.status] ?? project.status}</p></div>
+      </aside>
+    </div>
+    {project.activityMix && <ActivityMix mix={project.activityMix} locale={locale} />}
+    {related.length > 0 && (
+      <section class="detail-section">
+        <h2>{copy.relatedRecord}</h2>
+        <div class="timeline-records">{related.map((entry) => <EntrySummary entry={entry} urls={urls} copy={copy} />)}</div>
+      </section>
+    )}
+    <footer class="record-note"><strong>{data.preview ? copy.candidateNote : copy.publicationNote}</strong><p>{data.preview ? copy.candidateNoteText : copy.publicationNoteText}</p></footer>
+  </article>
+</BaseLayout>

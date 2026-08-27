@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 set -eu
 
-node scripts/career.mjs validate
-node scripts/career.mjs audit
+node --experimental-strip-types scripts/career.ts validate
+node --experimental-strip-types scripts/career.ts audit

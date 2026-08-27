@@ -1,0 +1,66 @@
+---
+import type { CareerDataset, UrlContext } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+import ActivityMix from '../ActivityMix.astro';
+
+interface Props { data: CareerDataset; urls: UrlContext; locale: 'en' | 'pt-BR'; }
+const { data, urls, locale } = Astro.props;
+const p = portfolioCopy(locale);
+const nodes = [
+  { id: 'frontend', label: 'Frontend', x: 106, y: 254, matches: ['frontend-architecture', 'accessibility', 'performance'] },
+  { id: 'product', label: locale === 'pt-BR' ? 'Produto' : 'Product', x: 282, y: 126, matches: ['product-engineering', 'commerce', 'mobile'] },
+  { id: 'backend', label: 'Backend', x: 496, y: 142, matches: ['backend-architecture', 'data-databases'] },
+  { id: 'systems', label: locale === 'pt-BR' ? 'Sistemas' : 'Systems', x: 608, y: 310, matches: ['system-design', 'authentication-security', 'observability-reliability'] },
+  { id: 'ai', label: locale === 'pt-BR' ? 'IA' : 'AI', x: 466, y: 468, matches: ['ai-engineering'] },
+  { id: 'infrastructure', label: locale === 'pt-BR' ? 'Infraestrutura' : 'Infrastructure', x: 236, y: 480, matches: ['cloud-infrastructure'] },
+  { id: 'dx', label: 'DX', x: 340, y: 310, matches: ['developer-experience', 'leadership'] }
+];
+const connections: Array<[string, string]> = [['frontend', 'product'], ['frontend', 'dx'], ['product', 'backend'], ['product', 'dx'], ['backend', 'systems'], ['backend', 'dx'], ['systems', 'ai'], ['systems', 'infrastructure'], ['ai', 'dx'], ['infrastructure', 'dx'], ['frontend', 'infrastructure']];
+const nodeMap = new Map(nodes.map((node) => [node.id, node]));
+const areaSlugs = new Map(data.taxonomy.areas.map((area) => [area.label, area.slug]));
+const activeNodes = nodes.map((node) => ({
+  ...node,
+  projects: data.projects.filter((project) => project.areas.some((area: string) => node.matches.includes(String(areaSlugs.get(area)))))
+}));
+const mix = data.resume?.activityMix ?? data.activityMix ?? null;
+---
+
+<section class="landscape shell" id="landscape" aria-labelledby="landscape-heading" data-section="landscape" data-landscape>
+  <header class="section-heading landscape__heading" data-reveal>
+    <span class="eyebrow">03 / {p.landscapeKicker}</span>
+    <h2 id="landscape-heading">{p.landscapeTitle}</h2>
+    <p>{p.landscapeDescription}</p>
+  </header>
+  <div class="landscape__visual">
+    <svg id="engineering-map" viewBox="0 0 720 590" role="img" aria-labelledby="landscape-svg-title landscape-svg-desc">
+      <title id="landscape-svg-title">{p.landscapeKicker}</title>
+      <desc id="landscape-svg-desc">{p.landscapeDescription}</desc>
+      <g class="landscape-grid" aria-hidden="true">
+        {Array.from({ length: 8 }, (_, index) => <path d={`M40 ${54 + index * 68}H680`} />)}
+        {Array.from({ length: 9 }, (_, index) => <path d={`M${68 + index * 72} 32V558`} />)}
+      </g>
+      <g class="landscape-edges" aria-hidden="true">
+        {connections.map(([from, to]) => {
+          const first = nodeMap.get(from)!;
+          const second = nodeMap.get(to)!;
+          return <path d={`M${first.x} ${first.y}L${second.x} ${second.y}`} data-landscape-edge />;
+        })}
+      </g>
+      <g class="landscape-nodes">
+        {activeNodes.map((node) => (
+          <a href={urls.href(`areas/${node.matches[0]}/`)}>
+            <circle cx={node.x} cy={node.y} r={node.id === 'dx' ? 34 : 25} />
+            <text x={node.x} y={node.y - 42} text-anchor="middle">{node.label}</text>
+            <text class="landscape-count" x={node.x} y={node.y + 5} text-anchor="middle">{String(node.projects.length).padStart(2, '0')}</text>
+          </a>
+        ))}
+      </g>
+    </svg>
+    <ol class="landscape__list" aria-label={p.landscapeList}>
+      {activeNodes.map((node) => (
+        <li><span>{node.label}</span><span>{node.projects.map((project) => project.name).slice(0, 3).join(' · ') || '—'}</span></li>
+      ))}
+    </ol>
+  </div>
+  {mix && <ActivityMix mix={mix} locale={locale} />}
+</section>

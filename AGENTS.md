@@ -13,6 +13,7 @@ Use the relevant repository skill under `.agents/skills/` for career analysis, c
 Read these documents when the task touches their scope:
 
 - `docs/privacy-model.md`
+- `docs/operating-model.md`
 - `docs/data-model.md`
 - `docs/codex-workflow.md`
 - `docs/definition-of-done.md`
@@ -65,8 +66,10 @@ Read these documents when the task touches their scope:
 
 ## Engineering expectations
 
-- Keep the project dependency-free unless a dependency solves a demonstrated limitation and the owner explicitly accepts it.
-- Use Node.js standard-library APIs and ESM.
+- Keep the private ledger engine on Node.js standard-library APIs and ESM.
+- Write maintained tooling, tests, and frontend logic in strict TypeScript. Use the existing native Node type-stripping entrypoints; keep runtime validation for unknown JSON and shared contracts in `scripts/lib/model.ts`.
+- The owner-approved static frontend uses Astro, TypeScript, GSAP, and Three.js; bundle dependencies locally and justify any additional runtime dependency.
+- Keep Three.js isolated to the hero, respect reduced motion, and preserve complete reading/navigation without JavaScript.
 - Keep output deterministic. Do not insert build timestamps that create meaningless diffs.
 - Support Windows, WSL, macOS, and Linux paths where practical.
 - Prefer full, readable functions over clever abstractions.

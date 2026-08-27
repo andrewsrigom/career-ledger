@@ -1,0 +1,36 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import TagList from '../TagList.astro';
+import ProjectSummary from '../ProjectSummary.astro';
+interface Props { context: SiteContext; slug: string; }
+const { context, slug } = Astro.props;
+const { data, urls, copy, locale } = context;
+const entry = data.entries.find((item) => item.slug === slug);
+if (!entry) throw new Error(`Unknown entry route: ${slug}`);
+const projects = data.projects.filter((project) => project.relatedEntries.includes(entry.id));
+---
+
+<BaseLayout
+  data={data} urls={urls} copy={copy} locale={locale}
+  title={entry.title} description={entry.summary} path={`entries/${entry.slug}/`} active="timeline" pageType="entry"
+  structuredData={[{ '@context': 'https://schema.org', '@type': 'Article', headline: entry.title, description: entry.summary, datePublished: entry.period.start, dateModified: entry.publication.reviewedAt, author: { '@type': 'Person', name: data.profile.name }, url: urls.absolute(`entries/${entry.slug}/`) }]}
+>
+  <article class="detail-article shell">
+    <header class="detail-hero">
+      <span class="eyebrow">{copy.significances[entry.significance]} / {entry.period.label}</span>
+      <h1>{entry.title}</h1>
+      <p>{entry.summary}</p>
+      <TagList items={entry.areas} label={copy.engineeringAreas} />
+      {entry.links.length > 0 && <ul class="external-links">{entry.links.map((link) => <li><a href={link.href} rel="noopener noreferrer">{link.label} ↗</a></li>)}</ul>}
+    </header>
+    <div class="detail-grid">
+      {entry.context && <section><h2>{copy.context}</h2><p>{entry.context}</p></section>}
+      <aside><div><span>{copy.technologies}</span><p>{entry.technologies.join(' · ')}</p></div></aside>
+    </div>
+    <section class="detail-section prose-list"><h2>{copy.contributions}</h2><ul>{entry.contributions.map((item: string) => <li>{item}</li>)}</ul></section>
+    {entry.outcomes.length > 0 && <section class="detail-section prose-list"><h2>{copy.outcomes}</h2><ul>{entry.outcomes.map((item) => <li>{item.text}</li>)}</ul></section>}
+    {projects.length > 0 && <section class="detail-section"><h2>{copy.relatedProjects}</h2><div class="directory-list directory-list--compact">{projects.map((project, index: number) => <ProjectSummary project={project} urls={urls} copy={copy} index={index} />)}</div></section>}
+    <footer class="record-note"><strong>{data.preview ? copy.candidateNote : copy.publicationNote}</strong><p>{data.preview ? copy.candidateNoteText : copy.publicationNoteText}</p></footer>
+  </article>
+</BaseLayout>

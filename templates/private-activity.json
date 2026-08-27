@@ -1,0 +1,39 @@
+{
+  "$schema": "../schemas/private-activity.schema.json",
+  "schemaVersion": 1,
+  "recordType": "activity",
+  "id": "activity-id",
+  "projectId": "project-id",
+  "workstreamId": null,
+  "title": "Meaningful private activity",
+  "summary": "Describe what changed professionally without reducing the activity to a commit message.",
+  "occurredAt": "2026-08-26",
+  "types": ["implementation"],
+  "domains": ["frontend"],
+  "significance": "activity",
+  "progression": "continued",
+  "attribution": {
+    "scope": "contributed",
+    "confidence": "medium",
+    "notes": "Explain what supports this attribution and what remains uncertain."
+  },
+  "evidence": [
+    {
+      "id": "activity-id-source",
+      "type": "scan",
+      "reference": "private scan or source reference",
+      "supports": "Explain the factual claim supported by this evidence.",
+      "provenance": "observed"
+    }
+  ],
+  "outcomes": [],
+  "areas": ["Product Engineering"],
+  "technologies": [],
+  "sensitivity": {
+    "level": "high",
+    "blockedTerms": [],
+    "notes": "Explain what must remain private or be generalized before projection."
+  },
+  "sourceScans": [],
+  "updatedAt": "2026-08-26"
+}

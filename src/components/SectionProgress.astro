@@ -1,0 +1,20 @@
+---
+import { portfolioCopy } from '../lib/portfolio-copy';
+interface Props { locale: 'en' | 'pt-BR'; hasExperience: boolean; }
+const { locale, hasExperience } = Astro.props;
+const p = portfolioCopy(locale);
+const ids = ['intro', 'work', 'landscape', 'experience', 'about'];
+---
+
+<nav class="section-progress" aria-label={p.sectionNavigation} data-section-progress>
+  <ol>
+    {p.sections.map((label, index) => (index !== 3 || hasExperience) && (
+      <li>
+        <a href={`#${ids[index]}`} data-section-link={ids[index]}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <span>{label}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

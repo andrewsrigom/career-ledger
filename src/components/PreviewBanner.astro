@@ -1,0 +1,10 @@
+---
+import type { SiteCopy } from '../lib/types';
+interface Props { copy: SiteCopy; }
+const { copy } = Astro.props;
+---
+
+<aside class="preview-banner" aria-label={copy.reviewBannerLabel}>
+  <span>{copy.reviewBannerTitle}</span>
+  <p>{copy.reviewBannerText}</p>
+</aside>

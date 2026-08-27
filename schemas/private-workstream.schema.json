@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/private-workstream.schema.json",
+  "title": "Private career workstream",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "id",
+    "projectId",
+    "title",
+    "summary",
+    "context",
+    "period",
+    "status",
+    "attribution",
+    "activityIds",
+    "contributions",
+    "potentialOutcomes",
+    "milestones",
+    "achievements",
+    "narrativeSignals",
+    "enrichmentQuestions",
+    "areas",
+    "technologies",
+    "sensitivity",
+    "sourceScans",
+    "updatedAt"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "recordType": { "const": "workstream" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 160
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 1000
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["internal", "public"],
+      "properties": {
+        "internal": { "type": "string", "minLength": 10, "maxLength": 3000 },
+        "public": { "type": ["string", "null"], "minLength": 10, "maxLength": 1200 }
+      }
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end", "label"],
+      "properties": {
+        "start": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "end": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "label": { "type": "string", "minLength": 4, "maxLength": 80 }
+      }
+    },
+    "status": {
+      "enum": ["detected", "active", "completed", "ready-for-sanitization", "archived"]
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "confidence", "notes"],
+      "properties": {
+        "scope": { "enum": ["implemented", "contributed", "designed", "led", "owned", "investigated"] },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "notes": { "type": "string", "maxLength": 1500 }
+      }
+    },
+    "activityIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
+    "contributions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 30,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 15, "maxLength": 500 }
+    },
+    "potentialOutcomes": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "status", "evidenceLevel", "notes"],
+        "properties": {
+          "text": { "type": "string", "minLength": 10, "maxLength": 500 },
+          "status": { "enum": ["needs-confirmation", "confirmed", "rejected"] },
+          "evidenceLevel": { "enum": ["unknown", "observed", "measured", "self-reported", "public"] },
+          "notes": { "type": "string", "maxLength": 1000 }
+        }
+      }
+    },
+    "milestones": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "date", "title", "summary", "activityIds", "evidenceRefs", "provenance"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "title": { "type": "string", "minLength": 4, "maxLength": 160 },
+          "summary": { "type": "string", "minLength": 20, "maxLength": 800 },
+          "activityIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          },
+          "provenance": { "enum": ["observed", "provided", "derived"] }
+        }
+      }
+    },
+    "achievements": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "date", "statement", "evidenceLevel", "activityIds", "evidenceRefs", "provenance"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "statement": { "type": "string", "minLength": 15, "maxLength": 500 },
+          "evidenceLevel": { "enum": ["observed", "measured", "self-reported", "public"] },
+          "activityIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          },
+          "provenance": { "enum": ["observed", "provided", "derived"] }
+        }
+      }
+    },
+    "narrativeSignals": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "strength", "activityIds"],
+        "properties": {
+          "label": { "type": "string", "minLength": 3, "maxLength": 120 },
+          "strength": { "enum": ["emerging", "supported"] },
+          "activityIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          }
+        }
+      }
+    },
+    "enrichmentQuestions": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "reason", "status"],
+        "properties": {
+          "question": { "type": "string", "minLength": 10, "maxLength": 500 },
+          "reason": { "enum": ["impact", "ownership", "scale", "adoption", "public-safety", "accuracy", "resume-strength"] },
+          "status": { "enum": ["open", "answered", "dismissed"] }
+        }
+      }
+    },
+    "areas": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 2, "maxLength": 80 }
+    },
+    "technologies": {
+      "type": "array",
+      "maxItems": 40,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+    },
+    "sensitivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "blockedTerms", "notes"],
+      "properties": {
+        "level": { "enum": ["low", "medium", "high"] },
+        "blockedTerms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 300 }
+        },
+        "notes": { "type": "string", "maxLength": 1500 }
+      }
+    },
+    "sourceScans": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+    },
+    "updatedAt": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    }
+  }
+}

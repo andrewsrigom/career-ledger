@@ -1,0 +1,54 @@
+---
+import type { CareerDataset, UrlContext, SiteCopy } from '../../lib/types';
+import { isPresent } from '../../lib/types';
+import ProjectPreview from './ProjectPreview.astro';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+
+interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; locale: 'en' | 'pt-BR'; }
+const { data, urls, copy, locale } = Astro.props;
+const p = portfolioCopy(locale);
+const featured = data.projects.filter((project) => project.featured);
+const projects = (featured.length ? featured : data.projects).slice(0, 11);
+const entriesById = new Map(data.entries.map((entry) => [entry.id, entry]));
+---
+
+<section class="work-section shell" id="work" aria-labelledby="work-heading" data-section="work">
+  <header class="section-heading" data-reveal>
+    <span class="eyebrow">02 / {p.workKicker}</span>
+    <h2 id="work-heading">{p.workTitle}</h2>
+    <p>{copy.selectedWorkIntro}</p>
+  </header>
+  <div class="project-index" data-project-index>
+    {projects.map((project, index: number) => {
+      const relatedEntries = project.relatedEntries.map((id: string) => entriesById.get(id)).filter(isPresent);
+      const signal = relatedEntries.flatMap((entry) => entry.outcomes ?? []).at(0)?.text
+        ?? relatedEntries.flatMap((entry) => entry.contributions ?? []).at(0)
+        ?? project.description;
+      return (
+        <article class="project-row" data-project-row data-project-slug={project.slug}>
+          <a class="project-row__link" href={urls.href(`projects/${project.slug}/`)}>
+            <span class="project-row__number">{String(index + 1).padStart(2, '0')}</span>
+            <div class="project-row__identity">
+              <span>{copy.projectKinds[project.kind]} / {copy.statuses[project.status]}</span>
+              <h3 style={`view-transition-name: project-${project.slug}`}>{project.name}</h3>
+              <p>{project.summary}</p>
+            </div>
+            <div class="project-row__signal">
+              <span>{relatedEntries.some((entry) => entry.outcomes?.length) ? copy.results : copy.keyWork}</span>
+              <p>{signal}</p>
+              {relatedEntries[0] && <small>{relatedEntries[0].title}</small>}
+            </div>
+            <span class="project-row__arrow" aria-hidden="true">↗</span>
+          </a>
+          <ul class="tag-list project-row__areas" aria-label={copy.projectAreas}>
+            {project.areas.slice(0, 4).map((area: string) => <li>{area}</li>)}
+          </ul>
+          <ProjectPreview project={project} index={index} label={p.previewLabel} diagramLabel={p.diagramLabel} urls={urls} />
+        </article>
+      );
+    })}
+  </div>
+  <a class="index-link" href={urls.href('projects/')}>
+    <span>{copy.viewAllProjects}</span><span>{String(data.projects.length).padStart(2, '0')} ↗</span>
+  </a>
+</section>

@@ -33,5 +33,13 @@
     "reviewedAt": "2026-08-26",
     "approvedBy": "owner"
   },
-  "links": []
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "name": "Career Ledger",
+      "summary": "Um registro profissional de engenharia com análise privada e um portfólio público estático e revisado.",
+      "description": "O Career Ledger analisa evidências de projetos locais por meio de um fluxo offline, usa análise orientada por agentes para manter iniciativas privadas e publica apenas registros aprovados manualmente. O site público e o feed JSON são gerados estaticamente para o GitHub Pages.",
+      "links": []
+    }
+  }
 }

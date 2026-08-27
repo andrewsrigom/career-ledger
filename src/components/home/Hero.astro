@@ -1,0 +1,38 @@
+---
+import type { CareerDataset, UrlContext, SiteCopy } from '../../lib/types';
+import ArchitectureScene from './ArchitectureScene.astro';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+
+interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; locale: 'en' | 'pt-BR'; }
+const { data, copy, locale } = Astro.props;
+const p = portfolioCopy(locale);
+---
+
+<section class="hero shell" id="intro" aria-labelledby="portfolio-heading" data-hero>
+  <div class="hero__editorial">
+    <div class="hero__kicker" data-reveal>
+      <span>{data.profile.headline}</span>
+      <span>{data.profile.location}</span>
+    </div>
+    <h1 id="portfolio-heading" data-hero-title>{copy.homeTitle}</h1>
+    <p class="hero__summary" data-reveal>{data.profile.intro || copy.homeSummaryFallback}</p>
+    <a class="text-link hero__cta" href="#work" data-reveal>
+      {copy.viewSelectedWork}<span aria-hidden="true">↘</span>
+    </a>
+  </div>
+  <div class="hero__system" data-hero-system>
+    <ArchitectureScene locale={locale} />
+    <ol class="hero-layers" aria-label={p.architectureLabel}>
+      {p.layers.map((layer, index) => (
+        <li data-hero-layer={index}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div>
+            <strong>{layer}</strong>
+            <p>{p.layerDescriptions[index]}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+  <p class="hero__scroll" aria-hidden="true"><span></span>{p.scrollPrompt}</p>
+</section>

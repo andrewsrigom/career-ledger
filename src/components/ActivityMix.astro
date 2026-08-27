@@ -1,0 +1,25 @@
+---
+import type { ActivityMix, LocaleCode } from '../lib/types';
+import { portfolioCopy } from '../lib/portfolio-copy';
+interface Props { mix: ActivityMix; locale: LocaleCode; id?: string; }
+const { mix, locale, id = 'activity-mix-heading' } = Astro.props;
+const p = portfolioCopy(locale);
+const number = new Intl.NumberFormat(locale, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+---
+
+<aside class="activity-mix" aria-labelledby={id}>
+  <div>
+    <h3 id={id}>{p.mixTitle}</h3>
+    <p>{p.mixNote}</p>
+    <p class="activity-mix__sample">{p.mixSample(mix.activityCount)}</p>
+  </div>
+  <ol>
+    {mix.items.map((item) => (
+      <li>
+        <span>{p.domainLabels[item.domain]}</span>
+        <span class="activity-mix__bar" aria-hidden="true"><i style={`--mix: ${item.percentage}%`}></i></span>
+        <strong>{number.format(item.percentage)}%</strong>
+      </li>
+    ))}
+  </ol>
+</aside>

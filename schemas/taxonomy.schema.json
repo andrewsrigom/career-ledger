@@ -78,6 +78,9 @@
           }
         }
       }
+    },
+    "localizations": {
+      "$ref": "public-localizations.schema.json#/$defs/taxonomy"
     }
   }
 }

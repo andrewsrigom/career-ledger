@@ -58,6 +58,49 @@
         "research"
       ]
     },
+    "significance": {
+      "enum": [
+        "activity",
+        "notable",
+        "milestone",
+        "achievement"
+      ]
+    },
+    "activityTypes": {
+      "type": "array",
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "build",
+          "design",
+          "architecture",
+          "implementation",
+          "investigation",
+          "research",
+          "migration",
+          "optimization",
+          "performance",
+          "testing",
+          "reliability",
+          "security",
+          "accessibility",
+          "infrastructure",
+          "automation",
+          "integration",
+          "maintenance",
+          "refactoring",
+          "leadership",
+          "mentoring",
+          "planning",
+          "release",
+          "product",
+          "developer-experience",
+          "documentation",
+          "observability"
+        ]
+      }
+    },
     "status": {
       "enum": [
         "active",
@@ -218,6 +261,29 @@
           }
         }
       }
+    },
+    "localizations": {
+      "$ref": "public-localizations.schema.json#/$defs/entry"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": ["significance"],
+        "properties": { "significance": { "enum": ["milestone", "achievement"] } }
+      },
+      "then": {
+        "properties": { "status": { "const": "completed" } }
+      }
+    },
+    {
+      "if": {
+        "required": ["significance"],
+        "properties": { "significance": { "const": "achievement" } }
+      },
+      "then": {
+        "properties": { "outcomes": { "minItems": 1 } }
+      }
+    }
+  ]
 }

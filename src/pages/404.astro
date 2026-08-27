@@ -1,0 +1,6 @@
+---
+import NotFoundPage from '../components/pages/NotFoundPage.astro';
+import { siteContext } from '../lib/build-context';
+const context = siteContext('en');
+---
+<NotFoundPage context={context} />

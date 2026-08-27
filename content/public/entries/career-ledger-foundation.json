@@ -45,5 +45,22 @@
     "reviewedAt": "2026-08-26",
     "approvedBy": "owner"
   },
-  "links": []
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Fundação do Career Ledger",
+      "periodLabel": "Agosto de 2026–presente",
+      "summary": "Projetei um sistema de publicação que transforma evidências locais de engenharia em registros profissionais revisados e em um site estático.",
+      "context": "O trabalho de engenharia fica disperso entre repositórios, tickets, anotações e iniciativas de longa duração. O projeto cria uma memória profissional durável sem transformar material confidencial em conteúdo público.",
+      "contributions": [
+        "Defini um fluxo de evidência até iniciativa que separa atividade bruta, análise privada, candidatos revisados e registros públicos aprovados.",
+        "Criei instruções e skills do Codex específicas do repositório para análise de projetos, consolidação, sanitização, revisão de publicação e manutenção do site.",
+        "Implementei validação, auditoria de privacidade, varredura incremental do Git, proteção de arquivos staged, geração estática e deploy no GitHub Pages sem dependências de runtime."
+      ],
+      "outcomes": [
+        "Estabeleci um fluxo offline reutilizável para registrar trabalho de engenharia, mantendo a publicação deliberada e protegida por revisão."
+      ],
+      "links": []
+    }
+  }
 }

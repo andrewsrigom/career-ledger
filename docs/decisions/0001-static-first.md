@@ -31,3 +31,7 @@ Tradeoffs:
 - owner approval happens locally.
 
 A backend may be introduced only when these limitations become concrete product requirements.
+
+## Amendment
+
+[ADR 0004](0004-bounded-static-frontend.md) replaces the dependency-free HTML renderer with Astro while preserving static output, Node.js ledger modules, GitHub Pages, and the same approval boundary. It does not introduce a backend or online content source.

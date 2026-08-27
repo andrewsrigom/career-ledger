@@ -19,6 +19,8 @@ Private data includes:
 - attribution notes;
 - incomplete or uncertain outcome claims;
 - drafts and unsanitized summaries.
+- source CV files, personal contact details, and unreviewed employer or outcome claims.
+- chronological activities, workstreams, provenance, narrative signals, enrichment questions, and derived career-material drafts.
 
 Private data belongs only in:
 
@@ -44,13 +46,29 @@ The site generator reads no other content source.
 
 Generated output under `dist/` is public by definition.
 
+An optional approved `content/public/resume.json` may contain reviewed experience, skills, and education. Source CV files and private contact data never become build inputs.
+
+Localized copy inherits the boundary of its source record. A translation stored in `content/public/` is public; a translation stored with a candidate under `.career/private/` remains private. The generator never loads candidate translations during a public build.
+
+## Frontend build boundary
+
+Astro receives an ephemeral dataset assembled by the Node adapter after schema and privacy validation. The public path uses only approved content. An injected dataset requires `preview: true` and is rejected if its destination is `dist/` or a descendant. Temporary build inputs are removed on completion or failure.
+
+The adapter stages only the favicon and project images explicitly referenced in the validated dataset with owner image approval. It does not expose the whole assets directory to Astro, traverse local projects, or read the private media inventory during public generation. Project images must be WebP/AVIF, size-bounded, and free of symlink path components. Image approval is not publication approval.
+
+Private preview mode may aggregate domain classifications into recorded activity percentages, but never includes raw activities, paths, evidence, or project scan data. That aggregate remains private until separately reviewed into an approved project or resume record.
+
+Public output is checked for leaked identifiers, broken base-path references, remote runtime resources, and JavaScript budgets. Astro telemetry is disabled; browser assets are bundled locally. Dependency installation is the explicit networked setup step, not part of the offline analysis/build workflow.
+
 ## Publication invariant
 
 A private initiative may become public only through this sequence:
 
 ```text
 private evidence
-  → private initiative
+  → private activity
+  → private workstream
+  → milestone / achievement review
   → sanitized public candidate
   → privacy and claim review
   → explicit owner approval
@@ -59,6 +77,8 @@ private evidence
 ```
 
 No agent, script, scheduled task, or future integration may skip explicit owner approval.
+
+Resume, portfolio, summary, and interview drafts are projections inside the private boundary. They cannot become an alternate publication source or bypass candidate review.
 
 ## What sanitization means
 

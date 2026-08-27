@@ -1,0 +1,17 @@
+---
+import type { CareerDataset, UrlContext, SiteCopy } from '../lib/types';
+interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; }
+const { data, urls, copy } = Astro.props;
+---
+
+<footer class="site-footer shell">
+  <div>
+    <span>{data.profile.name}</span>
+    <p>{data.profile.headline}</p>
+  </div>
+  <div class="site-footer__links">
+    <a href={urls.href('feed.xml')}>RSS</a>
+    <a href={urls.href('data/career.json')}>{data.preview ? copy.previewJson : copy.publicJson}</a>
+    <span>{copy.updated} {data.updatedAt}</span>
+  </div>
+</footer>

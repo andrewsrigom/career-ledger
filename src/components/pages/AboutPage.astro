@@ -1,0 +1,29 @@
+---
+import type { SiteContext } from '../../lib/types';
+import BaseLayout from '../BaseLayout.astro';
+import TagList from '../TagList.astro';
+interface Props { context: SiteContext; }
+const { context } = Astro.props;
+const { data, urls, copy, locale } = context;
+const focus = data.resume?.skills.slice(0, 10) ?? data.taxonomy.areas.slice(0, 10).map((area) => area.label);
+---
+
+<BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={copy.navigation.about} description={copy.aboutDescription(data.profile.name)} path="about/" active="about" pageType="about">
+  <header class="page-hero page-hero--about shell">
+    <span class="eyebrow">01 / {copy.aboutEyebrow}</span>
+    <h1>{copy.aboutTitle}</h1>
+    <p>{copy.aboutIntro}</p>
+  </header>
+  <section class="about-editorial shell">
+    <div class="about-editorial__copy">{data.profile.bio.map((paragraph: string) => <p>{paragraph}</p>)}{data.profile.links.length > 0 && <ul class="external-links">{data.profile.links.map((link) => <li><a href={link.href} rel="noopener noreferrer">{link.label} ↗</a></li>)}</ul>}</div>
+    <aside>
+      <span>{copy.basedIn}</span><strong>{data.profile.location}</strong>
+      <span>{copy.coreFocus}</span><TagList items={focus} label={copy.coreFocus} />
+    </aside>
+  </section>
+  <section class="principles-section shell">
+    <header class="section-heading"><span class="eyebrow">02 / {copy.howIContribute}</span><h2>{copy.strengthsTitle}</h2><p>{copy.strengthsIntro}</p></header>
+    <ol class="principle-list">{data.profile.principles.map((principle, index: number) => <li><span>{String(index + 1).padStart(2, '0')}</span><h3>{principle.title}</h3><p>{principle.description}</p></li>)}</ol>
+  </section>
+  <section class="about-cta shell"><h2>{copy.aboutCtaTitle}</h2><div><p>{copy.aboutCtaText}</p><a class="text-link" href={`${urls.href('')}#work`}>{copy.viewSelectedWork}<span aria-hidden="true">→</span></a></div></section>
+</BaseLayout>

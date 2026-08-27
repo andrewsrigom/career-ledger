@@ -1,0 +1,48 @@
+{
+  "$schema": "../schemas/private-workstream.schema.json",
+  "schemaVersion": 1,
+  "recordType": "workstream",
+  "id": "workstream-id",
+  "projectId": "project-id",
+  "title": "Private workstream title",
+  "summary": "Describe the larger problem, responsibility, or technical objective that connects the activities.",
+  "context": {
+    "internal": "Preserve the private project identity and context needed for accurate local reasoning.",
+    "public": null
+  },
+  "period": {
+    "start": "2026-08-26",
+    "end": null,
+    "label": "August 2026–present"
+  },
+  "status": "detected",
+  "attribution": {
+    "scope": "contributed",
+    "confidence": "medium",
+    "notes": "Explain what supports this attribution and what remains uncertain."
+  },
+  "activityIds": ["activity-id"],
+  "contributions": [
+    "Summarize a contribution supported by the referenced activities and evidence."
+  ],
+  "potentialOutcomes": [],
+  "milestones": [],
+  "achievements": [],
+  "narrativeSignals": [
+    {
+      "label": "Product Engineering",
+      "strength": "emerging",
+      "activityIds": ["activity-id"]
+    }
+  ],
+  "enrichmentQuestions": [],
+  "areas": ["Product Engineering"],
+  "technologies": [],
+  "sensitivity": {
+    "level": "high",
+    "blockedTerms": [],
+    "notes": "Explain what must remain private or be generalized before projection."
+  },
+  "sourceScans": [],
+  "updatedAt": "2026-08-26"
+}

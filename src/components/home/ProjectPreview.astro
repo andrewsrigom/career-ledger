@@ -1,0 +1,33 @@
+---
+import type { UrlContext, Project } from '../../lib/types';
+interface Props { project: Project; index: number; label: string; diagramLabel: string; urls: UrlContext; }
+const { project, index, label, diagramLabel, urls } = Astro.props;
+const presentation = project.presentation;
+const image = presentation?.preview?.kind === 'image' ? presentation.preview : null;
+const seed = (index % 4) + 1;
+---
+
+<figure class="project-preview" data-project-preview aria-label={`${label}: ${project.name}`}>
+  {image ? (
+    <img
+      src={urls.rootHref(image.src)}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <svg viewBox="0 0 640 420" role="img" aria-label={presentation?.preview.alt ?? `${diagramLabel}: ${project.name}`}>
+      <rect x="1" y="1" width="638" height="418" rx="2" class="preview-paper" />
+      <g class={`preview-diagram preview-diagram--${seed}`}>
+        <path d="M72 86H568M72 334H568M110 52V368M530 52V368" />
+        <path d="M110 210H235L300 126H420L530 210M110 210H245L310 294H430L530 210" />
+        <circle cx="110" cy="210" r="12" /><circle cx="300" cy="126" r="12" />
+        <circle cx="310" cy="294" r="12" /><circle cx="530" cy="210" r="12" />
+        <rect x="235" y="184" width="145" height="52" rx="2" />
+      </g>
+      <text x="72" y="382">{String(index + 1).padStart(2, '0')} / {project.kind.toUpperCase()}</text>
+    </svg>
+  )}
+</figure>

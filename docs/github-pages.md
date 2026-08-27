@@ -5,11 +5,13 @@ The repository includes `.github/workflows/pages.yml`.
 The workflow:
 
 1. checks out the repository;
-2. configures Node.js;
+2. configures Node.js and installs locked dependencies with `npm ci`;
 3. derives `SITE_URL` and `BASE_PATH` from the repository name;
-4. runs validation, privacy audit, tests, and the static build;
+4. runs validation, privacy audit, Node tests, Astro type-check, the static build, link checks, and bundle budgets;
 5. uploads `dist/` as the Pages artifact;
-6. deploys with the GitHub Pages deployment action.
+6. retains an additional verified public artifact for 90 days and deploys with the GitHub Pages deployment action.
+
+It runs **only** through `workflow_dispatch` on `main`, with `confirm_publication` explicitly checked. A push or merge does not deploy. CI still verifies pushes to `main` and pull requests automatically.
 
 ## Repository types
 
@@ -42,7 +44,18 @@ After pushing the repository:
 1. open repository **Settings**;
 2. open **Pages**;
 3. choose **GitHub Actions** as the source;
-4. run the deployment workflow or push to `main`.
+4. review the localhost candidate preview and approve the intended public records;
+5. run the deployment workflow manually from `main` and confirm publication.
+
+No push, merge, or workflow dispatch should be performed before owner approval. Changes to this workflow take effect remotely only after an authorized push/merge; editing it locally does not change the existing deployed site.
+
+## Rollback
+
+The currently deployed site remains available until a successful, explicitly approved replacement. Before the first redesign deployment, record the last successful Pages deployment's full source commit SHA in the release review and retain its artifact locally if available.
+
+For subsequent releases, `public-site-<run-id>` retains the verified static output for 90 days. Keep the last stable artifact outside this expiration window when long-term retention is needed.
+
+To roll back, manually dispatch the current workflow from `main`, check `confirm_publication`, and supply the stable full SHA in `source_commit`. The workflow verifies that it belongs to `main` history and checks it out detached for the build; it does not change or force-push branches. Historical dependency-free revisions skip installation if no lockfile exists. The normal validation/audit/build still runs. Blank `source_commit` publishes current `main`.
 
 ## Custom domain
 

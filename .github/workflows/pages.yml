@@ -1,10 +1,17 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      confirm_publication:
+        description: I reviewed the local preview and approve publishing the approved content on main.
+        required: true
+        default: false
+        type: boolean
+      source_commit:
+        description: Optional full commit SHA from main history for an explicitly approved rollback. Leave empty to publish current main.
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -17,16 +24,32 @@ concurrency:
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main' && inputs.confirm_publication == true
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Select an approved rollback revision
+        if: inputs.source_commit != ''
+        env:
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: |
+          [[ "$SOURCE_COMMIT" =~ ^[0-9a-f]{40}$ ]] || { echo "A full commit SHA is required."; exit 1; }
+          git merge-base --is-ancestor "$SOURCE_COMMIT" origin/main
+          git checkout --detach "$SOURCE_COMMIT"
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          package-manager-cache: false
+
+      - name: Install pinned dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci; fi
 
       - name: Configure deployment URL
         env:
@@ -49,9 +72,20 @@ jobs:
 
       - name: Verify and build
         run: npm run check
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
+
+      - name: Retain the verified public build for rollback review
+        uses: actions/upload-artifact@v7
+        with:
+          name: public-site-${{ github.run_id }}
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5

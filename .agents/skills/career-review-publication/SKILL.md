@@ -28,6 +28,12 @@ Give the owner a clear publication recommendation without assuming authority to 
 - Deliverables are not disguised as measured impact.
 - Unknown results are omitted.
 
+### Significance
+
+- `activity` and `notable` entries do not imply a result that is not supported.
+- `milestone` describes a completed delivery, transition, or stage with supporting evidence.
+- `achievement` includes at least one supported outcome and remains comparatively rare.
+
 ### Quality
 
 - The record is specific enough to be useful.

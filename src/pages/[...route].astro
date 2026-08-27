@@ -1,0 +1,17 @@
+---
+import PageRouter from '../components/pages/PageRouter.astro';
+import { pageDescriptors, siteContext, type PageDescriptor } from '../lib/build-context';
+
+export function getStaticPaths() {
+  return pageDescriptors().map((descriptor) => ({
+    params: { route: descriptor.path || undefined },
+    props: { descriptor }
+  }));
+}
+
+interface Props { descriptor: PageDescriptor; }
+const { descriptor } = Astro.props;
+const context = siteContext(descriptor.locale);
+---
+
+<PageRouter context={context} descriptor={descriptor} />

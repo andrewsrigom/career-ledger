@@ -1,0 +1,19 @@
+---
+import type { UrlContext, SiteCopy, Project } from '../lib/types';
+import TagList from './TagList.astro';
+interface Props { project: Project; urls: UrlContext; copy: SiteCopy; index?: number; }
+const { project, urls, copy, index = 0 } = Astro.props;
+---
+
+<article class="directory-project">
+  <a href={urls.href(`projects/${project.slug}/`)}>
+    <span class="directory-project__number">{String(index + 1).padStart(2, '0')}</span>
+    <div>
+      <span>{copy.projectKinds[project.kind] ?? project.kind} / {copy.statuses[project.status] ?? project.status}</span>
+      <h2 style={`view-transition-name: project-${project.slug}`}>{project.name}</h2>
+      <p>{project.summary}</p>
+      <TagList items={project.areas} label={copy.projectAreas} />
+    </div>
+    <span aria-hidden="true">↗</span>
+  </a>
+</article>
