@@ -1,33 +1,34 @@
 ---
-import type { UrlContext, Project } from '../../lib/types';
-interface Props { project: Project; index: number; label: string; diagramLabel: string; urls: UrlContext; }
-const { project, index, label, diagramLabel, urls } = Astro.props;
+import type { UrlContext, Project, ReviewImage } from '../../lib/types';
+interface Props { project: Project; index: number; label: string; diagramLabel: string; urls: UrlContext; layers: boolean[]; layerLabels: readonly string[]; reviewImage?: ReviewImage; }
+const { project, index, label, diagramLabel, urls, layers, layerLabels, reviewImage } = Astro.props;
 const presentation = project.presentation;
-const image = presentation?.preview?.kind === 'image' ? presentation.preview : null;
-const seed = (index % 4) + 1;
+const image = reviewImage ?? (presentation?.preview?.kind === 'image' ? presentation.preview : null);
 ---
 
 <figure class="project-preview" data-project-preview aria-label={`${label}: ${project.name}`}>
-  {image ? (
-    <img
-      src={urls.rootHref(image.src)}
-      alt={image.alt}
-      width={image.width}
-      height={image.height}
-      loading="lazy"
-      decoding="async"
-    />
-  ) : (
-    <svg viewBox="0 0 640 420" role="img" aria-label={presentation?.preview.alt ?? `${diagramLabel}: ${project.name}`}>
-      <rect x="1" y="1" width="638" height="418" rx="2" class="preview-paper" />
-      <g class={`preview-diagram preview-diagram--${seed}`}>
-        <path d="M72 86H568M72 334H568M110 52V368M530 52V368" />
-        <path d="M110 210H235L300 126H420L530 210M110 210H245L310 294H430L530 210" />
-        <circle cx="110" cy="210" r="12" /><circle cx="300" cy="126" r="12" />
-        <circle cx="310" cy="294" r="12" /><circle cx="530" cy="210" r="12" />
-        <rect x="235" y="184" width="145" height="52" rx="2" />
-      </g>
-      <text x="72" y="382">{String(index + 1).padStart(2, '0')} / {project.kind.toUpperCase()}</text>
-    </svg>
-  )}
+  <a class="project-preview__surface" href={urls.href(`projects/${project.slug}/`)} aria-label={`${label}: ${project.name}`}>
+    {image ? (
+      <img src={urls.rootHref(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
+    ) : (
+      <svg viewBox="0 0 640 420" role="img" aria-label={presentation?.preview.alt ?? `${diagramLabel}: ${project.name}`}>
+        <rect x="1" y="1" width="638" height="418" class="preview-paper" />
+        <g class="preview-grid" aria-hidden="true">
+          <path d="M54 84H586M54 168H586M54 252H586M54 336H586M88 40V378M552 40V378" />
+        </g>
+        <g class="preview-diagram" aria-hidden="true">
+          {layerLabels.map((layer, layerIndex) => (
+            <g class:list={{ 'is-recorded': layers[layerIndex] }}>
+              <path d={`M88 ${80 + layerIndex * 80}H178L218 ${62 + layerIndex * 80}H552`} data-preview-edge />
+              <circle cx="88" cy={80 + layerIndex * 80} r="7" />
+              <text x="232" y={86 + layerIndex * 80}>{layer}</text>
+              <circle cx="552" cy={62 + layerIndex * 80} r="4" />
+            </g>
+          ))}
+        </g>
+        <text class="preview-index" x="54" y="384">{String(index + 1).padStart(2, '0')} / {project.kind.toUpperCase()}</text>
+      </svg>
+    )}
+  </a>
+  <figcaption>{reviewImage?.caption ?? (image ? image.alt : diagramLabel)}</figcaption>
 </figure>

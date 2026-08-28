@@ -1,0 +1,40 @@
+---
+import type { Project, ReviewImage, UrlContext, LocaleCode } from '../lib/types';
+interface Props { project: Project; reviewImages?: ReviewImage[]; urls: UrlContext; locale: LocaleCode; }
+const { project, reviewImages = [], urls, locale } = Astro.props;
+const approved = project.presentation?.preview.kind === 'image' ? project.presentation.preview : null;
+const images = reviewImages.length ? reviewImages : project.presentation?.gallery ?? (approved ? [approved] : []);
+const pt = locale === 'pt-BR';
+---
+
+{images.length > 0 && (
+  <section class="project-gallery detail-section" aria-labelledby="project-gallery-heading">
+    <div class="project-gallery__heading">
+      <h2 id="project-gallery-heading">{pt ? 'Interfaces do projeto' : 'Interface views'}</h2>
+      <p>{pt ? 'Selecione uma imagem para ampliar.' : 'Select an image to view it at full size.'}</p>
+    </div>
+    <div class="project-gallery__images">
+      {images.map((image) => (
+        <figure>
+          <a href={urls.rootHref(image.src)} target="_blank" rel="noopener noreferrer" aria-label={`${pt ? 'Ampliar' : 'Enlarge'}: ${image.alt}`}>
+            <img src={urls.rootHref(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
+          </a>
+          {'caption' in image && (
+            <figcaption>
+              <p>{image.caption}</p>
+              <span>{image.source.kind === 'web' ? (
+                <>{pt ? 'Capturada em' : 'Captured'} <time datetime={image.source.capturedAt}>{image.source.capturedAt}</time>{image.source.url && <> · <a href={image.source.url} rel="noopener noreferrer">{pt ? 'Página de origem' : 'Source page'} ↗</a></>}</>
+              ) : image.source.kind === 'local-capture' ? (
+                <>{pt ? 'Capturada localmente em' : 'Captured locally'} <time datetime={image.source.capturedAt}>{image.source.capturedAt}</time></>
+              ) : image.source.kind === 'project-asset' ? (
+                <>{pt ? 'Imagem do projeto selecionada em' : 'Project image selected'} <time datetime={image.source.collectedAt}>{image.source.collectedAt}</time></>
+              ) : (
+                <>{pt ? 'Imagem fornecida em' : 'Image provided'} <time datetime={image.source.providedAt}>{image.source.providedAt}</time></>
+              )}</span>
+            </figcaption>
+          )}
+        </figure>
+      ))}
+    </div>
+  </section>
+)}

@@ -1,0 +1,86 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "public-extensions-workspace",
+  "slug": "public-extensions-workspace",
+  "title": "Built a Privacy-Gated Browser Extension Workspace",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-08-19",
+    "end": null,
+    "label": "August 2026–present"
+  },
+  "summary": "Conceived and built Public Extensions from scratch, combining focused browser tools, shared interface packages, least-permission design, and an explicit public-export boundary.",
+  "context": "Small browser tools can become difficult to maintain when permissions, storage, shared interfaces, site-specific behavior, and public-release boundaries evolve independently. The workspace gives those concerns one tested architecture while keeping each extension focused on a narrow user problem.",
+  "contributions": [
+    "Defined the extension concepts, workspace architecture, shared interface system, privacy model, browser-testing strategy, licensing, and public-release safeguards.",
+    "Built focused browser tools with local settings, encapsulated site-specific behavior, minimum required permissions, and confirmation for destructive actions.",
+    "Created shared React interface and token packages with a reuse rule that keeps one-off behavior inside the extension that owns it.",
+    "Implemented storage migration checks, deterministic fixtures, disposable-browser verification, manifest validation, and compatibility coverage.",
+    "Designed an opt-in export pipeline that rejects unmarked packages and checks the public surface for sensitive material, licenses, assets, and provenance."
+  ],
+  "outcomes": [
+    {
+      "text": "Published a source-available workspace with focused browser tools and a shared, tested interface foundation.",
+      "evidenceLevel": "public"
+    },
+    {
+      "text": "Made the public/private release boundary repeatable and automatically verifiable through opt-in manifests and export checks.",
+      "evidenceLevel": "observed"
+    }
+  ],
+  "areas": [
+    "Product Engineering",
+    "Frontend Architecture",
+    "Developer Experience",
+    "Authentication & Security",
+    "System Design"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "WXT",
+    "Vite",
+    "Vitest",
+    "Playwright",
+    "Browser Extensions",
+    "GitHub Actions"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "View Public Extensions on GitHub",
+      "href": "https://github.com/andrewsrigom/public-extensions"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "title": "Criei um Workspace de Extensões com Publicação Protegida",
+      "periodLabel": "Agosto de 2026–presente",
+      "summary": "Concebi e desenvolvi o Public Extensions do zero, reunindo ferramentas focadas para navegador, pacotes de interface compartilhados, permissões mínimas e uma fronteira explícita para exportação pública.",
+      "context": "Pequenas ferramentas de navegador podem se tornar difíceis de manter quando permissões, armazenamento, interfaces compartilhadas, comportamentos específicos por site e limites de publicação evoluem separadamente. O workspace reúne essas preocupações em uma arquitetura testada, mantendo cada extensão focada em um problema específico.",
+      "contributions": [
+        "Defini os conceitos das extensões, a arquitetura do workspace, o sistema de interfaces compartilhadas, o modelo de privacidade, a estratégia de testes no navegador, o licenciamento e as proteções de publicação.",
+        "Implementei ferramentas focadas para navegador com configurações locais, comportamentos específicos por site encapsulados, permissões mínimas e confirmação para ações destrutivas.",
+        "Criei pacotes compartilhados de interface React e tokens com uma regra de reutilização que mantém comportamentos isolados dentro da extensão responsável.",
+        "Implementei verificações de migração de storage, fixtures determinísticas, validação em navegadores descartáveis, validação de manifests e cobertura de compatibilidade.",
+        "Projetei um pipeline de exportação opt-in que rejeita pacotes não autorizados e verifica materiais sensíveis, licenças, assets e proveniência na superfície pública."
+      ],
+      "outcomes": [
+        "Publiquei um workspace source-available com ferramentas focadas para navegador e uma fundação de interface compartilhada e testada.",
+        "Transformei a fronteira entre conteúdo público e privado em um processo repetível e verificável automaticamente por manifests opt-in e checagens de exportação."
+      ],
+      "links": [
+        "Ver o Public Extensions no GitHub"
+      ]
+    }
+  }
+}

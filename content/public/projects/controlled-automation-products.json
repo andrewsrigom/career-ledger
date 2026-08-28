@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "controlled-automation-products",
+  "slug": "controlled-automation-products",
+  "name": "Job Apply Assistant & Inbox Cleaner",
+  "kind": "application",
+  "status": "active",
+  "summary": "Guarded browser and backend tools for job-application preparation and review-first mailbox operations.",
+  "description": "Separates browser interaction, durable backend work, sensitive data, immutable plans, fresh-state verification, backup, and confirmation boundaries so automation remains reviewable and user-controlled.",
+  "areas": [
+    "Product Engineering",
+    "Frontend Architecture",
+    "Backend Architecture",
+    "AI Engineering",
+    "Authentication & Security"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "Browser Extensions",
+    "Node.js",
+    "Model Context Protocol",
+    "PostgreSQL"
+  ],
+  "relatedEntries": [
+    "human-controlled-automation-tools"
+  ],
+  "featured": false,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Job Apply Assistant & Inbox Cleaner",
+      "summary": "Ferramentas de navegador e backend para preparação de candidaturas e operações de caixa de entrada com revisão prévia.",
+      "description": "Separa interação no navegador, tarefas duráveis no backend, dados sensíveis, planos imutáveis, verificação de estado, backup e confirmação para manter a automação revisável e sob controle do usuário."
+    }
+  }
+}

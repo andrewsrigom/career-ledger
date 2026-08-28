@@ -1,0 +1,100 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "web-operations-platform",
+  "slug": "web-operations-platform",
+  "name": "Rebolt",
+  "kind": "platform",
+  "status": "completed",
+  "workContext": "professional",
+  "summary": "A multi-tenant platform for business websites and customer operations, with backend automation, analytics, and AI-assisted voice processing.",
+  "description": "I contributed backend and full-stack workflows to Rebolt's shared platform: authenticated APIs, database queries, transactional updates, scheduled responses, and cache-backed analytics. I also integrated managed prompts for voice transcription and structured extraction, including response parsing and error handling. The work connected these services to administration, website editing, and rendering interfaces across repositories.",
+  "areas": [
+    "Backend Architecture",
+    "AI Engineering",
+    "Data & Databases",
+    "Product Engineering",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL",
+    "Prisma",
+    "Next.js",
+    "React"
+  ],
+  "relatedEntries": [
+    "multi-tenant-web-operations"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Rebolt",
+      "summary": "Plataforma multi-tenant para sites de negócios e operações de atendimento, com automação backend, analytics e processamento de voz assistido por IA.",
+      "description": "Contribuí com fluxos backend e full-stack na plataforma compartilhada do Rebolt: APIs autenticadas, consultas de banco de dados, atualizações transacionais, respostas agendadas e analytics com cache. Também integrei prompts gerenciados para transcrição de voz e extração estruturada, incluindo interpretação de respostas e tratamento de erros. O trabalho conectou esses serviços às interfaces de administração, edição e renderização de sites entre repositórios.",
+      "previewAlt": "Home do Rebolt com destaques laranja na navegação e título que apresenta CRM e marketing com IA para profissionais de serviços residenciais.",
+      "gallery": [
+        {
+          "alt": "Home do Rebolt com destaques laranja na navegação e título que apresenta CRM e marketing com IA para profissionais de serviços residenciais.",
+          "caption": "Home pública do Rebolt, apresentando sua plataforma de CRM e marketing assistida por IA para empresas de serviços."
+        }
+      ]
+    }
+  },
+  "activityMix": {
+    "basis": "recorded-activities",
+    "activityCount": 16,
+    "items": [
+      {
+        "domain": "frontend",
+        "percentage": 56.25
+      },
+      {
+        "domain": "backend",
+        "percentage": 43.75
+      }
+    ]
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/rebolt-home-2026-08-27.webp",
+      "width": 1440,
+      "height": 900,
+      "alt": "Rebolt homepage with orange navigation accents and a headline presenting AI-first CRM and marketing for home service professionals.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/rebolt-home-2026-08-27.webp",
+        "width": 1440,
+        "height": 900,
+        "source": {
+          "kind": "web",
+          "url": "https://rebolthq.com/",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "Rebolt homepage with orange navigation accents and a headline presenting AI-first CRM and marketing for home service professionals.",
+        "caption": "Rebolt's public homepage, presenting its AI-assisted CRM and marketing platform for service businesses.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

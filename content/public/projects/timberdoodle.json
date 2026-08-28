@@ -1,0 +1,172 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "timberdoodle",
+  "slug": "timberdoodle",
+  "name": "Timberdoodle",
+  "kind": "product",
+  "status": "completed",
+  "workContext": "professional",
+  "summary": "Developed pages for Timberdoodle's online storefront for homeschool curriculum and learning materials.",
+  "description": "Timberdoodle connects curriculum discovery, customizable kits, and shopping journeys. I developed pages for its online storefront.",
+  "areas": [
+    "Product Engineering",
+    "Commerce"
+  ],
+  "technologies": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Express.js",
+    "AWS Lambda",
+    "Shopify",
+    "GraphQL",
+    "PostgreSQL",
+    "Sanity",
+    "MongoDB"
+  ],
+  "relatedEntries": [],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "Visit Timberdoodle",
+      "href": "https://timberdoodle.com/"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "name": "Timberdoodle",
+      "summary": "Desenvolvi páginas para a loja online da Timberdoodle, voltada a currículos de educação domiciliar e materiais de aprendizagem.",
+      "description": "A Timberdoodle reúne descoberta de currículos, kits personalizáveis e jornadas de compra. Desenvolvi páginas para sua loja online.",
+      "links": [
+        "Visitar Timberdoodle"
+      ],
+      "previewAlt": "Home da loja Timberdoodle com navegação de kits curriculares e destaque de materiais para educação domiciliar.",
+      "gallery": [
+        {
+          "alt": "Home da loja Timberdoodle com navegação de kits curriculares e destaque de materiais para educação domiciliar.",
+          "caption": "Loja da Timberdoodle, com kits curriculares e materiais de aprendizagem para educação domiciliar."
+        },
+        {
+          "alt": "Personalizador de kits curriculares da Timberdoodle com opções de criar um kit ou carregar um existente.",
+          "caption": "Personalizador de kits da Timberdoodle, com opções de criar um kit curricular ou continuar uma seleção salva."
+        },
+        {
+          "alt": "Editor de cursos do Timberdoodle Scheduler com navegação por disciplina, cards de materiais e controles para adicionar cursos e salvar o planejamento.",
+          "caption": "Timberdoodle Scheduler: personalização de cursos e materiais por disciplina no planejamento curricular."
+        },
+        {
+          "alt": "Checklist semanal do Timberdoodle Scheduler com disciplinas identificadas por cor, atividades dos cursos, caixas de conclusão e controles para baixar e imprimir.",
+          "caption": "Timberdoodle Scheduler: checklist semanal para impressão, com atividades dos cursos organizadas por disciplina."
+        }
+      ]
+    }
+  },
+  "activityMix": {
+    "basis": "recorded-activities",
+    "activityCount": 19,
+    "items": [
+      {
+        "domain": "frontend",
+        "percentage": 57.89473684210527
+      },
+      {
+        "domain": "backend",
+        "percentage": 31.57894736842105
+      },
+      {
+        "domain": "devops",
+        "percentage": 10.526315789473683
+      }
+    ]
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/timberdoodle-home-2026-08-27.webp",
+      "width": 1440,
+      "height": 1017,
+      "alt": "Timberdoodle storefront homepage with curriculum kit navigation and a homeschooling materials hero.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/timberdoodle-home-2026-08-27.webp",
+        "width": 1440,
+        "height": 1017,
+        "source": {
+          "kind": "web",
+          "url": "https://timberdoodle.com/",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "Timberdoodle storefront homepage with curriculum kit navigation and a homeschooling materials hero.",
+        "caption": "Timberdoodle storefront, with curriculum kits and learning materials for homeschooling.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      },
+      {
+        "src": "assets/projects/timberdoodle-kit-builder-2026-08-27.webp",
+        "width": 1440,
+        "height": 1017,
+        "source": {
+          "kind": "web",
+          "url": "https://timberdoodle.com/customizer",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "Timberdoodle curriculum kit builder with options to start a new kit or load a previously built one.",
+        "caption": "Timberdoodle kit builder, with options to create a curriculum kit or continue a saved selection.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      },
+      {
+        "src": "assets/projects/timberdoodle-scheduler-course-editor.webp",
+        "width": 1718,
+        "height": 1262,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "Timberdoodle Scheduler course editor with subject navigation, learning-material cards, and controls to add courses and save the schedule.",
+        "caption": "Timberdoodle Scheduler: customizing courses and learning materials by subject within a curriculum schedule.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      },
+      {
+        "src": "assets/projects/timberdoodle-scheduler-weekly-checklist.webp",
+        "width": 1718,
+        "height": 1262,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "Timberdoodle Scheduler weekly checklist with color-coded subjects, course assignments, completion boxes, and download and print controls.",
+        "caption": "Timberdoodle Scheduler: a printable weekly checklist organizing course assignments by subject.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

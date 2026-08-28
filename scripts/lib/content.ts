@@ -1,5 +1,6 @@
-import type { EntryRecord, Entry, Project, Experience, DatasetInput, CareerDataset } from './model.ts';
+import type { EntryRecord, Entry, Experience, DatasetInput, CareerDataset } from './model.ts';
 import { validatePublicContent, throwIfIssues } from './validation.ts';
+import { withRankedProjects } from './project-ranking.ts';
 
 function withoutSchema<T>(value: T): T {
   if (Array.isArray(value)) {
@@ -32,13 +33,6 @@ function sortEntries(entries: Entry[]) {
     const dateOrder = entryDate(b).localeCompare(entryDate(a));
     if (dateOrder !== 0) return dateOrder;
     return a.title.localeCompare(b.title);
-  });
-}
-
-function sortProjects(projects: Project[]) {
-  return [...projects].sort((a, b) => {
-    if (a.featured !== b.featured) return Number(b.featured) - Number(a.featured);
-    return a.name.localeCompare(b.name);
   });
 }
 
@@ -75,7 +69,7 @@ export function createCareerDataset(content: DatasetInput, options: { preview?: 
   const resume = content.resume ? withoutSchema(content.resume) : null;
   const taxonomy = withoutSchema(content.taxonomy);
   const entries = sortEntries(content.entries.map((record) => normalizeEntry(withoutSchema('value' in record ? record.value : record))));
-  const projects = sortProjects(content.projects.map((record) => withoutSchema('value' in record ? record.value : record)));
+  const projects = content.projects.map((record) => withoutSchema('value' in record ? record.value : record));
   const entryIds = new Set(entries.map((entry) => entry.id));
 
   const areas = taxonomy.areas
@@ -157,7 +151,7 @@ export function createCareerDataset(content: DatasetInput, options: { preview?: 
     data.preview = true;
   }
 
-  return data;
+  return withRankedProjects(data);
 }
 
 export async function createPublicDataset() {

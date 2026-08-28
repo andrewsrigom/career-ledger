@@ -1,0 +1,98 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "shared-frontend-platform",
+  "slug": "shared-frontend-platform",
+  "name": "AOA Design System",
+  "kind": "platform",
+  "status": "completed",
+  "workContext": "professional",
+  "summary": "Led creation of the design-system component library, building reusable React primitives and composed components following atomic design principles.",
+  "description": "Led creation of AOA Design System's React and TypeScript component library, from reusable primitives to composed interface components following atomic design principles. Built interactive Storybook documentation, shared styling, component tests, and preview workflows. Also contributed reusable packages and content-driven page composition across packages-aoa and aoa-next as part of the wider team-maintained frontend foundation.",
+  "areas": [
+    "Technical Leadership",
+    "Frontend Architecture",
+    "Product Engineering",
+    "Developer Experience",
+    "Accessibility"
+  ],
+  "technologies": [
+    "Figma",
+    "TypeScript",
+    "React",
+    "Tailwind CSS",
+    "Storybook"
+  ],
+  "relatedEntries": [
+    "shared-frontend-systems"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "AOA Design System",
+      "summary": "Liderei a criação da biblioteca de componentes do design system, desenvolvendo primitivas React reutilizáveis e componentes compostos seguindo princípios de atomic design.",
+      "description": "Liderei a criação da biblioteca React e TypeScript do AOA Design System, de primitivas reutilizáveis a componentes de interface compostos seguindo princípios de atomic design. Desenvolvi documentação interativa no Storybook, estilos compartilhados, testes de componentes e fluxos de preview. Também contribuí com pacotes reutilizáveis e composição de páginas orientadas por conteúdo em packages-aoa e aoa-next, dentro da fundação frontend mantida pela equipe.",
+      "previewAlt": "AOA Design System no Storybook, com catálogo de componentes, exemplos de tipografia e controles de conteúdo, variante de título e elemento renderizado.",
+      "gallery": [
+        {
+          "alt": "AOA Design System no Storybook, com catálogo de componentes, exemplos de tipografia e controles de conteúdo, variante de título e elemento renderizado.",
+          "caption": "AOA Design System: documentação no Storybook com primitivas de tipografia, variantes de títulos e propriedades configuráveis dos componentes."
+        }
+      ]
+    }
+  },
+  "activityMix": {
+    "basis": "recorded-activities",
+    "activityCount": 4,
+    "items": [
+      {
+        "domain": "frontend",
+        "percentage": 87.5
+      },
+      {
+        "domain": "devops",
+        "percentage": 12.5
+      }
+    ]
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/aoa-design-system-storybook-typography.webp",
+      "width": 1718,
+      "height": 1262,
+      "alt": "AOA Design System in Storybook, showing the component catalog, typography examples, and controls for content, heading variant, and rendered element.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/aoa-design-system-storybook-typography.webp",
+        "width": 1718,
+        "height": 1262,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "AOA Design System in Storybook, showing the component catalog, typography examples, and controls for content, heading variant, and rendered element.",
+        "caption": "AOA Design System: Storybook documentation with typography primitives, heading variants, and configurable component properties.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

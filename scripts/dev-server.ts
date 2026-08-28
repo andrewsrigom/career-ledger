@@ -167,7 +167,7 @@ for (const directory of [
   PATHS.publicContent,
   path.join(PATHS.root, 'src'),
   path.join(PATHS.root, 'public'),
-  ...(previewMode ? [PATHS.candidates, PATHS.activities] : [])
+  ...(previewMode ? [PATHS.candidates, PATHS.activities, path.join(PATHS.careerPrivate, 'media-review')] : [])
 ]) {
   watchDirectory(directory);
 }

@@ -1,17 +1,20 @@
 ---
 import { portfolioCopy } from '../lib/portfolio-copy';
-interface Props { locale: 'en' | 'pt-BR'; hasExperience: boolean; }
-const { locale, hasExperience } = Astro.props;
+interface Props { locale: 'en' | 'pt-BR'; hasExperience: boolean; hasRecommendations?: boolean; hasContact?: boolean; }
+const { locale, hasExperience, hasRecommendations = false, hasContact = false } = Astro.props;
 const p = portfolioCopy(locale);
 const ids = ['intro', 'work', 'landscape', 'experience', 'about'];
+const sections = ids.map((id, index) => ({ id, label: p.sections[index] ?? id, number: index + 1 + (id === 'about' && hasRecommendations ? 1 : 0) })).filter((item) => item.id !== 'experience' || hasExperience);
+if (hasRecommendations) sections.splice(sections.length - 1, 0, { label: p.recommendationsKicker, id: 'recommendations', number: 5 });
+if (hasContact) sections.push({ label: p.contactKicker, id: 'contact', number: hasRecommendations ? 8 : 7 });
 ---
 
 <nav class="section-progress" aria-label={p.sectionNavigation} data-section-progress>
   <ol>
-    {p.sections.map((label, index) => (index !== 3 || hasExperience) && (
+    {sections.map(({ label, id, number }) => (
       <li>
-        <a href={`#${ids[index]}`} data-section-link={ids[index]}>
-          <span>{String(index + 1).padStart(2, '0')}</span>
+        <a href={`#${id}`} data-section-link={id}>
+          <span>{String(number).padStart(2, '0')}</span>
           <span>{label}</span>
         </a>
       </li>

@@ -62,6 +62,14 @@
         "paused"
       ]
     },
+    "workContext": {
+      "description": "Whether the owner's contribution belongs to client/company work or an independent project. Omit when unconfirmed.",
+      "enum": ["professional", "independent"]
+    },
+    "ownership": {
+      "description": "Explicitly reviewed scope of the owner's contribution. End-to-end means responsibility across the product lifecycle, not sole authorship. Omit when unconfirmed.",
+      "enum": ["end-to-end", "shared"]
+    },
     "summary": {
       "type": "string",
       "minLength": 30,

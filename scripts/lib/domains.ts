@@ -43,3 +43,19 @@ export function calculateActivityDomainMix(activities: readonly unknown[]) {
 
   return { activityCount, items };
 }
+
+// A focused projection of the recorded work, not a change to canonical tags.
+// Cross-cutting tags (quality, security, DX, etc.) do not create extra slices.
+export function calculateProjectWorkMix(activities: readonly unknown[]) {
+  const surfaces = activities.map((activity) => {
+    if (!isObject(activity) || !Array.isArray(activity.domains)) return { domains: [] };
+    return {
+      domains: activity.domains.flatMap((domain: unknown) => {
+        if (domain === 'backend' || domain === 'frontend') return [domain];
+        if (domain === 'devops' || domain === 'infrastructure') return ['devops'];
+        return [];
+      })
+    };
+  });
+  return calculateActivityDomainMix(surfaces);
+}

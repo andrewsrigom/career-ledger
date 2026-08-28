@@ -5,23 +5,23 @@ const { locale } = Astro.props;
 const p = portfolioCopy(locale);
 ---
 
-<figure class="architecture-scene" data-architecture-scene aria-label={p.architectureLabel}>
-  <svg class="architecture-scene__fallback" viewBox="0 0 720 620" role="img" aria-labelledby="architecture-title architecture-desc">
-    <title id="architecture-title">{p.architectureLabel}</title>
-    <desc id="architecture-desc">{p.layers.join(' → ')}</desc>
+<figure class="architecture-scene" data-architecture-scene aria-hidden="true">
+  <svg class="architecture-scene__fallback" viewBox="0 0 720 620" focusable="false">
     <g class="blueprint-grid" aria-hidden="true">
       {Array.from({ length: 11 }, (_, index) => <path d={`M60 ${70 + index * 48}H660`} />)}
       {Array.from({ length: 11 }, (_, index) => <path d={`M${120 + index * 48} 40V580`} />)}
     </g>
-    <g class="blueprint-stack" aria-hidden="true">
-      <path d="M160 155L360 72l200 83-200 83z" />
-      <path d="M160 250l200-83 200 83-200 83z" />
-      <path d="M160 345l200-83 200 83-200 83z" />
-      <path d="M160 440l200-83 200 83-200 83z" />
-      <path d="M160 155v285M560 155v285M360 238v285" />
-      <circle cx="360" cy="72" r="7" /><circle cx="160" cy="155" r="7" /><circle cx="560" cy="155" r="7" />
-      <circle cx="360" cy="262" r="7" /><circle cx="160" cy="345" r="7" /><circle cx="560" cy="345" r="7" />
-      <circle cx="360" cy="452" r="7" /><circle cx="360" cy="523" r="7" />
+    <g class="blueprint-stack">
+      <path class="blueprint-bridges" d="M160 155v285M560 155v285M360 238v285" />
+      {p.layers.map((_, index) => (
+        <g data-scene-layer={index} class:list={['blueprint-layer', { 'is-current': index === 0 }]}>
+          <path d={`M160 ${155 + index * 95}l200-83 200 83-200 83z`} />
+          <circle cx="160" cy={155 + index * 95} r="3.5" />
+          <circle cx="560" cy={155 + index * 95} r="3.5" />
+          <circle cx="360" cy={238 + index * 95} r="3.5" />
+          <text x="580" y={160 + index * 95}>{String(index + 1).padStart(2, '0')}</text>
+        </g>
+      ))}
     </g>
   </svg>
   <div class="architecture-scene__canvas" data-architecture-canvas aria-hidden="true"></div>

@@ -101,6 +101,8 @@ When a record has `localizations.pt-BR`, review the English and Portuguese versi
 
 Inspect the homepage, experience section when present, timeline, project and entry detail pages, relevant areas, links, desktop layout, and mobile layout before approval.
 
+When the owner requests screenshots, prepare real captures or use explicitly supplied images. Keep originals and review derivatives private; the optional `.career/private/media-review/preview.json` manifest makes selected images visible in the local preview without granting image or publication approval. Review visible identifiers and values as well as the caption. A current website capture is not evidence that the owner implemented every visible element. The preview server watches the media-review directory; restart it after changing Node tooling.
+
 ### 8. Approve
 
 ```bash
@@ -108,6 +110,10 @@ npm run career:approve -- --candidate <slug>
 ```
 
 Approval is intentionally interactive.
+
+Explicit owner approval in the current conversation may authorize execution of that gate for the exact reviewed records. Preserve the approval scope in private review notes; this is not agent self-approval and does not authorize future drafts. The complete 2026-08-28 portfolio release includes its existing drafts, reviewed image galleries, recommendations and contact channels. With no pending candidates, the isolated local preview can still render the approved collection.
+
+Publication to Cloudflare is a separate manual operation. Follow `docs/cloudflare-release.md`; upload only the verified public `dist/` and keep credentials/private material outside Git. Never infer deployment approval from passing CI.
 
 ## Agent limitations to preserve
 

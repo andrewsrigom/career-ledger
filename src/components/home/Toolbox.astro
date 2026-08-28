@@ -1,34 +1,37 @@
 ---
 import type { CareerDataset } from '../../lib/types';
 import { portfolioCopy } from '../../lib/portfolio-copy';
+import { isPriorityTechnology, orderTechnologies, technologyArea } from '../../lib/technology-presentation';
 interface Props { data: CareerDataset; locale: 'en' | 'pt-BR'; }
 const { data, locale } = Astro.props;
 const p = portfolioCopy(locale);
-const source = [...new Set(data.technologies.map((item) => item.label))];
+const source = orderTechnologies(data.technologies.map((item) => item.label));
+const core = source.filter(isPriorityTechnology);
 const groups = [
-  { label: locale === 'pt-BR' ? 'Linguagens' : 'Languages', test: /^(typescript|javascript|python|go|rust|java|c#|php|html|css|json)$/i },
-  { label: 'Interface', test: /react|next|astro|vue|angular|svelte|frontend|front-end|storybook|tailwind|accessib|web component|browser extension|gsap|\blit\b/i },
-  { label: locale === 'pt-BR' ? 'Dados e IA' : 'Data & AI', test: /sql|postgres|redis|mongo|database|prisma|drizzle|storage|openai|llm|vector|\brag\b|codex|ollama|model context/i },
-  { label: locale === 'pt-BR' ? 'Sistemas' : 'Systems', test: /node|api|graphql|rest|microservice|backend|nest|express|zod|system design|arquitetura de sistemas/i },
-  { label: locale === 'pt-BR' ? 'Entrega e qualidade' : 'Delivery & quality', test: /git|docker|kubernetes|aws|azure|cloud|test|playwright|vitest|jest|ansible|terraform|github|ci\/cd|telemetry|proxy|shell/i },
-  { label: 'DX', test: /vite|changesets|wxt|eslint|prettier/i }
+  { label: 'Backend', test: (item: string) => technologyArea(item) === 'backend' },
+  { label: 'Frontend', test: (item: string) => technologyArea(item) === 'frontend' },
+  { label: 'DevOps', test: (item: string) => technologyArea(item) === 'devops' },
+  { label: locale === 'pt-BR' ? 'Dados e IA' : 'Data & AI', test: (item: string) => /sql|postgres|redis|mongo|database|prisma|drizzle|storage|openai|llm|vector|\brag\b|codex|ollama|model context/i.test(item) },
+  { label: locale === 'pt-BR' ? 'Linguagens' : 'Languages', test: (item: string) => /^(typescript|javascript|python|go|rust|java|c#|php|html|css|json)$/i.test(item) },
+  { label: locale === 'pt-BR' ? 'Qualidade e DX' : 'Quality & DX', test: (item: string) => /test|playwright|jest|vite|changesets|wxt|eslint|prettier/i.test(item) }
 ];
-const used = new Set<string>();
+const used = new Set<string>(core);
 const categorized = groups.map((group) => {
-  const items = source.filter((item) => !used.has(item) && group.test.test(item));
+  const items = source.filter((item) => !used.has(item) && group.test(item));
   items.forEach((item) => used.add(item));
   return { ...group, items };
 });
 const other = source.filter((item: string) => !used.has(item));
-if (other.length) categorized.push({ label: locale === 'pt-BR' ? 'Produto e ferramentas' : 'Product & tools', test: /.*/, items: other });
+if (other.length) categorized.push({ label: locale === 'pt-BR' ? 'Produto e ferramentas' : 'Product & tools', test: () => true, items: other });
 ---
 
 {source.length > 0 && (
   <section class="toolbox shell" aria-labelledby="toolbox-heading">
     <header class="section-heading" data-reveal>
-      <span class="eyebrow">06 / {p.toolboxKicker}</span>
+      <span class="eyebrow">{data.resume?.recommendations?.length ? '07' : '06'} / {p.toolboxKicker}</span>
       <h2 id="toolbox-heading">{p.toolboxTitle}</h2>
     </header>
+    {core.length > 0 && <ul class="toolbox__core" aria-label={p.coreStackLabel} data-reveal>{core.map((technology) => <li>{technology}</li>)}</ul>}
     <div class="toolbox__groups">
       {categorized.filter((group) => group.items.length).map((group) => (
         <section data-reveal>

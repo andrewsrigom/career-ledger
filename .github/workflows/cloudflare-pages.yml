@@ -1,0 +1,66 @@
+name: Deploy Cloudflare Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_publication:
+        description: I reviewed this revision and approve publishing it to andrewsrigom.pages.dev.
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pages-production
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: inputs.confirm_publication == true && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/portfolio-interactive-redesign')
+    runs-on: ubuntu-latest
+    environment:
+      name: cloudflare-pages
+      url: https://andrewsrigom.pages.dev
+    env:
+      SITE_URL: https://andrewsrigom.pages.dev
+      BASE_PATH: /
+      ASTRO_TELEMETRY_DISABLED: '1'
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - name: Check out the explicitly selected revision
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install pinned dependencies
+        run: npm ci
+      - name: Validate, audit, type-check, test, and build public content
+        run: npm run check
+      - name: Install browser runtime
+        run: npx playwright install --with-deps chromium
+      - name: Verify the complete public site
+        run: npm run check:browser
+      - name: Rebuild with the production canonical URL
+        run: npm run build
+      - name: Retain the verified release for rollback
+        uses: actions/upload-artifact@v7
+        with:
+          name: cloudflare-public-site-${{ github.sha }}
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Publish the approved build
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Configure the Cloudflare Pages Edit deployment secret first."; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Configure the Cloudflare account secret first."; exit 1; }
+          npx --no-install wrangler pages deploy dist --project-name andrewsrigom --branch main --commit-hash "$GITHUB_SHA" --commit-dirty=false

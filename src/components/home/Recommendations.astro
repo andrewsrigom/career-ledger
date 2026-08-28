@@ -1,0 +1,73 @@
+---
+import type { CareerDataset, UrlContext, LocaleCode } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+interface Props { data: CareerDataset; urls: UrlContext; locale: LocaleCode; }
+const { data, urls, locale } = Astro.props;
+const recommendations = data.resume?.recommendations ?? [];
+const p = portfolioCopy(locale);
+const translated = recommendations.some((item) => item.translated);
+---
+
+{recommendations.length > 0 && (
+  <section class="recommendations-section shell" id="recommendations" aria-labelledby="recommendations-heading" data-section="recommendations">
+    <header class="section-heading" data-reveal>
+      <span class="eyebrow">05 / {p.recommendationsKicker}</span>
+      <h2 id="recommendations-heading">{p.recommendationsTitle}</h2>
+      <p>{p.recommendationsIntro}</p>
+    </header>
+    <ul class="recommendations-list" role="list">
+      {recommendations.map((item) => {
+        const portrait = (data.preview ? data.reviewPortraits?.[item.id] : undefined) ?? item.portrait;
+        const initials = item.name.split(/\s+/).filter(Boolean).map((part) => part[0]).filter(Boolean);
+        const monogram = `${initials[0] ?? ''}${initials.length > 1 ? initials[initials.length - 1] : ''}`;
+        return (
+          <li data-reveal data-recommendation={item.id}>
+            <figure class="recommendation">
+              <span class="recommendation__mark" aria-hidden="true">“</span>
+              <blockquote cite={item.sourceUrl} lang={item.translated ? 'pt-BR' : 'en'}>
+                <p>{item.quote}</p>
+              </blockquote>
+              <figcaption>
+                {portrait ? (
+                  <img class="recommendation__portrait" src={urls.rootHref(portrait.src)} alt="" width={portrait.width} height={portrait.height} loading="lazy" decoding="async" />
+                ) : <span class="recommendation__portrait recommendation__initials" aria-hidden="true">{monogram}</span>}
+                <div>
+                  <a class="recommendation__name" href={item.profileUrl} rel="external">{item.name}<span aria-hidden="true"> ↗</span></a>
+                  <p class="recommendation__relationship" lang={item.translated ? 'pt-BR' : 'en'}>{item.relationship}</p>
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+        );
+      })}
+    </ul>
+    <footer class="recommendations-footer">
+      {translated && <p>{p.recommendationsTranslation}</p>}
+      <a class="text-link" href={recommendations[0]?.sourceUrl} rel="external">{p.recommendationsSource}<span aria-hidden="true">↗</span></a>
+    </footer>
+  </section>
+)}
+
+<style>
+  .recommendations-section { padding-block: clamp(4rem, 9vw, 8rem); }
+  .recommendations-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; column-gap: clamp(2rem, 5vw, 6rem); }
+  .recommendations-list > li { border-top: 1px solid var(--line); padding-block: 2rem 2.8rem; min-width: 0; }
+  .recommendation { display: flex; flex-direction: column; height: 100%; margin: 0; }
+  .recommendation__mark { color: var(--accent); font-family: var(--serif); font-size: 3.5rem; line-height: 1; height: 2.4rem; }
+  blockquote { margin: .5rem 0 1.8rem; }
+  blockquote p { font-family: var(--serif); font-size: clamp(1.2rem, 1.6vw, 1.5rem); line-height: 1.55; margin: 0; }
+  figcaption { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
+  figcaption > div { min-width: 0; }
+  .recommendation__portrait { display: block; width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; flex: 0 0 3.5rem; background: var(--paper); }
+  .recommendation__initials { display: grid; place-items: center; font-family: var(--mono); color: var(--muted); border: 1px solid var(--line); }
+  .recommendation__name { font-size: .95rem; font-weight: 600; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: .2em; overflow-wrap: anywhere; }
+  .recommendation__name:hover { text-decoration-color: var(--accent); }
+  .recommendation__name span { color: var(--accent); font-weight: 400; }
+  .recommendation__relationship { color: var(--muted); font-size: .8rem; line-height: 1.5; margin: .3rem 0 0; }
+  .recommendations-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+  .recommendations-footer p { color: var(--muted); font-size: .85rem; margin: 0; }
+  @media (max-width: 700px) {
+    .recommendations-list { grid-template-columns: 1fr; }
+    .recommendations-list > li { padding-block: 1.5rem 2rem; }
+  }
+</style>

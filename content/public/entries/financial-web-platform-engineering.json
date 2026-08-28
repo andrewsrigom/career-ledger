@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "financial-web-platform-engineering",
+  "slug": "financial-web-platform-engineering",
+  "title": "Engineering Digital Banking and Rewards at Rogue Credit Union",
+  "kind": "leadership",
+  "status": "active",
+  "period": {
+    "start": "2024-09-03",
+    "end": null,
+    "label": "September 2024–present"
+  },
+  "summary": "Leading API integration architecture, authentication, and full-stack implementation for Rogue Credit Union's digital banking and rewards application through Integritas.",
+  "context": "The platform combines sensitive authenticated journeys, upstream integrations, localized experiences, form workflows, telemetry, automated testing, and a production-oriented delivery pipeline. The role covered technical direction rather than ownership of the business roadmap.",
+  "contributions": [
+    "Designed the application's server-side API boundaries, authentication flow, runtime validation, and integration testing patterns.",
+    "Created a scenario-driven mock API and contract workflow for deterministic development without live upstream dependencies.",
+    "Implemented generated compile-time contracts, maintained runtime validation, reusable fixtures, and contract-drift checks.",
+    "Expanded privacy-aware diagnostics, form lifecycle telemetry, localized product journeys, and browser-based verification.",
+    "Led engineering automation spanning changelog governance, design handoff, testing strategy, and production-build modernization."
+  ],
+  "outcomes": [
+    {
+      "text": "Optimized the production-build workflow, reducing cold-build time by 60%.",
+      "evidenceLevel": "measured"
+    },
+    {
+      "text": "Reduced integration defects and dependency wait through deterministic mocks and contract checks.",
+      "evidenceLevel": "self-reported"
+    }
+  ],
+  "areas": [
+    "Backend Architecture",
+    "System Design",
+    "Technical Leadership",
+    "Authentication & Security",
+    "Frontend Architecture",
+    "Developer Experience",
+    "Observability & Reliability"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "OpenAPI",
+    "Zod",
+    "Next.js",
+    "React",
+    "Vitest",
+    "Playwright"
+  ],
+  "featured": true,
+  "significance": "notable",
+  "activityTypes": [
+    "leadership",
+    "architecture",
+    "implementation",
+    "integration",
+    "security",
+    "testing",
+    "automation",
+    "developer-experience"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Engenharia da aplicação bancária e de recompensas da Rogue Credit Union",
+      "periodLabel": "Setembro de 2024–presente",
+      "summary": "Lidero a arquitetura de integração de APIs, autenticação e implementação full-stack da aplicação bancária digital e de recompensas da Rogue Credit Union através da Integritas.",
+      "context": "A plataforma reúne jornadas autenticadas, integrações com serviços, experiências localizadas, formulários, telemetria, testes automatizados e um fluxo de entrega voltado à produção. A atuação abrange a direção técnica, não a definição do roadmap de negócio.",
+      "contributions": [
+        "Projetei os limites das APIs no servidor, o fluxo de autenticação, a validação em runtime e os padrões de testes de integração da aplicação.",
+        "Criei uma mock API orientada a cenários e um fluxo de contratos para desenvolvimento determinístico, sem dependência de serviços upstream ativos.",
+        "Implementei contratos gerados para verificação de tipos, validação em runtime, fixtures reutilizáveis e verificações de divergência de contratos.",
+        "Ampliei diagnósticos com atenção à privacidade, telemetria do ciclo de formulários, jornadas localizadas e verificação em navegador.",
+        "Liderei automações de engenharia para governança de changelog, handoff de design, estratégia de testes e modernização do build de produção."
+      ],
+      "outcomes": [
+        "Otimizei o processo de build de produção, reduzindo em 60% o tempo de builds a frio.",
+        "Reduzi defeitos de integração e espera por dependências com mocks determinísticos e verificações de contratos."
+      ],
+      "links": []
+    }
+  }
+}

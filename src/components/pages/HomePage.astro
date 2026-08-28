@@ -6,6 +6,9 @@ import Hero from '../home/Hero.astro';
 import ProjectIndex from '../home/ProjectIndex.astro';
 import EngineeringLandscape from '../home/EngineeringLandscape.astro';
 import ExperienceTimeline from '../home/ExperienceTimeline.astro';
+import Recommendations from '../home/Recommendations.astro';
+import Contact from '../home/Contact.astro';
+import { hasContact } from '../../../scripts/lib/contact';
 import Principles from '../home/Principles.astro';
 import Toolbox from '../home/Toolbox.astro';
 
@@ -23,11 +26,13 @@ const { data, urls, copy, locale } = context;
   active="home"
   pageType="home"
 >
-  <SectionProgress locale={locale} hasExperience={Boolean(data.resume)} />
+  <SectionProgress locale={locale} hasExperience={Boolean(data.resume)} hasRecommendations={Boolean(data.resume?.recommendations?.length)} hasContact={hasContact(data.resume?.contact, data.profile.links)} />
   <Hero data={data} urls={urls} copy={copy} locale={locale} />
   <ProjectIndex data={data} urls={urls} copy={copy} locale={locale} />
   <EngineeringLandscape data={data} urls={urls} locale={locale} />
   {data.resume && <ExperienceTimeline data={data} urls={urls} copy={copy} locale={locale} />}
+  <Recommendations data={data} urls={urls} locale={locale} />
   <Principles data={data} locale={locale} />
   <Toolbox data={data} locale={locale} />
+  <Contact data={data} locale={locale} />
 </BaseLayout>

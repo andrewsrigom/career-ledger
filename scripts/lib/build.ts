@@ -1,6 +1,6 @@
-import type { CareerDataset } from './model.ts';
+import type { CareerDataset, ReviewAsset } from './model.ts';
 import type { UrlContext } from './url.ts';
-export interface BuildOptions { distDir?: string; siteUrl?: string; basePath?: string; data?: CareerDataset; includeLocalRules?: boolean; logLevel?: 'debug' | 'info' | 'warn' | 'error' | 'silent'; }
+export interface BuildOptions { distDir?: string; siteUrl?: string; basePath?: string; data?: CareerDataset; reviewAssets?: readonly ReviewAsset[]; includeLocalRules?: boolean; logLevel?: 'debug' | 'info' | 'warn' | 'error' | 'silent'; }
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -28,6 +28,7 @@ import {
 import { createUrlContext } from './url.ts';
 import { ValidationError } from './validation.ts';
 import { stagePublicAssets, verifyFrontendBudget, verifyLocalResources } from './frontend-guards.ts';
+import { stageReviewAssets } from './review-media.ts';
 
 const HTML_REFERENCE = /(?:href|src)="([^"]+)"/g;
 
@@ -124,6 +125,9 @@ export async function buildSite(options: BuildOptions = {}) {
   }
 
   const sourceData = options.data ?? await createPublicDataset();
+  if ((sourceData.reviewMedia !== undefined || sourceData.reviewPortraits !== undefined || options.reviewAssets?.length) && sourceData.preview !== true) {
+    throw new ValidationError('Images awaiting review are reserved for isolated candidate previews.');
+  }
   if (options.data && sourceData.preview !== true) {
     throw new ValidationError('Injected build data is reserved for isolated candidate previews.');
   }
@@ -157,7 +161,8 @@ export async function buildSite(options: BuildOptions = {}) {
   process.env.ASTRO_TELEMETRY_DISABLED = '1';
 
   try {
-    await stagePublicAssets(sourceData.projects, path.join(PATHS.root, 'public'), stagedAssets);
+    await stagePublicAssets(sourceData.projects, path.join(PATHS.root, 'public'), stagedAssets, sourceData.resume?.recommendations);
+    await stageReviewAssets(sourceData, options.reviewAssets ?? [], stagedAssets);
     const { build: buildAstro } = await import('astro');
     await buildAstro({
       root: PATHS.root,

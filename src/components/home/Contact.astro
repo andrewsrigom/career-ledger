@@ -1,0 +1,64 @@
+---
+import type { CareerDataset, LocaleCode } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+import { contactLinks, emailHref, formatPhone, hasContact } from '../../../scripts/lib/contact';
+interface Props { data: CareerDataset; locale: LocaleCode; }
+const { data, locale } = Astro.props;
+const p = portfolioCopy(locale);
+const contact = data.resume?.contact;
+const links = contactLinks(contact, data.profile.links);
+---
+
+{hasContact(contact, data.profile.links) && (
+  <section class="contact-section shell" id="contact" aria-labelledby="contact-heading" data-section="contact">
+    <div class="contact-heading" data-reveal>
+      <span class="eyebrow">{data.resume?.recommendations?.length ? '08' : '07'} / {p.contactKicker}</span>
+      <h2 id="contact-heading">{p.contactTitle}</h2>
+      <p>{p.contactIntro}</p>
+    </div>
+    <div class="contact-channels" data-reveal>
+      {contact?.email && (
+        <a class="contact-channel contact-channel--email" href={emailHref(contact.email)}>
+          <span class="eyebrow">{p.contactEmail}</span>
+          <strong>{contact.email}</strong><span class="contact-arrow" aria-hidden="true">↗</span>
+        </a>
+      )}
+      {contact?.phone && (
+        <div class="contact-phone">
+          <a class="contact-channel" href={`tel:${contact.phone}`}>
+            <span class="eyebrow">{p.contactPhone}</span>
+            <strong>{formatPhone(contact.phone)}</strong><span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          {contact.whatsapp && <a class="text-link contact-whatsapp" href={`https://wa.me/${contact.phone.slice(1)}`} rel="external">WhatsApp<span aria-hidden="true">↗</span></a>}
+        </div>
+      )}
+      {links.length > 0 && (
+        <ul class="contact-socials" role="list" aria-label={p.contactSocials}>
+          {links.map((link) => <li><a href={link.href} rel="external">{link.label}<span aria-hidden="true">↗</span></a></li>)}
+        </ul>
+      )}
+    </div>
+  </section>
+)}
+
+<style>
+  .contact-section { border-top: 1px solid var(--line); padding-block: clamp(4rem, 8vw, 8rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(2rem, 7vw, 8rem); }
+  .contact-heading h2 { font: 400 clamp(3rem, 6vw, 6.4rem)/1.05 var(--serif); letter-spacing: -.045em; margin: 1rem 0 1.5rem; }
+  .contact-heading p { color: var(--muted); max-width: 27rem; font-size: 1.1rem; line-height: 1.7; }
+  .contact-channels { min-width: 0; align-self: center; }
+  .contact-channel { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; align-items: center; padding-block: 1.4rem; text-decoration: none; }
+  .contact-channel .eyebrow { grid-column: 1 / -1; margin-bottom: .7rem; }
+  .contact-channel strong { font: 400 clamp(1.35rem, 2.5vw, 2.4rem)/1.35 var(--serif); overflow-wrap: anywhere; }
+  .contact-arrow { color: var(--accent); font-size: 1.5rem; }
+  .contact-channel:hover strong { text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
+  .contact-channel--email, .contact-phone { border-bottom: 1px solid var(--line); }
+  .contact-whatsapp { margin-bottom: 1.4rem; }
+  .contact-socials { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0 2.5rem; }
+  .contact-socials a { display: inline-flex; align-items: center; gap: 1.2rem; padding-block: 1.4rem; font: 500 1rem/1.5 var(--mono); text-decoration: underline; text-underline-offset: .3em; }
+  .contact-socials span { color: var(--accent); }
+  @media (max-width: 700px) {
+    .contact-section { grid-template-columns: 1fr; gap: 1.2rem; }
+    .contact-heading p { margin-bottom: 0; }
+    .contact-socials { gap: 0 1.5rem; }
+  }
+</style>

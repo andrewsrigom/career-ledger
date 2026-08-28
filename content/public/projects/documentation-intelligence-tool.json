@@ -1,0 +1,122 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "documentation-intelligence-tool",
+  "ownership": "end-to-end",
+  "slug": "documentation-intelligence-tool",
+  "name": "Endpointer",
+  "kind": "tool",
+  "status": "active",
+  "summary": "An AI-assisted search tool that indexes vendor API documentation and gives engineers and coding agents direct access to integration context.",
+  "description": "I designed and built Endpointer to turn scattered vendor documentation and API specifications into searchable engineering context. Its ingestion pipeline creates structured operation and field indexes, preserves source references, and exposes search through a Python CLI and read-only Model Context Protocol tools. Engineers and AI assistants can retrieve relevant API details without repeating manual searches across documentation sites.",
+  "areas": [
+    "AI Engineering",
+    "Backend Architecture",
+    "Developer Experience",
+    "System Design"
+  ],
+  "technologies": [
+    "Python",
+    "Model Context Protocol",
+    "OpenAPI",
+    "pytest"
+  ],
+  "relatedEntries": [
+    "local-documentation-intelligence"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Endpointer",
+      "summary": "Ferramenta de busca assistida por IA que indexa documentação de APIs de fornecedores e oferece contexto de integração a engenheiros e agentes de programação.",
+      "description": "Projetei e desenvolvi o Endpointer para transformar documentação dispersa de fornecedores e especificações de APIs em contexto de engenharia pesquisável. Seu pipeline de ingestão cria índices estruturados de operações e campos, preserva referências às fontes e disponibiliza busca por uma CLI Python e ferramentas MCP somente leitura. Engenheiros e assistentes de IA conseguem consultar detalhes relevantes das APIs sem repetir buscas manuais entre sites de documentação.",
+      "previewAlt": "Pergunta no terminal solicitando orientação para integrar uma API e resposta de contexto do MCP Endpointer.",
+      "gallery": [
+        {
+          "alt": "Pergunta no terminal solicitando orientação para integrar uma API e resposta de contexto do MCP Endpointer.",
+          "caption": "1. A pergunta: usar o Endpointer pelo Codex para encontrar uma operação de API na documentação indexada localmente."
+        },
+        {
+          "alt": "Chamadas às ferramentas MCP do Endpointer buscando documentação e endpoints e recuperando o contrato de uma operação.",
+          "caption": "2. A busca: search_docs e search_endpoints localizam a documentação relevante; get_operation recupera o contrato selecionado."
+        },
+        {
+          "alt": "Resposta no terminal resumindo uma operação de API, parâmetros obrigatórios, campos da resposta, erros e informações a verificar.",
+          "caption": "3. A resposta: orientação para a integração com base na documentação recuperada, incluindo parâmetros, campos da resposta, erros documentados e dúvidas a verificar."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/endpointer-01-question.webp",
+      "width": 1347,
+      "height": 680,
+      "alt": "Terminal prompt requesting API integration guidance and the Endpointer MCP context response.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/endpointer-01-question.webp",
+        "width": 1347,
+        "height": 680,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "Terminal prompt requesting API integration guidance and the Endpointer MCP context response.",
+        "caption": "1. The question: use Endpointer through Codex to find an API operation in locally indexed documentation.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      },
+      {
+        "src": "assets/projects/endpointer-02-documentation-search.webp",
+        "width": 1334,
+        "height": 687,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "Endpointer MCP tool calls searching documentation and endpoints, then retrieving an operation contract.",
+        "caption": "2. The retrieval: search_docs and search_endpoints locate relevant documentation; get_operation retrieves the selected contract.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      },
+      {
+        "src": "assets/projects/endpointer-03-integration-summary.webp",
+        "width": 1352,
+        "height": 586,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "Terminal answer summarizing an API operation, required parameters, response fields, errors, and information to verify.",
+        "caption": "3. The answer: integration guidance based on the retrieved documentation, with parameters, response fields, documented errors, and remaining questions.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "reusable-saas-ecosystem",
+  "slug": "reusable-saas-ecosystem",
+  "title": "Built SeuSaaS Payments, Authentication, and Backend Services",
+  "kind": "architecture",
+  "status": "active",
+  "period": {
+    "start": "2026-04-03",
+    "end": null,
+    "label": "April 2026–present"
+  },
+  "summary": "Designed and built SeuSaaS as a full-stack application with payment flows, authentication, tenant-scoped workspaces, and reusable backend services.",
+  "context": "The application connects marketing and sign-in pages to billing, onboarding, and workspace operations. Shared backend capabilities and a central release pipeline support distinct product editions.",
+  "contributions": [
+    "Built reusable identity, tenancy, audit, event, queue, webhook, notification, cache, storage, and media foundations.",
+    "Created catalog-driven developer tooling for capability discovery, diagnostics, operational guidance, and automation inventory.",
+    "Developed a multi-tenant product platform spanning authentication, workspaces, billing, administration, privacy controls, analytics, storage, integrations, and bounded AI assistance.",
+    "Implemented plan-aware generation, pruning, verification, manifests, release preflights, buyer-safe bootstrap guidance, and edition publication.",
+    "Maintained explicit boundaries between original reusable implementation, legacy product lineages, generated editions, and licensed visual source."
+  ],
+  "outcomes": [
+    {
+      "text": "Reached initial private use across health and technology segments.",
+      "evidenceLevel": "self-reported"
+    },
+    {
+      "text": "Published two plan-specific repository histories through a traceable central release pipeline.",
+      "evidenceLevel": "observed"
+    }
+  ],
+  "areas": [
+    "Backend Architecture",
+    "Authentication & Security",
+    "System Design",
+    "Product Engineering",
+    "Frontend Architecture",
+    "Developer Experience"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL",
+    "OpenAPI",
+    "Docker",
+    "Next.js",
+    "React",
+    "Playwright"
+  ],
+  "featured": true,
+  "significance": "notable",
+  "activityTypes": [
+    "architecture",
+    "implementation",
+    "integration",
+    "security",
+    "automation",
+    "release",
+    "product",
+    "developer-experience"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Pagamentos, autenticação e serviços backend do SeuSaaS",
+      "periodLabel": "Abril de 2026–presente",
+      "summary": "Projetei e desenvolvi o SeuSaaS como uma aplicação full-stack com pagamentos, autenticação, espaços de trabalho por tenant e serviços backend reutilizáveis.",
+      "context": "A aplicação conecta páginas de apresentação e login a cobrança, onboarding e operações dos espaços de trabalho. Capacidades backend compartilhadas e um pipeline central de releases sustentam diferentes edições do produto.",
+      "contributions": [
+        "Desenvolvi bases reutilizáveis de identidade, tenancy, auditoria, eventos, filas, webhooks, notificações, cache, armazenamento e mídia.",
+        "Criei ferramentas de desenvolvimento orientadas por catálogo para descoberta de capacidades, diagnósticos, orientações de operação e inventário de automações.",
+        "Desenvolvi uma plataforma multi-tenant com autenticação, espaços de trabalho, cobrança, administração, controles de privacidade, analytics, armazenamento, integrações e assistência de IA delimitada.",
+        "Implementei geração por plano, remoção de recursos não incluídos, verificação, manifests, verificações pré-release, orientações de configuração para compradores e publicação de edições.",
+        "Mantive limites explícitos entre implementação reutilizável original, produtos anteriores, edições geradas e materiais visuais licenciados."
+      ],
+      "outcomes": [
+        "O produto alcançou uso privado inicial nos segmentos de saúde e tecnologia.",
+        "Publiquei históricos de repositórios para duas edições por plano através de um pipeline central de releases rastreável."
+      ],
+      "links": []
+    }
+  }
+}

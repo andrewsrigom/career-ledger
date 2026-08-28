@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "shared-frontend-systems",
+  "slug": "shared-frontend-systems",
+  "title": "Led Creation of the AOA Design System Component Library",
+  "kind": "leadership",
+  "status": "completed",
+  "period": {
+    "start": "2023-11-20",
+    "end": "2024-11-25",
+    "label": "November 2023–November 2024"
+  },
+  "summary": "Led creation of AOA Design System's component library, building reusable primitives and composed components following atomic design principles, with interactive documentation and automated quality feedback.",
+  "context": "The component library formed part of a shared frontend foundation alongside reusable packages and content-driven applications. My leadership covered creation of the library; the wider content and application systems remained a team effort.",
+  "contributions": [
+    "Led creation of the React and TypeScript component library, building reusable primitives and composed components following atomic design principles.",
+    "Established and hardened a reusable package workspace for frontend utilities, hooks, configuration, and developer tooling.",
+    "Expanded component stories, behavior tests, preview automation, pre-commit validation, and build-tool modernization.",
+    "Built structured content models, reusable page sections, forms, responsive media, motion, and visual authoring workflows.",
+    "Added accessibility, crawlability, preview-environment browser tests, and quality feedback across content-driven applications."
+  ],
+  "outcomes": [
+    {
+      "text": "The broader shared frontend foundation was used across multiple production applications.",
+      "evidenceLevel": "self-reported"
+    }
+  ],
+  "areas": [
+    "Technical Leadership",
+    "Frontend Architecture",
+    "Product Engineering",
+    "Developer Experience",
+    "Accessibility"
+  ],
+  "technologies": [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Storybook",
+    "Vite",
+    "Vitest",
+    "Playwright",
+    "Tailwind CSS"
+  ],
+  "featured": true,
+  "significance": "notable",
+  "activityTypes": [
+    "leadership",
+    "architecture",
+    "implementation",
+    "testing",
+    "accessibility",
+    "automation",
+    "developer-experience",
+    "documentation"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Liderei a criação da biblioteca de componentes do AOA Design System",
+      "periodLabel": "Novembro de 2023–novembro de 2024",
+      "summary": "Liderei a criação da biblioteca de componentes do AOA Design System, desenvolvendo primitivas reutilizáveis e componentes compostos seguindo princípios de atomic design, com documentação interativa e verificações automatizadas de qualidade.",
+      "context": "A biblioteca de componentes fazia parte de uma fundação frontend compartilhada com pacotes reutilizáveis e aplicações orientadas por conteúdo. Minha liderança abrangeu a criação da biblioteca; os demais sistemas de conteúdo e aplicações foram um trabalho de equipe.",
+      "contributions": [
+        "Liderei a criação da biblioteca de componentes React e TypeScript, desenvolvendo primitivas reutilizáveis e componentes compostos seguindo princípios de atomic design.",
+        "Estabeleci e consolidei um workspace de pacotes reutilizáveis para utilitários frontend, hooks, configurações e ferramentas de desenvolvimento.",
+        "Ampliei stories, testes de comportamento, automação de previews, validação pré-commit e modernização das ferramentas de build.",
+        "Desenvolvi modelos de conteúdo estruturado, seções reutilizáveis, formulários, mídia responsiva, animações e fluxos de edição visual.",
+        "Adicionei melhorias de acessibilidade e indexação, testes de navegador em ambientes de preview e feedback de qualidade nas aplicações orientadas por conteúdo."
+      ],
+      "outcomes": [
+        "A fundação frontend compartilhada foi utilizada em várias aplicações de produção."
+      ],
+      "links": []
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "knowledge-product-platform",
+  "ownership": "end-to-end",
+  "slug": "knowledge-product-platform",
+  "name": "SeniorPath",
+  "kind": "open-source",
+  "status": "active",
+  "summary": "A practical guide for software engineers, making complex concepts easier to understand through explanations, recipes, and hands-on challenges.",
+  "description": "SeniorPath brings together engineering guides, practical recipes, connected concepts, and coding challenges to support learning and professional growth in technology. I built the bilingual platform with searchable content, learning tracks, and reading progress, backed by a reusable site shell, a separate editorial content pipeline, and automated content validation. The focus is helping engineers understand ideas and apply them to real problems.",
+  "areas": [
+    "Developer Experience",
+    "Product Engineering",
+    "Accessibility",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "Astro",
+    "Svelte",
+    "TypeScript",
+    "Node.js",
+    "Tailwind CSS",
+    "Playwright"
+  ],
+  "relatedEntries": [
+    "localized-knowledge-platform"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "SeniorPath",
+      "summary": "Guia prático para engenheiros de software, descomplicando conceitos por meio de explicações, receitas e desafios aplicados.",
+      "description": "O SeniorPath reúne guias de engenharia, receitas práticas, conceitos conectados e desafios de programação para apoiar o aprendizado e o desenvolvimento profissional em tecnologia. Desenvolvi a plataforma bilíngue com busca, trilhas de estudo e progresso de leitura, sustentada por uma estrutura de site reutilizável, um pipeline editorial separado e validação automatizada do conteúdo. O foco é ajudar engenheiros a compreender ideias e aplicá-las a problemas reais.",
+      "previewAlt": "Índice de artigos do SeniorPath com navegação inspirada em cadernos, introdução em destaque e lista cronológica de artigos de engenharia.",
+      "gallery": [
+        {
+          "alt": "Índice de artigos do SeniorPath com navegação inspirada em cadernos, introdução em destaque e lista cronológica de artigos de engenharia.",
+          "caption": "Índice atual de artigos do SeniorPath, com layout voltado à leitura e navegação para guias, trilhas e desafios."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/seniorpath-articles-2026-08-27.webp",
+      "width": 1440,
+      "height": 1065,
+      "alt": "SeniorPath article index with notebook-inspired navigation, a prominent introduction, and a chronological list of engineering articles.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/seniorpath-articles-2026-08-27.webp",
+        "width": 1440,
+        "height": 1065,
+        "source": {
+          "kind": "local-capture",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "SeniorPath article index with notebook-inspired navigation, a prominent introduction, and a chronological list of engineering articles.",
+        "caption": "The current SeniorPath article index, showing the reading-focused layout and navigation to guides, tracks, and challenges.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

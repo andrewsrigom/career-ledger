@@ -1,0 +1,82 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "localized-knowledge-platform",
+  "slug": "localized-knowledge-platform",
+  "title": "Built SeniorPath, a Practical Software Engineering Guide",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-03-24",
+    "end": null,
+    "label": "March 2026–present"
+  },
+  "summary": "Built SeniorPath to explain software-engineering concepts through practical guides, recipes, and coding challenges, with bilingual search and structured learning paths.",
+  "context": "Engineers need more than disconnected definitions: they need explanations, examples, and a way to connect concepts to everyday work. SeniorPath combines that editorial purpose with searchable collections, learning tracks, and reading progress.",
+  "contributions": [
+    "Built a connected learning experience spanning guides, practical recipes, concepts, coding challenges, glossary entries, search, and reading progress.",
+    "Separated the generic site shell from editorial content through a manifest contract, synchronization tools, and external repository support.",
+    "Implemented localized static routes, accessible navigation, reusable editorial interfaces, feeds, and search indexing.",
+    "Added content-graph validation, review readiness, preparation audits, web-quality checks, browser verification, and release safeguards.",
+    "Integrated a reusable notebook-oriented interface system while preserving the external-content build boundary."
+  ],
+  "outcomes": [
+    {
+      "text": "Published SeniorPath and its engineering guides, concepts, and challenges.",
+      "evidenceLevel": "self-reported"
+    }
+  ],
+  "areas": [
+    "Developer Experience",
+    "Product Engineering",
+    "Accessibility",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "Astro",
+    "Svelte",
+    "TypeScript",
+    "Node.js",
+    "Tailwind CSS",
+    "Playwright"
+  ],
+  "featured": true,
+  "significance": "notable",
+  "activityTypes": [
+    "product",
+    "architecture",
+    "implementation",
+    "accessibility",
+    "testing",
+    "automation",
+    "documentation",
+    "release"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "SeniorPath: um guia prático de engenharia de software",
+      "periodLabel": "Março de 2026–presente",
+      "summary": "Desenvolvi o SeniorPath para explicar conceitos de engenharia de software por meio de guias práticos, receitas e desafios de programação, com busca bilíngue e trilhas de aprendizado estruturadas.",
+      "context": "Engenheiros precisam de mais do que definições isoladas: precisam de explicações, exemplos e formas de conectar conceitos ao trabalho cotidiano. O SeniorPath combina esse propósito editorial com coleções pesquisáveis, trilhas de estudo e progresso de leitura.",
+      "contributions": [
+        "Desenvolvi uma experiência de aprendizado conectada com guias, receitas práticas, conceitos, desafios de programação, glossário, busca e progresso de leitura.",
+        "Separei a estrutura genérica do site do conteúdo editorial por meio de um contrato de manifest, ferramentas de sincronização e suporte a repositórios externos.",
+        "Implementei rotas estáticas localizadas, navegação acessível, interfaces editoriais reutilizáveis, feeds e indexação para busca.",
+        "Adicionei validação do grafo de conteúdo, verificações de prontidão para revisão, auditorias de preparação, verificações de qualidade web, testes de navegador e proteções de release.",
+        "Integrei um sistema reutilizável de interface inspirado em cadernos, preservando a separação do conteúdo externo no build."
+      ],
+      "outcomes": [
+        "Publiquei o SeniorPath e seus guias de engenharia, conceitos e desafios."
+      ],
+      "links": []
+    }
+  }
+}

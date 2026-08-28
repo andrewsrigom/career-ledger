@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "public-extensions",
+  "ownership": "end-to-end",
+  "slug": "public-extensions",
+  "name": "Public Extensions",
+  "kind": "platform",
+  "status": "active",
+  "summary": "A source-available workspace for focused browser extensions, shared interface packages, and privacy-gated public releases.",
+  "description": "I conceived, designed, and built Public Extensions from scratch as a collection of focused browser tools. The workspace combines shared React interface packages with least-permission manifests, local settings, storage migrations, deterministic browser tests, provenance documentation, and an opt-in export boundary that rejects private or unapproved packages before a public release.",
+  "areas": [
+    "Product Engineering",
+    "Frontend Architecture",
+    "Developer Experience",
+    "Authentication & Security",
+    "System Design"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "WXT",
+    "Vite",
+    "Vitest",
+    "Playwright",
+    "Browser Extensions",
+    "GitHub Actions"
+  ],
+  "relatedEntries": [
+    "public-extensions-workspace"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "GitHub repository",
+      "href": "https://github.com/andrewsrigom/public-extensions"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "name": "Public Extensions",
+      "summary": "Um workspace source-available para extensões focadas de navegador, pacotes compartilhados de interface e releases públicos protegidos por revisão.",
+      "description": "Concebi, projetei e desenvolvi o Public Extensions do zero como uma coleção de ferramentas focadas para navegador. O workspace combina pacotes compartilhados de interface React com manifests de permissões mínimas, configurações locais, migrações de storage, testes determinísticos no navegador, documentação de proveniência e uma fronteira de exportação opt-in que rejeita pacotes privados ou não aprovados antes de um release público.",
+      "links": [
+        "Repositório no GitHub"
+      ]
+    }
+  }
+}

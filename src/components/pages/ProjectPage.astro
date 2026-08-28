@@ -5,6 +5,8 @@ import BaseLayout from '../BaseLayout.astro';
 import TagList from '../TagList.astro';
 import EntrySummary from '../EntrySummary.astro';
 import ActivityMix from '../ActivityMix.astro';
+import ProjectGallery from '../ProjectGallery.astro';
+import { orderTechnologies } from '../../lib/technology-presentation';
 interface Props { context: SiteContext; slug: string; }
 const { context, slug } = Astro.props;
 const { data, urls, copy, locale } = context;
@@ -32,10 +34,11 @@ const related = project.relatedEntries.map((id: string) => data.entries.find((en
         <p>{project.description}</p>
       </section>
       <aside>
-        <div><span>{copy.technologies}</span><p>{project.technologies.join(' · ')}</p></div>
+        {project.technologies.length > 0 && <div><span>{copy.technologies}</span><p>{orderTechnologies(project.technologies).join(' · ')}</p></div>}
         <div><span>{copy.status}</span><p>{copy.statuses[project.status] ?? project.status}</p></div>
       </aside>
     </div>
+    <ProjectGallery project={project} reviewImages={data.preview ? data.reviewMedia?.[project.id] : undefined} urls={urls} locale={locale} />
     {project.activityMix && <ActivityMix mix={project.activityMix} locale={locale} />}
     {related.length > 0 && (
       <section class="detail-section">
@@ -43,6 +46,5 @@ const related = project.relatedEntries.map((id: string) => data.entries.find((en
         <div class="timeline-records">{related.map((entry) => <EntrySummary entry={entry} urls={urls} copy={copy} />)}</div>
       </section>
     )}
-    <footer class="record-note"><strong>{data.preview ? copy.candidateNote : copy.publicationNote}</strong><p>{data.preview ? copy.candidateNoteText : copy.publicationNoteText}</p></footer>
   </article>
 </BaseLayout>

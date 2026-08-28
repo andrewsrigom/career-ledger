@@ -1,0 +1,635 @@
+{
+  "$schema": "../../schemas/public-resume.schema.json",
+  "schemaVersion": 1,
+  "recordType": "resume",
+  "id": "resume",
+  "slug": "resume",
+  "experienceStart": "2016-02-01",
+  "summary": "Senior full-stack engineer building backend services, API integrations, and AI-powered tools across SaaS and financial products. Combines database and system design with frontend architecture, delivery automation, and technical leadership.",
+  "highlights": [
+    {
+      "text": "Created Connect from its database queries and APIs to the reporting interface, serving more than 600 client companies.",
+      "evidenceLevel": "self-reported"
+    },
+    {
+      "text": "Delivered more than 50 reusable components adopted across more than 8 applications.",
+      "evidenceLevel": "self-reported"
+    },
+    {
+      "text": "Increased automated test coverage from 0% to 74% for a production commerce platform.",
+      "evidenceLevel": "self-reported"
+    },
+    {
+      "text": "Led hiring, mentoring, planning, and delivery for an engineering team of 8 developers.",
+      "evidenceLevel": "self-reported"
+    },
+    {
+      "text": "Developed automation that helped clients avoid approximately $300K in regulatory fines.",
+      "evidenceLevel": "self-reported"
+    }
+  ],
+  "skills": [
+    "Node.js",
+    "TypeScript",
+    "API Design",
+    "Backend Architecture",
+    "PostgreSQL",
+    "Python",
+    "AI Integration",
+    "System Design",
+    "React",
+    "Next.js",
+    "Frontend Architecture",
+    "Product Engineering",
+    "Testing Strategy",
+    "Developer Experience",
+    "Technical Leadership",
+    "Mentoring"
+  ],
+  "experiences": [
+    {
+      "id": "integritas-fintech-platform",
+      "organization": "Integritas",
+      "role": "Senior Full-Stack Engineer",
+      "engagement": "full-time",
+      "location": "Remote, USA",
+      "domain": "Rogue Credit Union · Digital banking and rewards",
+      "period": {
+        "start": "2025-06-01",
+        "end": null,
+        "label": "June 2025-present"
+      },
+      "summary": "Leads API integration architecture, authentication, and full-stack delivery for Rogue Credit Union's digital banking and rewards application through Integritas, with focused contributions to infrastructure automation.",
+      "contributions": [
+        "Designed server-side API boundaries, authentication and validation patterns, and typed integrations with upstream services.",
+        "Delivered full-stack features using React, TypeScript, Node.js, Zod, and OpenAPI-based backend contracts.",
+        "Designed a mock API layer that allowed frontend and backend work to progress independently of upstream readiness.",
+        "Expanded automated coverage with Vitest and Playwright for critical authenticated user flows.",
+        "Contributed Ansible and Podman automation for preview routing, container lifecycle, and deployment health checks."
+      ],
+      "outcomes": [
+        {
+          "text": "Optimized the production-build workflow, reducing cold-build time by 60%.",
+          "evidenceLevel": "measured"
+        },
+        {
+          "text": "Enabled frontend and backend teams to work in parallel through a reusable mock API boundary.",
+          "evidenceLevel": "self-reported"
+        }
+      ],
+      "technologies": [
+        "Node.js",
+        "TypeScript",
+        "Ansible",
+        "Podman",
+        "Nginx",
+        "Linux",
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "Azure",
+        "OpenAPI",
+        "Zod",
+        "Vitest",
+        "Playwright"
+      ],
+      "relatedProjects": [
+        "financial-product-platform"
+      ]
+    },
+    {
+      "id": "alpha-omega-commerce",
+      "organization": "Alpha Omega Agency",
+      "role": "Senior Full-Stack Engineer",
+      "engagement": "full-time",
+      "location": "Remote, USA",
+      "domain": "Headless commerce and content platforms",
+      "period": {
+        "start": "2023-10-01",
+        "end": "2025-07-31",
+        "label": "October 2023-July 2025"
+      },
+      "summary": "Led full-stack development for a high-traffic headless commerce platform spanning storefronts, content workflows, APIs, and third-party integrations.",
+      "contributions": [
+        "Led creation of the AOA Design System component library, building reusable primitives and composed components following atomic design principles.",
+        "Delivered features across Next.js storefronts, content workflows, backend APIs, GraphQL integrations, and third-party services.",
+        "Built content-managed storefront and marketing experiences for non-technical publishing teams.",
+        "Established automated coverage for production workflows that previously had no test suite."
+      ],
+      "outcomes": [
+        {
+          "text": "Increased automated test coverage from 0% to 74%, improving regression visibility and release confidence.",
+          "evidenceLevel": "self-reported"
+        }
+      ],
+      "technologies": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "AWS Lambda",
+        "Shopify",
+        "GraphQL",
+        "PostgreSQL",
+        "Sanity",
+        "MongoDB",
+        "AWS"
+      ],
+      "relatedProjects": [
+        "shared-frontend-platform"
+      ]
+    },
+    {
+      "id": "viamo-enterprise-ui",
+      "organization": "Viamo",
+      "role": "Senior Frontend Engineer",
+      "engagement": "full-time",
+      "location": "Remote, Canada",
+      "domain": "Enterprise communication and social impact platforms",
+      "period": {
+        "start": "2021-10-01",
+        "end": "2023-10-31",
+        "label": "October 2021-October 2023"
+      },
+      "summary": "Built shared frontend foundations for a Vue-based enterprise platform connected to multiple applications and mentored engineers on scalable interface architecture.",
+      "contributions": [
+        "Designed and implemented a universal design system for a large Vue-based enterprise hub.",
+        "Refactored and modernized legacy interfaces to improve consistency, maintainability, and developer experience.",
+        "Mentored developers through component design, frontend standards, code reviews, and architecture decisions."
+      ],
+      "outcomes": [
+        {
+          "text": "Delivered more than 50 reusable components adopted across more than 8 applications within 2 months.",
+          "evidenceLevel": "self-reported"
+        }
+      ],
+      "technologies": [
+        "TypeScript",
+        "Vue",
+        "Tailwind CSS",
+        "Laravel",
+        "Node.js",
+        "Vite"
+      ],
+      "relatedProjects": []
+    },
+    {
+      "id": "viasat-operations-analytics",
+      "organization": "ViaSat",
+      "role": "Senior Software Engineer",
+      "engagement": "contract",
+      "location": "Brazil",
+      "domain": "Intelie · Real-time oil and gas analytics",
+      "period": {
+        "start": "2021-02-01",
+        "end": "2021-09-30",
+        "label": "February-September 2021"
+      },
+      "summary": "Built interactive dashboards for Intelie during my ViaSat engagement, translating real-time oil and gas operational datasets into React and Highcharts interfaces.",
+      "contributions": [
+        "Implemented interactive dashboards and data visualizations for real-time oil and gas operational analytics.",
+        "Integrated complex datasets into performant React interfaces using Highcharts.",
+        "Collaborated with backend engineers to validate data accuracy and improve analytics performance.",
+        "Improved usability and performance for data-heavy internal operational analytics tools."
+      ],
+      "outcomes": [
+        {
+          "text": "Delivered production interfaces that made complex operational data usable through interactive analytics workflows.",
+          "evidenceLevel": "self-reported"
+        }
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Redux",
+        "PostgreSQL",
+        "Highcharts"
+      ],
+      "relatedProjects": [
+        "intelie"
+      ]
+    },
+    {
+      "id": "jca-accounting-platform",
+      "organization": "JCA Contadores",
+      "role": "Full-Stack Engineer / Team Lead",
+      "engagement": "full-time",
+      "location": "Brazil",
+      "domain": "Connect · Accounting reports and financial statements",
+      "period": {
+        "start": "2016-02-01",
+        "end": "2021-01-31",
+        "label": "February 2016-January 2021"
+      },
+      "summary": "Created Connect from database queries and third-party integrations through APIs and reporting interfaces. Progressed to team lead, working directly with company directors on technical planning and delivery.",
+      "contributions": [
+        "Wrote complex database queries, integrated third-party systems, and built Connect's API endpoints and reporting interface.",
+        "Worked directly with company directors to clarify requirements, plan tickets, and manage the engineering team and delivery board.",
+        "Led hiring, mentoring, onboarding, code reviews, task planning, and delivery for a team of 8 developers.",
+        "Built workflow automation for high-risk regulatory and accounting processes."
+      ],
+      "outcomes": [
+        {
+          "text": "Created Connect, used by more than 600 client companies for accounting charts, reports, and financial statements.",
+          "evidenceLevel": "self-reported"
+        },
+        {
+          "text": "Developed automation that helped clients avoid approximately $300K in regulatory fines.",
+          "evidenceLevel": "self-reported"
+        }
+      ],
+      "technologies": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "Laravel",
+        "MySQL",
+        "Vue",
+        "Redis"
+      ],
+      "relatedProjects": [
+        "connect"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "mba-software-engineering",
+      "credential": "MBA in Software Engineering",
+      "institution": "Universidade Estácio de Sá",
+      "period": {
+        "start": "2021-01-01",
+        "end": "2022-12-31",
+        "label": "2021-2022"
+      }
+    },
+    {
+      "id": "business-administration",
+      "credential": "Bachelor of Business Administration",
+      "institution": "Universidade Estácio de Sá",
+      "period": {
+        "start": "2016-01-01",
+        "end": "2020-12-31",
+        "label": "2016-2020"
+      }
+    },
+    {
+      "id": "industrial-automation-electronics",
+      "credential": "Technical Program in Industrial Automation and Electronics",
+      "institution": "SENAI",
+      "period": {
+        "start": "2014-01-01",
+        "end": "2016-12-31",
+        "label": "2014-2016"
+      }
+    }
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "localizations": {
+    "pt-BR": {
+      "summary": "Engenheiro full-stack sênior que desenvolve serviços backend, integrações de APIs e ferramentas com IA em produtos SaaS e financeiros. Combina modelagem de dados e arquitetura de sistemas com arquitetura frontend, automação de entrega e liderança técnica.",
+      "highlights": [
+        "Criei o Connect das consultas de banco de dados e APIs à interface de relatórios, atendendo mais de 600 empresas clientes.",
+        "Entreguei mais de 50 componentes reutilizáveis adotados por mais de 8 aplicações.",
+        "Elevei a cobertura de testes automatizados de 0% para 74% em uma plataforma de comércio em produção.",
+        "Liderei contratação, mentoria, planejamento e entrega de uma equipe de engenharia com 8 desenvolvedores.",
+        "Desenvolvi uma automação que ajudou clientes a evitar aproximadamente US$ 300 mil em multas regulatórias."
+      ],
+      "skills": [
+        "Node.js",
+        "TypeScript",
+        "Design de APIs",
+        "Arquitetura Backend",
+        "PostgreSQL",
+        "Python",
+        "Integração de IA",
+        "Arquitetura de Sistemas",
+        "React",
+        "Next.js",
+        "Arquitetura Frontend",
+        "Engenharia de Produto",
+        "Estratégia de Testes",
+        "Experiência de Desenvolvimento",
+        "Liderança Técnica",
+        "Mentoria"
+      ],
+      "experiences": [
+        {
+          "id": "integritas-fintech-platform",
+          "role": "Engenheiro Full-Stack Sênior",
+          "location": "Remoto, EUA",
+          "domain": "Rogue Credit Union · Banco digital e recompensas",
+          "periodLabel": "Junho de 2025–presente",
+          "summary": "Lidero a arquitetura de integração de APIs, autenticação e entrega full-stack da aplicação bancária digital e de recompensas da Rogue Credit Union através da Integritas, com contribuições focadas em automação de infraestrutura.",
+          "contributions": [
+            "Projetei limites de APIs no servidor, padrões de autenticação e validação e integrações tipadas com serviços externos.",
+            "Entreguei funcionalidades full-stack com React, TypeScript, Node.js, Zod e contratos backend baseados em OpenAPI.",
+            "Projetei uma camada de mock API que permitiu o avanço independente das equipes frontend e backend, sem depender da disponibilidade dos serviços upstream.",
+            "Ampliei a cobertura automatizada com Vitest e Playwright para jornadas críticas de usuários autenticados.",
+            "Contribuí com automações Ansible e Podman para roteamento de previews, ciclo de vida dos containers e verificações de saúde dos deployments."
+          ],
+          "outcomes": [
+            "Otimizei o processo de build de produção, reduzindo em 60% o tempo de builds a frio.",
+            "Permiti que as equipes frontend e backend trabalhassem em paralelo por meio de uma fronteira reutilizável de mock API."
+          ]
+        },
+        {
+          "id": "alpha-omega-commerce",
+          "role": "Engenheiro Full-Stack Sênior",
+          "location": "Remoto, EUA",
+          "domain": "Comércio headless e plataformas de conteúdo",
+          "periodLabel": "Outubro de 2023–julho de 2025",
+          "summary": "Liderei o desenvolvimento full-stack de uma plataforma de comércio headless de alto tráfego, abrangendo lojas, fluxos de conteúdo, APIs e integrações com terceiros.",
+          "contributions": [
+            "Liderei a criação da biblioteca de componentes do AOA Design System, desenvolvendo primitivas reutilizáveis e componentes compostos seguindo princípios de atomic design.",
+            "Entreguei funcionalidades em lojas Next.js, fluxos de conteúdo, APIs backend, integrações GraphQL e serviços de terceiros.",
+            "Criei experiências de loja e marketing gerenciadas por conteúdo para equipes de publicação não técnicas.",
+            "Estabeleci cobertura automatizada para fluxos de produção que antes não possuíam uma suíte de testes."
+          ],
+          "outcomes": [
+            "Elevei a cobertura de testes automatizados de 0% para 74%, aumentando a visibilidade de regressões e a confiança nos releases."
+          ]
+        },
+        {
+          "id": "viamo-enterprise-ui",
+          "role": "Engenheiro Frontend Sênior",
+          "location": "Remoto, Canadá",
+          "domain": "Comunicação empresarial e plataformas de impacto social",
+          "periodLabel": "Outubro de 2021–outubro de 2023",
+          "summary": "Construí fundações frontend compartilhadas para uma plataforma empresarial em Vue conectada a várias aplicações e orientei engenheiros em arquitetura de interfaces escaláveis.",
+          "contributions": [
+            "Projetei e implementei um design system universal para um grande hub empresarial desenvolvido com Vue.",
+            "Refatorei e modernizei interfaces legadas para melhorar consistência, manutenção e experiência de desenvolvimento.",
+            "Orientei desenvolvedores em design de componentes, padrões frontend, revisão de código e decisões de arquitetura."
+          ],
+          "outcomes": [
+            "Entreguei mais de 50 componentes reutilizáveis adotados por mais de 8 aplicações em 2 meses."
+          ]
+        },
+        {
+          "id": "viasat-operations-analytics",
+          "role": "Engenheiro de Software Sênior",
+          "location": "Brasil",
+          "domain": "Intelie · Análise de operações de óleo e gás em tempo real",
+          "periodLabel": "Fevereiro–setembro de 2021",
+          "summary": "Desenvolvi dashboards interativos para a Intelie durante minha atuação na ViaSat, transformando dados operacionais de óleo e gás em tempo real em interfaces React com Highcharts.",
+          "contributions": [
+            "Implementei dashboards interativos e visualizações de dados para análises de operações de óleo e gás em tempo real.",
+            "Integrei conjuntos de dados complexos em interfaces React de alto desempenho usando Highcharts.",
+            "Colaborei com engenheiros backend para validar a precisão dos dados e melhorar o desempenho das análises.",
+            "Melhorei a usabilidade e o desempenho de ferramentas internas de análise operacional intensivas em dados."
+          ],
+          "outcomes": [
+            "Entreguei interfaces de produção que tornaram dados operacionais complexos utilizáveis por meio de fluxos analíticos interativos."
+          ]
+        },
+        {
+          "id": "jca-accounting-platform",
+          "role": "Engenheiro Full-Stack / Líder Técnico",
+          "location": "Brasil",
+          "domain": "Connect · Relatórios contábeis e demonstrações financeiras",
+          "periodLabel": "Fevereiro de 2016–janeiro de 2021",
+          "summary": "Criei o Connect das consultas de banco de dados e integrações com terceiros às APIs e interfaces de relatórios. Evoluí para líder técnico, trabalhando diretamente com a diretoria no planejamento técnico e nas entregas.",
+          "contributions": [
+            "Escrevi consultas complexas no banco de dados, integrei sistemas de terceiros e desenvolvi os endpoints de API e a interface de relatórios do Connect.",
+            "Trabalhei diretamente com a diretoria para esclarecer requisitos, planejar tickets e gerenciar a equipe de engenharia e o board de entregas.",
+            "Liderei contratação, mentoria, onboarding, revisões de código, planejamento de tarefas e entrega para uma equipe de 8 desenvolvedores.",
+            "Desenvolvi automações de fluxo para processos contábeis e regulatórios de alto risco."
+          ],
+          "outcomes": [
+            "Criei o Connect, utilizado por mais de 600 empresas clientes para gráficos, relatórios contábeis e demonstrações financeiras.",
+            "Desenvolvi uma automação que ajudou clientes a evitar aproximadamente US$ 300 mil em multas regulatórias."
+          ]
+        }
+      ],
+      "education": [
+        {
+          "id": "mba-software-engineering",
+          "credential": "MBA em Engenharia de Software",
+          "institution": "Universidade Estácio de Sá",
+          "periodLabel": "2021–2022"
+        },
+        {
+          "id": "business-administration",
+          "credential": "Bacharelado em Administração",
+          "institution": "Universidade Estácio de Sá",
+          "periodLabel": "2016–2020"
+        },
+        {
+          "id": "industrial-automation-electronics",
+          "credential": "Curso Técnico em Automação Industrial e Eletrônica",
+          "institution": "SENAI",
+          "periodLabel": "2014–2016"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "george-arthur-sarpong",
+          "quote": "Andrews demonstrou muita iniciativa e responsabilidade ao longo do projeto. Identificava problemas proativamente, muitas vezes já com propostas de solução. Mesmo trabalhando de forma totalmente remota, gerenciava muito bem o próprio trabalho: compartilhava atualizações regulares e assumia a responsabilidade por cumprir o que havia combinado.",
+          "relationship": "Meu gestor na Viamo"
+        },
+        {
+          "id": "roan-cooney",
+          "quote": "Andrews tem pensamento crítico, resolve problemas e aprende rápido. Ele teve uma influência positiva na nossa equipe. Foi uma honra liderá-lo e trabalhar ao seu lado. Se tivesse a oportunidade, eu o contrataria novamente sem hesitar.",
+          "relationship": "Meu líder de engenharia na Viamo"
+        },
+        {
+          "id": "daniel-vilela",
+          "quote": "Andrews liderou a equipe em que trabalhei por cerca de quatro anos, e foi uma experiência gratificante. Ele tem uma mente incrível e claramente capaz: consegue trabalhar em várias tarefas ao mesmo tempo, mesmo com tecnologias diferentes, enquanto orienta a equipe de forma eficaz.",
+          "relationship": "Trabalhou sob minha liderança"
+        },
+        {
+          "id": "mohamed-nassar",
+          "quote": "Recomendo Andrews com toda a convicção como um excelente desenvolvedor frontend com experiência full-stack. Ele superou as expectativas de forma consistente ao assumir o desafio de criar um design system para a empresa sem contar com um designer dedicado.",
+          "relationship": "Trabalhou comigo na mesma equipe"
+        },
+        {
+          "id": "alex-safian",
+          "quote": "Além da competência técnica, Andrew se destaca pela comunicação e pelo trabalho em equipe. Ele demonstra constantemente disposição para compartilhar o que sabe e apoiar os colegas em seus projetos.",
+          "relationship": "Meu colega na Viamo"
+        },
+        {
+          "id": "safidy-rambeloson",
+          "quote": "Andrews se destaca pelo compromisso em compartilhar conhecimento. Ele não só se dedica a aprender, como também contribui de forma proativa, trazendo novas ideias para melhorar nossos processos de frontend.",
+          "relationship": "Meu colega na Viamo"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "email": "andrews.ribeiro.gomes@gmail.com",
+    "phone": "+5521981392924",
+    "whatsapp": true,
+    "links": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/andrewsrigom/"
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "id": "george-arthur-sarpong",
+      "name": "George Arthur-Sarpong",
+      "relationship": "My manager at Viamo",
+      "quote": "Andrews demonstrated remarkable initiative and ownership throughout the project. He proactively identified issues, often with a proposal for solutions. His self-management was very effective, despite working fully remotely, by providing regular updates and taking responsibility for delivering on commitments.",
+      "profileUrl": "https://www.linkedin.com/in/arthursarpong/",
+      "sourceUrl": "https://www.linkedin.com/in/andrewsrigom/details/recommendations/",
+      "portrait": {
+        "src": "assets/portraits/george-arthur-sarpong-portrait.webp",
+        "width": 100,
+        "height": 100,
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "roan-cooney",
+      "name": "Roan Cooney",
+      "relationship": "My engineering lead at Viamo",
+      "quote": "Andrews is a critical thinker, problem-solver, and a fast learner who exerted a positive influence on our team. It has been an honor to lead and work alongside someone of Andrews. Given the opportunity, I would hire Andrews again in a heartbeat.",
+      "profileUrl": "https://www.linkedin.com/in/roancooney/",
+      "sourceUrl": "https://www.linkedin.com/in/andrewsrigom/details/recommendations/",
+      "portrait": {
+        "src": "assets/portraits/roan-cooney-portrait.webp",
+        "width": 100,
+        "height": 100,
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "daniel-vilela",
+      "name": "Daniel Vilela",
+      "relationship": "Reported directly to me",
+      "quote": "Andrews led the team I worked on for about 4 years, and it was a rewarding experience. Andrews has an amazing and clearly capable mind; he can work on many tasks simultaneously, even with different technologies, while still effectively guiding a team.",
+      "profileUrl": "https://www.linkedin.com/in/daniel-vilela-961316117/",
+      "sourceUrl": "https://www.linkedin.com/in/andrewsrigom/details/recommendations/",
+      "portrait": {
+        "src": "assets/portraits/daniel-vilela-portrait.webp",
+        "width": 100,
+        "height": 100,
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "mohamed-nassar",
+      "name": "Mohamed Nassar",
+      "relationship": "Worked on the same team",
+      "quote": "I wholeheartedly recommend Andrews as a remarkable Front-End Developer with Full-Stack expertise. Andrews consistently exceeded expectations, taking on a challenging project to create a company Design System without a dedicated designer.",
+      "profileUrl": "https://www.linkedin.com/in/mo-nassar/",
+      "sourceUrl": "https://www.linkedin.com/in/andrewsrigom/details/recommendations/",
+      "portrait": {
+        "src": "assets/portraits/mohamed-nassar-portrait.webp",
+        "width": 100,
+        "height": 100,
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "alex-safian",
+      "name": "Alex Safian",
+      "relationship": "My colleague at Viamo",
+      "quote": "Beyond his technical prowess, Andrew excels as a communicator and a team player. He consistently demonstrates a willingness to share his expertise and support others in their endeavors.",
+      "profileUrl": "https://www.linkedin.com/in/safian/",
+      "sourceUrl": "https://www.linkedin.com/in/andrewsrigom/details/recommendations/",
+      "portrait": {
+        "src": "assets/portraits/alex-safian-portrait.webp",
+        "width": 100,
+        "height": 100,
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "safidy-rambeloson",
+      "name": "Safidy Rambeloson",
+      "relationship": "My colleague at Viamo",
+      "quote": "Andrews stands out for his commitment to sharing knowledge. He's not only a dedicated learner but also a proactive contributor, consistently offering fresh ideas to enhance our frontend processes.",
+      "profileUrl": "https://www.linkedin.com/in/safidy-rambeloson-64b403114/",
+      "sourceUrl": "https://www.linkedin.com/in/andrewsrigom/details/recommendations/",
+      "portrait": {
+        "src": "assets/portraits/safidy-rambeloson-portrait.webp",
+        "width": 100,
+        "height": 100,
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    }
+  ],
+  "activityMix": {
+    "basis": "recorded-activities",
+    "activityCount": 120,
+    "items": [
+      {
+        "domain": "frontend",
+        "percentage": 26.730158730158728
+      },
+      {
+        "domain": "backend",
+        "percentage": 15.285714285714292
+      },
+      {
+        "domain": "developer-experience",
+        "percentage": 11.361111111111112
+      },
+      {
+        "domain": "quality-engineering",
+        "percentage": 11.146825396825397
+      },
+      {
+        "domain": "data",
+        "percentage": 9.507936507936508
+      },
+      {
+        "domain": "devops",
+        "percentage": 7.11904761904762
+      },
+      {
+        "domain": "product-design",
+        "percentage": 6.438492063492063
+      },
+      {
+        "domain": "security",
+        "percentage": 5.896825396825397
+      },
+      {
+        "domain": "infrastructure",
+        "percentage": 3.375000000000001
+      },
+      {
+        "domain": "ai-ml",
+        "percentage": 1.5416666666666665
+      },
+      {
+        "domain": "other",
+        "percentage": 1.111111111111111
+      },
+      {
+        "domain": "mobile",
+        "percentage": 0.48611111111111105
+      }
+    ]
+  }
+}

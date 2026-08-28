@@ -2,14 +2,18 @@
 import type { CareerDataset, UrlContext, SiteCopy } from '../../lib/types';
 import { isPresent } from '../../lib/types';
 import ProjectPreview from './ProjectPreview.astro';
+import ProjectWorkChart from './ProjectWorkChart.astro';
 import { portfolioCopy } from '../../lib/portfolio-copy';
+import { recordedProjectLayers } from '../../lib/project-presentation';
+import { rankProjects } from '../../../scripts/lib/project-ranking';
+import { orderTechnologies } from '../../lib/technology-presentation';
 
 interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; locale: 'en' | 'pt-BR'; }
 const { data, urls, copy, locale } = Astro.props;
 const p = portfolioCopy(locale);
-const featured = data.projects.filter((project) => project.featured);
-const projects = (featured.length ? featured : data.projects).slice(0, 11);
+const work = rankProjects(data);
 const entriesById = new Map(data.entries.map((entry) => [entry.id, entry]));
+const aiArea = data.taxonomy.areas.find((area) => area.slug === 'ai-engineering')?.label;
 ---
 
 <section class="work-section shell" id="work" aria-labelledby="work-heading" data-section="work">
@@ -18,32 +22,70 @@ const entriesById = new Map(data.entries.map((entry) => [entry.id, entry]));
     <h2 id="work-heading">{p.workTitle}</h2>
     <p>{copy.selectedWorkIntro}</p>
   </header>
+  <div class="work-index-heading">
+    <span>{p.workKicker} / {String(work.length).padStart(2, '0')}</span>
+    <span>{p.workAcrossLayers}</span>
+  </div>
   <div class="project-index" data-project-index>
-    {projects.map((project, index: number) => {
-      const relatedEntries = project.relatedEntries.map((id: string) => entriesById.get(id)).filter(isPresent);
-      const signal = relatedEntries.flatMap((entry) => entry.outcomes ?? []).at(0)?.text
-        ?? relatedEntries.flatMap((entry) => entry.contributions ?? []).at(0)
-        ?? project.description;
+    {work.map(({ project, prominence }, index) => {
+      const expanded = prominence === 'flagship' || prominence === 'featured';
+      const relatedEntries = project.relatedEntries.map((id) => entriesById.get(id)).filter(isPresent);
+      const technologies = orderTechnologies(project.technologies);
+      const primaryTechnologies = technologies.slice(0, 4);
+      const remainingTechnologies = technologies.length - primaryTechnologies.length;
+      const hasAi = aiArea !== undefined && project.areas.includes(aiArea);
+      const roles = [...new Set(data.resume?.experiences.filter((experience) => experience.relatedProjects.includes(project.id)).map((experience) => experience.role) ?? [])];
+      const contribution = relatedEntries.flatMap((entry) => entry.contributions).at(0);
+      const outcome = relatedEntries.flatMap((entry) => entry.outcomes).at(0);
+      const layers = recordedProjectLayers(project, data.taxonomy);
+      const reviewImage = (data.preview ? data.reviewMedia?.[project.id]?.[0] : undefined) ?? project.presentation?.gallery?.[0];
+      const hasVisual = Boolean(reviewImage || project.presentation?.preview || prominence === 'flagship');
+      const showChart = expanded || project.activityMix?.basis === 'owner-estimate';
+      const projectHref = urls.href(`projects/${project.slug}/`);
       return (
-        <article class="project-row" data-project-row data-project-slug={project.slug}>
-          <a class="project-row__link" href={urls.href(`projects/${project.slug}/`)}>
+        <article class:list={['project-row', `project-row--${prominence}`, { 'project-row--text': !hasVisual, 'project-row--text-result': !hasVisual && Boolean(outcome) }]}
+          data-project-row data-project-slug={project.slug} aria-labelledby={`project-title-${project.slug}`}>
+          <a class="project-row__link" href={projectHref} aria-labelledby={`project-title-${project.slug}`}>
             <span class="project-row__number">{String(index + 1).padStart(2, '0')}</span>
             <div class="project-row__identity">
               <span>{copy.projectKinds[project.kind]} / {copy.statuses[project.status]}</span>
-              <h3 style={`view-transition-name: project-${project.slug}`}>{project.name}</h3>
+              <h3 id={`project-title-${project.slug}`} style={`view-transition-name: project-${project.slug}`}>{project.name}</h3>
               <p>{project.summary}</p>
+              {layers.some(Boolean) && (
+                <ul class="project-layers" aria-label={p.projectLayers}>
+                  {p.layers.map((label, layerIndex) => layers[layerIndex] && <li><span aria-hidden="true">{String(layerIndex + 1).padStart(2, '0')}</span>{label}</li>)}
+                </ul>
+              )}
+              {expanded && (roles.length > 0 || contribution) && (
+                <dl class="project-row__context">
+                  {roles.length > 0 && <div><dt>{p.roleLabel}</dt><dd>{roles.join(' / ')}</dd></div>}
+                  {contribution && <div><dt>{copy.keyWork}</dt><dd>{contribution}</dd></div>}
+                </dl>
+              )}
+              {showChart && <ProjectWorkChart mix={project.activityMix} locale={locale} slug={project.slug} />}
+              {(hasAi || technologies.length > 0) && (
+                <ul class="project-stack" aria-label={p.projectStackLabel}>
+                  {primaryTechnologies.map((technology) => (
+                    <li>{technology === 'Model Context Protocol' ? <abbr title={technology}>MCP</abbr> : technology}</li>
+                  ))}
+                  {hasAi && <li class="project-stack__ai">{p.aiTag}</li>}
+                  {remainingTechnologies > 0 && <li class="project-stack__more" title={p.moreTechnologies(remainingTechnologies)}><span aria-hidden="true">+{remainingTechnologies}</span><span class="sr-only">{p.moreTechnologies(remainingTechnologies)}</span></li>}
+                </ul>
+              )}
+              <span class="project-row__details">{p.inspectProject} <span aria-hidden="true">↗</span></span>
             </div>
-            <div class="project-row__signal">
-              <span>{relatedEntries.some((entry) => entry.outcomes?.length) ? copy.results : copy.keyWork}</span>
-              <p>{signal}</p>
-              {relatedEntries[0] && <small>{relatedEntries[0].title}</small>}
-            </div>
-            <span class="project-row__arrow" aria-hidden="true">↗</span>
           </a>
-          <ul class="tag-list project-row__areas" aria-label={copy.projectAreas}>
-            {project.areas.slice(0, 4).map((area: string) => <li>{area}</li>)}
-          </ul>
-          <ProjectPreview project={project} index={index} label={p.previewLabel} diagramLabel={p.diagramLabel} urls={urls} />
+          {(hasVisual || outcome) && (
+            <div class="project-row__evidence">
+              {hasVisual && <ProjectPreview project={project} index={index} label={p.previewLabel} diagramLabel={p.diagramLabel} urls={urls} layers={layers} layerLabels={p.layers} reviewImage={reviewImage} />}
+              {outcome && (
+                <div class="project-row__signal">
+                  <span>{copy.results}</span>
+                  <p>{outcome.text}</p>
+                </div>
+              )}
+            </div>
+          )}
         </article>
       );
     })}

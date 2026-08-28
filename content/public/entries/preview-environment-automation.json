@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "preview-environment-automation",
+  "slug": "preview-environment-automation",
+  "title": "Automated Preview Deployments for Rogue Credit Union",
+  "kind": "reliability",
+  "status": "completed",
+  "period": {
+    "start": "2026-05-28",
+    "end": "2026-07-30",
+    "label": "May–July 2026"
+  },
+  "summary": "Contributed Ansible automation for Rogue Credit Union's application preview environments, covering container lifecycle, routing, and deployment health checks.",
+  "context": "The digital banking and rewards application needs preview environments where routing, container state, service startup, and health checks work together. This was a focused infrastructure contribution alongside the application work.",
+  "contributions": [
+    "Configured reverse-proxy routing for containerized application previews.",
+    "Automated container cleanup, image updates, service startup, and verification with Ansible and Podman.",
+    "Added layered health checks and corrected local probes to verify the intended application service."
+  ],
+  "outcomes": [],
+  "areas": [
+    "Cloud & Infrastructure",
+    "Observability & Reliability",
+    "Developer Experience"
+  ],
+  "technologies": [
+    "Ansible",
+    "Podman",
+    "Nginx",
+    "Linux",
+    "systemd"
+  ],
+  "featured": false,
+  "significance": "milestone",
+  "activityTypes": [
+    "infrastructure",
+    "automation",
+    "reliability",
+    "implementation",
+    "testing"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Automação de deployments de preview para a Rogue Credit Union",
+      "periodLabel": "Maio–julho de 2026",
+      "summary": "Contribuí com automações Ansible para os ambientes de preview da aplicação da Rogue Credit Union, abrangendo ciclo de vida dos containers, roteamento e verificações de saúde dos deployments.",
+      "context": "A aplicação bancária digital e de recompensas precisa de ambientes de preview que combinem roteamento, estado dos containers, inicialização dos serviços e verificações de saúde. Foi uma contribuição focada de infraestrutura, em paralelo ao trabalho na aplicação.",
+      "contributions": [
+        "Configurei roteamento de proxy reverso para previews da aplicação em containers.",
+        "Automatizei limpeza de containers, atualização de imagens, inicialização dos serviços e verificação com Ansible e Podman.",
+        "Adicionei verificações de saúde em camadas e corrigi sondagens locais para verificar o serviço pretendido da aplicação."
+      ],
+      "outcomes": [],
+      "links": []
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "saas-product-platform",
+  "ownership": "end-to-end",
+  "slug": "saas-product-platform",
+  "name": "SeuSaaS",
+  "kind": "platform",
+  "status": "active",
+  "summary": "A full-stack SaaS application with payments, subscriptions, authentication pages, and multi-tenant workspaces.",
+  "description": "I designed and built SeuSaaS to connect payment and onboarding flows with authenticated workspaces and administration. The backend handles identity, tenant-scoped data, billing state, webhooks, asynchronous jobs, notifications, storage, and audit records. Marketing and authentication pages connect to the application, while a shared service foundation and automated release pipeline support distinct product editions.",
+  "areas": [
+    "Backend Architecture",
+    "Authentication & Security",
+    "System Design",
+    "Product Engineering",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL",
+    "OpenAPI",
+    "Docker",
+    "Next.js",
+    "React"
+  ],
+  "relatedEntries": [
+    "reusable-saas-ecosystem"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "SeuSaaS",
+      "summary": "Aplicação SaaS full-stack com pagamentos, assinaturas, páginas de autenticação e espaços de trabalho multi-tenant.",
+      "description": "Projetei e desenvolvi o SeuSaaS para conectar pagamentos e onboarding a espaços de trabalho autenticados e administração. O backend gerencia identidade, dados por tenant, estado de cobrança, webhooks, tarefas assíncronas, notificações, armazenamento e registros de auditoria. As páginas de apresentação e autenticação se conectam à aplicação, enquanto uma base compartilhada de serviços e um pipeline automatizado de releases sustentam diferentes edições do produto.",
+      "previewAlt": "Landing page do SeuSaaS com apresentação do produto, navegação e ícones das principais capacidades da plataforma.",
+      "gallery": [
+        {
+          "alt": "Landing page do SeuSaaS com apresentação do produto, navegação e ícones das principais capacidades da plataforma.",
+          "caption": "Landing page pública do SeuSaaS, apresentando o produto e suas principais capacidades."
+        },
+        {
+          "alt": "Cards de recursos do SeuSaaS para assinaturas, emails transacionais, autenticação, banco de dados e armazenamento.",
+          "caption": "Seção de recursos do site público, mostrando a apresentação das capacidades de cobrança, comunicação, acesso e dados."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/seusaas-landing-2026-08-27.webp",
+      "width": 1440,
+      "height": 566,
+      "alt": "SeuSaaS landing page with product introduction, navigation, and icons for the platform's core capabilities.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/seusaas-landing-2026-08-27.webp",
+        "width": 1440,
+        "height": 566,
+        "source": {
+          "kind": "web",
+          "url": "https://seusaas.com/",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "SeuSaaS landing page with product introduction, navigation, and icons for the platform's core capabilities.",
+        "caption": "The public SeuSaaS landing page, presenting the product and its core capabilities.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      },
+      {
+        "src": "assets/projects/seusaas-features-2026-08-27.webp",
+        "width": 1440,
+        "height": 1112,
+        "source": {
+          "kind": "web",
+          "url": "https://seusaas.com/",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "SeuSaaS feature cards for subscriptions, transactional email, authentication, and database and storage.",
+        "caption": "The public website's feature section, showing how billing, communication, access, and data capabilities are presented.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

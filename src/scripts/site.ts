@@ -1,6 +1,16 @@
+import { setupHeroLayers } from './hero-layers';
+
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 document.documentElement.classList.add('has-js');
+
+// Let the browser finish initial fragment positioning without a smooth scroll
+// that layout/animation measurements could interrupt partway down the page.
+const enableSmoothNavigation = () => {
+  requestAnimationFrame(() => document.documentElement.classList.add('navigation-ready'));
+};
+if (document.readyState === 'complete') enableSmoothNavigation();
+else window.addEventListener('load', enableSmoothNavigation, { once: true });
 
 function setupHeaderScrollState() {
   const header = document.querySelector<HTMLElement>('[data-site-header]');
@@ -15,6 +25,21 @@ function setupHeaderScrollState() {
   };
   evaluate();
   window.addEventListener('scroll', evaluate, { passive: true });
+}
+
+function setupHeaderInvertedState() {
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const invertingSection = document.querySelector<HTMLElement>('[data-hero-inverted]');
+  if (!header || !invertingSection) return;
+  const evaluate = () => {
+    const bounds = invertingSection.getBoundingClientRect();
+    const headerHeight = header.getBoundingClientRect().height;
+    const overlaps = bounds.bottom > headerHeight * .5 && bounds.top < headerHeight;
+    header.dataset.inverted = String(overlaps);
+  };
+  evaluate();
+  window.addEventListener('scroll', evaluate, { passive: true });
+  window.addEventListener('resize', evaluate);
 }
 
 function setupSectionProgress() {
@@ -41,62 +66,6 @@ function setupSectionProgress() {
   links.get('intro')?.setAttribute('aria-current', 'true');
 }
 
-function setupProjectPreviews() {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 821px)').matches) return;
-  const rows = document.querySelectorAll<HTMLElement>('[data-project-row]');
-
-  rows.forEach((row) => {
-    const preview = row.querySelector<HTMLElement>('[data-project-preview]');
-    const link = row.querySelector<HTMLAnchorElement>('.project-row__link');
-    if (!preview || !link) return;
-    let frame = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    const draw = () => {
-      currentX += (targetX - currentX) * (reducedMotion.matches ? 1 : .22);
-      currentY += (targetY - currentY) * (reducedMotion.matches ? 1 : .22);
-      preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(1)`;
-      if (Math.abs(targetX - currentX) > .2 || Math.abs(targetY - currentY) > .2) {
-        frame = requestAnimationFrame(draw);
-      }
-    };
-
-    const place = (x: number, y: number) => {
-      const width = preview.offsetWidth || 410;
-      const height = preview.offsetHeight || 270;
-      targetX = Math.min(window.innerWidth - width - 24, Math.max(window.innerWidth * .57, x + 28));
-      targetY = Math.min(window.innerHeight - height - 24, Math.max(24, y - height * .48));
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(draw);
-    };
-
-    row.addEventListener('pointerenter', (event) => {
-      row.classList.add('is-previewing');
-      currentX = event.clientX + 28;
-      currentY = event.clientY - 120;
-      place(event.clientX, event.clientY);
-    });
-    row.addEventListener('pointermove', (event) => place(event.clientX, event.clientY));
-    row.addEventListener('pointerleave', () => {
-      row.classList.remove('is-previewing');
-      cancelAnimationFrame(frame);
-    });
-    link.addEventListener('focus', () => {
-      const bounds = row.getBoundingClientRect();
-      row.classList.add('is-previewing');
-      currentX = Math.min(window.innerWidth - 440, bounds.right - 380);
-      currentY = Math.min(window.innerHeight - 300, Math.max(24, bounds.top + 20));
-      place(currentX, currentY + 120);
-    });
-    link.addEventListener('blur', () => row.classList.remove('is-previewing'));
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(frame);
-    });
-  });
-}
 
 function setupTimelineFilters() {
   const form = document.querySelector<HTMLFormElement>('[data-timeline-filters]');
@@ -128,20 +97,24 @@ function setupTimelineFilters() {
   form.addEventListener('change', apply);
 }
 
+const enhancedHero = window.matchMedia('(min-width: 821px) and (pointer: fine)');
+let cleanupMotion: (() => void) | undefined;
+
 function setupInteractiveHome() {
   const hero = document.querySelector<HTMLElement>('[data-hero]');
-  if (!hero || reducedMotion.matches) return;
+  if (!hero || reducedMotion.matches || !enhancedHero.matches) return;
 
-  import('./motion').then(({ setupMotion }) => setupMotion()).catch(() => undefined);
+  import('./motion').then(({ setupMotion }) => {
+    if (!cleanupMotion && !reducedMotion.matches && enhancedHero.matches) cleanupMotion = setupMotion();
+  }).catch(() => undefined);
 
-  if (!window.matchMedia('(min-width: 821px) and (pointer: fine)').matches) return;
   const canvas = hero.querySelector('[data-architecture-canvas]');
   if (!canvas) return;
   const observer = new IntersectionObserver((entries) => {
     if (!entries.some((entry) => entry.isIntersecting)) return;
     observer.disconnect();
     import('./architecture-scene').then(({ mountArchitectureScene }) => {
-      if (!reducedMotion.matches) {
+      if (!reducedMotion.matches && enhancedHero.matches) {
         hero.dataset.architecture = mountArchitectureScene(canvas as HTMLElement) ? 'ready' : 'fallback';
       }
     }).catch(() => hero.classList.add('architecture-fallback'));
@@ -150,17 +123,33 @@ function setupInteractiveHome() {
 }
 
 setupSectionProgress();
-setupProjectPreviews();
 setupTimelineFilters();
 setupHeaderScrollState();
+setupHeaderInvertedState();
+let cleanupHeroLayers = setupHeroLayers();
 setupInteractiveHome();
 
-window.addEventListener('pagehide', () => window.__careerArchitecture?.destroy());
-window.addEventListener('pageshow', (event) => { if (event.persisted) setupInteractiveHome(); });
+window.addEventListener('pagehide', () => {
+  cleanupHeroLayers();
+  cleanupMotion?.();
+  cleanupMotion = undefined;
+  window.__careerArchitecture?.destroy();
+});
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) { cleanupHeroLayers = setupHeroLayers(); setupInteractiveHome(); }
+});
 reducedMotion.addEventListener('change', () => {
-  if (reducedMotion.matches) window.__careerArchitecture?.destroy();
+  if (reducedMotion.matches) {
+    cleanupMotion?.();
+    cleanupMotion = undefined;
+    window.__careerArchitecture?.destroy();
+  }
   else setupInteractiveHome();
 });
-window.matchMedia('(min-width: 821px) and (pointer: fine)').addEventListener('change', (event) => {
-  if (!event.matches) window.__careerArchitecture?.destroy();
+enhancedHero.addEventListener('change', (event) => {
+  if (!event.matches) {
+    cleanupMotion?.();
+    cleanupMotion = undefined;
+    window.__careerArchitecture?.destroy();
+  } else setupInteractiveHome();
 });

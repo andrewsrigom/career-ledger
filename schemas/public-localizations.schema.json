@@ -75,6 +75,16 @@
             "summary": { "type": "string", "minLength": 30, "maxLength": 400 },
             "description": { "type": "string", "minLength": 40, "maxLength": 1500 },
             "previewAlt": { "type": "string", "minLength": 8, "maxLength": 240 },
+            "gallery": {
+              "type": "array", "minItems": 1, "maxItems": 6,
+              "items": {
+                "type": "object", "additionalProperties": false, "required": ["alt", "caption"],
+                "properties": {
+                  "alt": { "type": "string", "minLength": 8, "maxLength": 240 },
+                  "caption": { "type": "string", "minLength": 8, "maxLength": 500 }
+                }
+              }
+            },
             "links": { "$ref": "#/$defs/translatedTextList" }
           }
         }
@@ -125,6 +135,18 @@
             "education": {
               "type": "array",
               "items": { "$ref": "#/$defs/localizedEducation" }
+            },
+            "recommendations": {
+              "type": "array", "maxItems": 12,
+              "items": {
+                "type": "object", "additionalProperties": false,
+                "required": ["id", "quote", "relationship"],
+                "properties": {
+                  "id": { "type": "string", "minLength": 1, "maxLength": 100, "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                  "quote": { "type": "string", "minLength": 30, "maxLength": 700 },
+                  "relationship": { "type": "string", "minLength": 4, "maxLength": 160 }
+                }
+              }
             }
           }
         }

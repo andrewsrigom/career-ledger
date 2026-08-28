@@ -2,16 +2,17 @@
 import type { SiteContext } from '../../lib/types';
 import BaseLayout from '../BaseLayout.astro';
 import TagList from '../TagList.astro';
+import { orderTechnologies } from '../../lib/technology-presentation';
 interface Props { context: SiteContext; }
 const { context } = Astro.props;
 const { data, urls, copy, locale } = context;
-const focus = data.resume?.skills.slice(0, 10) ?? data.taxonomy.areas.slice(0, 10).map((area) => area.label);
+const focus = data.resume ? orderTechnologies(data.resume.skills).slice(0, 10) : data.taxonomy.areas.slice(0, 10).map((area) => area.label);
 ---
 
 <BaseLayout data={data} urls={urls} copy={copy} locale={locale} title={copy.navigation.about} description={copy.aboutDescription(data.profile.name)} path="about/" active="about" pageType="about">
   <header class="page-hero page-hero--about shell">
     <span class="eyebrow">01 / {copy.aboutEyebrow}</span>
-    <h1>{copy.aboutTitle}</h1>
+    <h1>{copy.aboutTitle(data.profile.name)}</h1>
     <p>{copy.aboutIntro}</p>
   </header>
   <section class="about-editorial shell">

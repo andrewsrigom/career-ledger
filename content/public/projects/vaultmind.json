@@ -1,0 +1,97 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "vaultmind",
+  "ownership": "end-to-end",
+  "slug": "vaultmind",
+  "name": "VaultMind",
+  "kind": "open-source",
+  "status": "active",
+  "summary": "An AI knowledge workspace that indexes multiple sources and answers questions with vector retrieval and traceable citations.",
+  "description": "I designed and built VaultMind's ingestion and retrieval pipeline to bring repositories, workspace tools, drive files, and authored documents into one searchable index. Its backend combines PostgreSQL and pgvector with scoped retrieval, source citations, and responses that decline when evidence is insufficient. The self-hosted application serves both a conversational interface and read-only MCP tools for coding agents.",
+  "areas": [
+    "AI Engineering",
+    "Backend Architecture",
+    "Data & Databases",
+    "System Design",
+    "Authentication & Security",
+    "Product Engineering"
+  ],
+  "technologies": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "PostgreSQL",
+    "pgvector",
+    "Drizzle ORM",
+    "OpenAI",
+    "Model Context Protocol",
+    "Vitest",
+    "Playwright"
+  ],
+  "relatedEntries": [
+    "vaultmind-self-hosted-rag"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "GitHub repository",
+      "href": "https://github.com/andrewsrigom/vaultmind"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "name": "VaultMind",
+      "summary": "Ambiente de conhecimento com IA que indexa múltiplas fontes e responde a perguntas com busca vetorial e citações rastreáveis.",
+      "description": "Projetei e desenvolvi o pipeline de ingestão e busca do VaultMind para reunir repositórios, ferramentas de trabalho, arquivos em drives e documentos autorais em um índice pesquisável. Seu backend combina PostgreSQL e pgvector com busca delimitada, citações das fontes e respostas que recusam conclusões sem evidência suficiente. A aplicação self-hosted oferece uma interface de conversa e ferramentas MCP somente leitura para agentes de programação.",
+      "links": [
+        "Repositório no GitHub"
+      ],
+      "previewAlt": "Interface Ask AI do VaultMind com painel de documentos consultados mostrando três fontes citadas em um espaço de demonstração.",
+      "gallery": [
+        {
+          "alt": "Interface Ask AI do VaultMind com painel de documentos consultados mostrando três fontes citadas em um espaço de demonstração.",
+          "caption": "Espaço de demonstração do VaultMind, mostrando uma resposta ao lado dos documentos consultados e das referências de origem."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/vaultmind-consulted-documents.webp",
+      "width": 1440,
+      "height": 1000,
+      "alt": "VaultMind Ask AI interface with the consulted-documents panel showing three cited sources from a demonstration workspace.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/vaultmind-consulted-documents.webp",
+        "width": 1440,
+        "height": 1000,
+        "source": {
+          "kind": "project-asset",
+          "collectedAt": "2026-08-27"
+        },
+        "alt": "VaultMind Ask AI interface with the consulted-documents panel showing three cited sources from a demonstration workspace.",
+        "caption": "VaultMind's demonstration workspace, showing an answer alongside its consulted documents and source references.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

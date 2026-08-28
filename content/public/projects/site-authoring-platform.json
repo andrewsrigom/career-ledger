@@ -1,0 +1,88 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "site-authoring-platform",
+  "ownership": "end-to-end",
+  "slug": "site-authoring-platform",
+  "name": "Capta",
+  "kind": "product",
+  "status": "active",
+  "summary": "An AI-assisted website builder for businesses, combining content generation, page management, business integrations, and SEO workflows.",
+  "description": "I designed and built Capta to help businesses create and manage websites using AI-generated content and reusable page sections. Its backend combines tenant-aware APIs and database services with queued AI generation, media workers, caching, and publishing controls. Business integrations and SEO workflows connect website operations to business needs and search visibility. The implementation spans the page editor, content orchestration, and delivery pipeline.",
+  "areas": [
+    "AI Engineering",
+    "Backend Architecture",
+    "System Design",
+    "Product Engineering",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL",
+    "Prisma",
+    "Model Context Protocol",
+    "Object Storage",
+    "Next.js",
+    "React",
+    "Playwright"
+  ],
+  "relatedEntries": [
+    "ai-assisted-site-platform"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Capta",
+      "summary": "Construtor de sites com IA para negócios, reunindo geração de conteúdo, gestão de páginas, integrações de negócio e fluxos de SEO.",
+      "description": "Projetei e desenvolvi o Capta para ajudar negócios a criar e gerenciar sites com conteúdo gerado por IA e seções de página reutilizáveis. O backend combina APIs e serviços de banco de dados por tenant com geração de IA em filas, workers de mídia, cache e controles de publicação. Integrações de negócio e fluxos de SEO conectam a operação dos sites às necessidades da empresa e à visibilidade nas buscas. A implementação abrange o editor de páginas, a orquestração de conteúdo e o pipeline de entrega.",
+      "previewAlt": "Seção de recursos da landing page do Capta com cards sobre governança de marca, fluxo de publicação e consistência comercial.",
+      "gallery": [
+        {
+          "alt": "Seção de recursos da landing page do Capta com cards sobre governança de marca, fluxo de publicação e consistência comercial.",
+          "caption": "Seção da landing page do Capta que apresenta regras de marca, fluxo de publicação e estrutura reutilizável de páginas."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/capta-landing-features.webp",
+      "width": 1440,
+      "height": 807,
+      "alt": "Capta landing-page feature section with cards for brand governance, publishing workflows, and commercial consistency.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/capta-landing-features.webp",
+        "width": 1440,
+        "height": 807,
+        "source": {
+          "kind": "project-asset",
+          "collectedAt": "2026-08-27"
+        },
+        "alt": "Capta landing-page feature section with cards for brand governance, publishing workflows, and commercial consistency.",
+        "caption": "A landing-page section from Capta, presenting brand rules, publishing workflows, and reusable page structure.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

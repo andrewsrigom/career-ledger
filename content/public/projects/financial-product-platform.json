@@ -1,0 +1,108 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "financial-product-platform",
+  "slug": "financial-product-platform",
+  "name": "Rogue Credit Union — Digital Banking & Rewards",
+  "kind": "platform",
+  "status": "active",
+  "workContext": "professional",
+  "summary": "Digital banking and rewards application with typed API integrations, authentication, and automated delivery. Full-stack engineering through Integritas.",
+  "description": "Through Integritas, I lead the technical architecture and hands-on development of Rogue Credit Union's digital banking and rewards application. My work spans the server-side API layer, upstream integrations, authentication, contract validation, deterministic mock services, observability, and user-facing journeys. I also contributed Ansible automation for container lifecycle, reverse-proxy routing, and deployment health checks. I optimized the production-build workflow, reducing cold-build time by 60%.",
+  "areas": [
+    "Backend Architecture",
+    "System Design",
+    "Cloud & Infrastructure",
+    "Technical Leadership",
+    "Authentication & Security",
+    "Frontend Architecture",
+    "Observability & Reliability"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "OpenAPI",
+    "Zod",
+    "Ansible",
+    "Podman",
+    "Nginx",
+    "Linux",
+    "systemd",
+    "Next.js",
+    "React",
+    "Playwright"
+  ],
+  "relatedEntries": [
+    "financial-web-platform-engineering",
+    "preview-environment-automation"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Rogue Credit Union — Banco digital e recompensas",
+      "summary": "Aplicação bancária digital e de recompensas com integrações de APIs tipadas, autenticação e automação de entrega. Engenharia full-stack através da Integritas.",
+      "description": "Através da Integritas, lidero a arquitetura técnica e atuo no desenvolvimento da aplicação bancária digital e de recompensas da Rogue Credit Union. Meu trabalho abrange a camada de APIs no servidor, integrações com serviços externos, autenticação, validação de contratos, serviços de mock determinísticos, observabilidade e jornadas de usuário. Também contribuí com automações Ansible para o ciclo de vida dos containers, roteamento de proxy reverso e verificações de saúde dos deployments. Otimizei o processo de build de produção, reduzindo em 60% o tempo de builds a frio.",
+      "previewAlt": "Home da Rogue Credit Union com navegação para cooperados, paisagem montanhosa no destaque e cards de conta corrente e financiamentos.",
+      "gallery": [
+        {
+          "alt": "Home da Rogue Credit Union com navegação para cooperados, paisagem montanhosa no destaque e cards de conta corrente e financiamentos.",
+          "caption": "Home da Rogue Credit Union, com navegação para contas, financiamentos e serviços aos cooperados."
+        }
+      ]
+    }
+  },
+  "activityMix": {
+    "basis": "owner-estimate",
+    "items": [
+      {
+        "domain": "backend",
+        "percentage": 10
+      },
+      {
+        "domain": "frontend",
+        "percentage": 90
+      }
+    ]
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/rogue-home-2026-08-27.webp",
+      "width": 1345,
+      "height": 990,
+      "alt": "Rogue Credit Union homepage with member navigation, a mountain landscape hero, and cards for checking, auto loans, and home loans.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/rogue-home-2026-08-27.webp",
+        "width": 1345,
+        "height": 990,
+        "source": {
+          "kind": "web",
+          "url": null,
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "Rogue Credit Union homepage with member navigation, a mountain landscape hero, and cards for checking, auto loans, and home loans.",
+        "caption": "Rogue Credit Union homepage, with navigation for accounts, loans, and member services.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

@@ -5,10 +5,12 @@ import { parseCandidate, isObject } from './validation.ts';
 import path from 'node:path';
 import { buildSite } from './build.ts';
 import { createCareerDataset } from './content.ts';
+import { withRankedProjects } from './project-ranking.ts';
 import { PATHS } from './constants.ts';
 import { calculateActivityDomainMix } from './domains.ts';
 import { listJsonFiles, readJson, toPosixPath, walkFiles } from './files.ts';
 import { auditCandidateFile, auditPublicFiles } from './privacy.ts';
+import { loadReviewMedia } from './review-media.ts';
 import {
   throwIfIssues,
   validateEntry,
@@ -95,14 +97,13 @@ function validateRelationships(content: Omit<PublicContent, 'entries' | 'project
   return issues;
 }
 
-export async function buildCandidatePreview(options: Omit<BuildOptions, 'data'> & { candidatesDir?: string; activitiesDir?: string } = {}) {
+export async function buildCandidatePreview(options: Omit<BuildOptions, 'data' | 'reviewAssets'> & { candidatesDir?: string; activitiesDir?: string; mediaDir?: string } = {}) {
   const candidatesDir = options.candidatesDir ?? PATHS.candidates;
   const activitiesDir = options.activitiesDir ?? PATHS.activities;
   const distDir = options.distDir ?? PATHS.publicationPreview;
   const files = await listJsonFiles(candidatesDir);
-  if (files.length === 0) {
-    throw new Error('No private public candidates are available for preview.');
-  }
+  // After an approved release there may be no pending candidates. The local
+  // preview still renders the approved collection, with the same isolation.
 
   const publicContent = await validatePublicContent();
   throwIfIssues(publicContent.issues, 'Approved public content validation failed');
@@ -131,6 +132,12 @@ export async function buildCandidatePreview(options: Omit<BuildOptions, 'data'> 
   throwIfIssues(validateRelationships(merged, candidates), 'Candidate relationship validation failed');
 
   const data = createCareerDataset(merged, { preview: true });
+  // Custom candidate fixtures/imports do not implicitly read the owner's media.
+  const mediaDir = options.mediaDir ?? (options.candidatesDir === undefined ? path.join(PATHS.careerPrivate, 'media-review') : undefined);
+  const review = mediaDir ? await loadReviewMedia(mediaDir, new Set(data.projects.map((project) => project.id)),
+    new Set(data.resume?.recommendations?.map((item) => item.id) ?? [])) : null;
+  if (review && Object.keys(review.media).length) data.reviewMedia = review.media;
+  if (review && Object.keys(review.portraits).length) data.reviewPortraits = review.portraits;
   const activityFiles = (await walkFiles(activitiesDir)).filter((file) => path.extname(file) === '.json');
   if (activityFiles.length > 0) {
     const activities = await Promise.all(activityFiles.map((file) => readJson(file)));
@@ -145,7 +152,8 @@ export async function buildCandidatePreview(options: Omit<BuildOptions, 'data'> 
   }
   const result = await buildSite({
     distDir,
-    data,
+    data: withRankedProjects(data),
+    reviewAssets: review?.assets,
     siteUrl: options.siteUrl ?? 'http://127.0.0.1:4173',
     basePath: options.basePath ?? '',
     includeLocalRules: true

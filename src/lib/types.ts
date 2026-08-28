@@ -6,7 +6,7 @@ export type { SiteCopy } from '../../scripts/lib/i18n.ts';
 import type { SiteCopy } from '../../scripts/lib/i18n.ts';
 
 export type { PublicLink, Period, Outcome, Publication, ActivityDomain, ActivityMix,
-  ProjectVisual, Project, Entry, Profile, Resume, CareerDataset } from '../../scripts/lib/model.ts';
+  ProjectVisual, Project, Entry, Profile, Resume, CareerDataset, ReviewImage } from '../../scripts/lib/model.ts';
 import type { CareerDataset } from '../../scripts/lib/model.ts';
 
 export interface SiteContext {

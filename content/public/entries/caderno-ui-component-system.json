@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "caderno-ui-component-system",
+  "slug": "caderno-ui-component-system",
+  "title": "Created a Framework-Agnostic Component System",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-08-21",
+    "end": null,
+    "label": "August 2026–present"
+  },
+  "summary": "Conceived and built Caderno UI from scratch, using canonical custom elements and thin framework adapters to deliver a portable, accessible notebook-inspired component platform.",
+  "context": "Component libraries often duplicate behavior across framework-specific implementations. Caderno UI keeps one standards-based element layer as the source of truth while offering ergonomic integration points for native HTML, React, and Astro.",
+  "contributions": [
+    "Defined the visual language, public component API, cross-framework architecture, accessibility principles, documentation, packaging, and release strategy.",
+    "Built shared design tokens, icons, Lit custom elements, optional motion and chart delivery, typed DOM events, slots, CSS properties, and shadow parts.",
+    "Created thin React wrappers and Astro facades that consume the canonical custom elements without duplicating their behavior.",
+    "Established semantic markup, keyboard behavior, focus handling, pre-upgrade content resilience, and no-JavaScript fallbacks as library requirements.",
+    "Implemented documentation, compatibility tests, package validation, Changesets releases, trusted publishing, provenance checks, and GitHub Pages deployment."
+  ],
+  "outcomes": [
+    {
+      "text": "Published an MIT-licensed component platform that serves native HTML, React, and Astro from one standards-based implementation.",
+      "evidenceLevel": "public"
+    },
+    {
+      "text": "Eliminated framework-specific behavior duplication inside the library by keeping adapters as thin facades.",
+      "evidenceLevel": "observed"
+    }
+  ],
+  "areas": [
+    "Frontend Architecture",
+    "Accessibility",
+    "Developer Experience",
+    "System Design",
+    "Product Engineering"
+  ],
+  "technologies": [
+    "Lit",
+    "Web Components",
+    "TypeScript",
+    "React",
+    "Astro",
+    "GSAP",
+    "Playwright",
+    "Changesets",
+    "GitHub Actions"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "Explore the documentation",
+      "href": "https://andrewsrigom.github.io/caderno-ui/"
+    },
+    {
+      "label": "View Caderno UI on GitHub",
+      "href": "https://github.com/andrewsrigom/caderno-ui"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "title": "Criei um Sistema de Componentes Independente de Framework",
+      "periodLabel": "Agosto de 2026–presente",
+      "summary": "Concebi e desenvolvi o Caderno UI do zero, usando custom elements canônicos e adaptadores leves para oferecer uma plataforma de componentes portátil, acessível e inspirada em cadernos.",
+      "context": "Bibliotecas de componentes frequentemente duplicam comportamento em implementações específicas de cada framework. O Caderno UI mantém uma única camada baseada em padrões web como fonte da verdade e oferece integrações ergonômicas para HTML nativo, React e Astro.",
+      "contributions": [
+        "Defini a linguagem visual, a API pública dos componentes, a arquitetura entre frameworks, os princípios de acessibilidade, a documentação, o empacotamento e a estratégia de releases.",
+        "Implementei design tokens, ícones, custom elements com Lit, entrega opcional de animações e gráficos, eventos DOM tipados, slots, propriedades CSS e shadow parts.",
+        "Criei wrappers React e fachadas Astro leves que utilizam os custom elements canônicos sem duplicar o comportamento.",
+        "Estabeleci marcação semântica, interação por teclado, gerenciamento de foco, resiliência antes do upgrade e fallbacks sem JavaScript como requisitos da biblioteca.",
+        "Implementei documentação, testes de compatibilidade, validação de pacotes, releases com Changesets, trusted publishing, verificação de proveniência e deploy no GitHub Pages."
+      ],
+      "outcomes": [
+        "Publiquei uma plataforma de componentes sob licença MIT que atende HTML nativo, React e Astro a partir de uma única implementação baseada em padrões web.",
+        "Eliminei a duplicação de comportamento específico por framework dentro da biblioteca ao manter os adaptadores como fachadas leves."
+      ],
+      "links": [
+        "Explorar a documentação",
+        "Ver o Caderno UI no GitHub"
+      ]
+    }
+  }
+}

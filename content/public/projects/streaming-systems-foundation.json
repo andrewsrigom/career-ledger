@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "streaming-systems-foundation",
+  "slug": "streaming-systems-foundation",
+  "name": "Aster Streaming Platform",
+  "kind": "research",
+  "status": "active",
+  "summary": "A rights-aware streaming architecture with executable repository governance and a bounded backend runtime foundation.",
+  "description": "Defines product and architecture boundaries for a video platform, then implements repository controls, local data services, configuration, structured logging, HTTP transport, service lifecycle, and telemetry checkpoints without overstating planned scope.",
+  "areas": [
+    "System Design",
+    "Backend Architecture",
+    "Cloud & Infrastructure",
+    "Observability & Reliability"
+  ],
+  "technologies": [
+    "TypeScript",
+    "Next.js",
+    "PostgreSQL",
+    "Redis",
+    "OpenTelemetry",
+    "GitHub Actions"
+  ],
+  "relatedEntries": [
+    "streaming-platform-foundation"
+  ],
+  "featured": false,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Aster Streaming Platform",
+      "summary": "Arquitetura de streaming que considera direitos de mídia, com governança executável do repositório e uma fundação delimitada de runtime backend.",
+      "description": "Define limites de produto e arquitetura para uma plataforma de vídeo e implementa controles do repositório, serviços locais de dados, configuração, logs estruturados, transporte HTTP, ciclo de vida de serviços e verificações de telemetria, sem apresentar o escopo planejado como concluído."
+    }
+  }
+}

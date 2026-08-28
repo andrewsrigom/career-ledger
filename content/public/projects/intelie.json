@@ -1,0 +1,80 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "intelie",
+  "slug": "intelie",
+  "name": "Intelie",
+  "kind": "platform",
+  "status": "completed",
+  "workContext": "professional",
+  "summary": "Interactive React dashboards and Highcharts visualizations for real-time oil and gas operations analytics, built during my ViaSat engagement.",
+  "description": "I contributed to Intelie's Performance Optimization work through interactive dashboards and data visualizations for real-time oil and gas operations. I integrated complex datasets into React interfaces using Highcharts, collaborated with backend teams on data accuracy and performance, and improved the usability and performance of data-heavy internal analytics tools.",
+  "areas": [
+    "Frontend Architecture",
+    "Product Engineering"
+  ],
+  "technologies": [
+    "React",
+    "Jest",
+    "TypeScript",
+    "Redux",
+    "PostgreSQL",
+    "Highcharts"
+  ],
+  "relatedEntries": [],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Intelie",
+      "summary": "Dashboards interativos em React e visualizações com Highcharts para análise de operações de óleo e gás em tempo real, desenvolvidos durante minha atuação na ViaSat.",
+      "description": "Contribuí para a área de Performance Optimization da Intelie com dashboards interativos e visualizações de dados de operações de óleo e gás em tempo real. Integrei conjuntos de dados complexos em interfaces React com Highcharts, colaborei com equipes backend na precisão dos dados e no desempenho, e melhorei a usabilidade e o desempenho de ferramentas internas de análise intensivas em dados.",
+      "previewAlt": "Interface de análise operacional da Intelie com visualizações simultâneas de torque, arraste, tensões e dados de perfuração.",
+      "gallery": [
+        {
+          "alt": "Interface de análise operacional da Intelie com visualizações simultâneas de torque, arraste, tensões e dados de perfuração.",
+          "caption": "Intelie: gráficos coordenados para análise de dados de perfuração e operação."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/intelie-operational-analytics.webp",
+      "width": 1421,
+      "height": 791,
+      "alt": "Intelie operational analytics interface with simultaneous torque, drag, stress, and drilling data visualizations.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/intelie-operational-analytics.webp",
+        "width": 1421,
+        "height": 791,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "Intelie operational analytics interface with simultaneous torque, drag, stress, and drilling data visualizations.",
+        "caption": "Intelie: coordinated charts for drilling and operational data analysis.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

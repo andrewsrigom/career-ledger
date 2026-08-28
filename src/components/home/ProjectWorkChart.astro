@@ -1,0 +1,27 @@
+---
+import type { ActivityMix, LocaleCode } from '../../lib/types';
+import { portfolioCopy } from '../../lib/portfolio-copy';
+import { projectWorkItems } from '../../lib/project-presentation';
+interface Props { mix?: ActivityMix; locale: LocaleCode; slug: string; }
+const { mix, locale, slug } = Astro.props;
+const p = portfolioCopy(locale);
+const items = mix ? projectWorkItems(mix) : [];
+const labelId = `project-work-chart-${slug}`;
+const number = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+---
+
+{mix && items.length > 0 && (
+  <div class="project-work-chart" aria-labelledby={labelId}>
+    <p class="project-work-chart__heading" id={labelId}>{mix.basis === 'owner-estimate' ? p.ownerWorkTitle : p.projectWorkTitle}</p>
+    <ul>
+      {items.map(({ area, percentage }) => (
+        <li data-work-area={area}>
+          <span class="project-work-chart__label">{p.domainLabels[area]}</span>
+          <span class="project-work-chart__track" aria-hidden="true"><i style={`--bar-size: ${percentage}%`}></i></span>
+          <span class="project-work-chart__percentage">{number.format(percentage)}%</span>
+        </li>
+      ))}
+    </ul>
+    <p class="project-work-chart__sample">{mix.basis === 'owner-estimate' ? p.ownerWorkSource : p.mixSample(mix.activityCount)}</p>
+  </div>
+)}

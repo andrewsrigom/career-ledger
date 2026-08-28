@@ -1,0 +1,80 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "ai-assisted-site-platform",
+  "slug": "ai-assisted-site-platform",
+  "title": "Built Capta's AI Website Builder and Content Pipeline",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-01-30",
+    "end": null,
+    "label": "January 2026–present"
+  },
+  "summary": "Built Capta's AI-assisted website builder, connecting page and content generation to tenant-aware APIs, asynchronous orchestration, media workers, and publishing workflows.",
+  "context": "Capta helps businesses create and manage websites with AI-generated content, reusable sections, business integrations, and SEO workflows. The backend connects editing requests to data services, queued generation, media processing, and publication controls.",
+  "contributions": [
+    "Established tenant-aware data, access, content, domain, media, analytics, and operational service boundaries.",
+    "Built a database-driven page builder with reusable section contracts, recovery-aware editing, and guarded authoring workflows.",
+    "Implemented contextual recommendations, feedback telemetry, structured AI orchestration, and a bounded agent control plane.",
+    "Developed cache-first media generation, responsive asset processing, worker flows, and portability boundaries.",
+    "Added smoke and release gates, agent governance, visual regression infrastructure, and explicit application-security checks."
+  ],
+  "outcomes": [],
+  "areas": [
+    "AI Engineering",
+    "Backend Architecture",
+    "System Design",
+    "Product Engineering",
+    "Frontend Architecture",
+    "Authentication & Security"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL",
+    "Prisma",
+    "Model Context Protocol",
+    "Object Storage",
+    "Next.js",
+    "React",
+    "Playwright"
+  ],
+  "featured": true,
+  "significance": "notable",
+  "activityTypes": [
+    "architecture",
+    "implementation",
+    "integration",
+    "security",
+    "automation",
+    "testing",
+    "product",
+    "observability"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Construtor de sites com IA e pipeline de conteúdo do Capta",
+      "periodLabel": "Janeiro de 2026–presente",
+      "summary": "Desenvolvi o construtor de sites com IA do Capta, conectando a geração de páginas e conteúdo a APIs por tenant, orquestração assíncrona, workers de mídia e fluxos de publicação.",
+      "context": "O Capta ajuda negócios a criar e gerenciar sites com conteúdo gerado por IA, seções reutilizáveis, integrações de negócio e fluxos de SEO. O backend conecta solicitações de edição a serviços de dados, geração em filas, processamento de mídia e controles de publicação.",
+      "contributions": [
+        "Estabeleci limites de serviços por tenant para dados, acesso, conteúdo, domínios, mídia, analytics e operações.",
+        "Desenvolvi um editor de páginas orientado por banco de dados, com contratos de seções reutilizáveis, recuperação da edição e fluxos protegidos de autoria.",
+        "Implementei recomendações contextuais, telemetria de feedback, orquestração estruturada de IA e um plano de controle delimitado para agentes.",
+        "Desenvolvi geração de mídia com cache, processamento responsivo de assets, fluxos de workers e limites de portabilidade.",
+        "Adicionei verificações de smoke e release, governança de agentes, regressão visual e verificações explícitas de segurança da aplicação."
+      ],
+      "outcomes": [],
+      "links": []
+    }
+  }
+}

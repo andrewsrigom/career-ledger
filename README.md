@@ -23,10 +23,12 @@ manual approval
       ↓
 static website and public JSON
       ↓
-GitHub Pages
+Cloudflare Pages (GitHub Pages remains available)
 ```
 
-The private ledger engine uses strict TypeScript, Node.js standard-library modules, and native type stripping, without a runtime framework or TS runner. The frontend is a static Astro + TypeScript multi-page site, with progressive GSAP motion and a lazy Three.js hero. Dependencies are installed with `npm ci`; no fonts, scripts, images, or APIs are fetched from external services at runtime. GitHub Actions verifies changes automatically, but publication is manual.
+The private ledger engine uses strict TypeScript, Node.js standard-library modules, and native type stripping, without a runtime framework or TS runner. The frontend is a static Astro + TypeScript multi-page site, with progressive GSAP motion and a lazy Three.js hero. Dependencies are installed with `npm ci`; local builds and previews load no external runtime resources. Production uses the owner-approved Cloudflare Web Analytics beacon injected by Pages. GitHub Actions verifies changes automatically, but publication is manual.
+
+Production: [andrewsrigom.pages.dev](https://andrewsrigom.pages.dev/) · [Português](https://andrewsrigom.pages.dev/pt-br/). See [Cloudflare release and analytics](docs/cloudflare-release.md) for deployment, verification and rollback.
 
 ## What this project protects against
 

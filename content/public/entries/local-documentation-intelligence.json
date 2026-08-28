@@ -1,0 +1,86 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "local-documentation-intelligence",
+  "slug": "local-documentation-intelligence",
+  "title": "Built Endpointer for API Documentation Search and AI Context",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-07-09",
+    "end": null,
+    "label": "July 2026–present"
+  },
+  "summary": "Designed and built Endpointer's ingestion and search pipeline, indexing vendor API documentation and exposing integration context to engineers and AI coding agents.",
+  "context": "Integration work requires details scattered across API specifications and vendor documentation. Endpointer organizes those sources into a searchable index that engineers can query directly and AI agents can access through MCP.",
+  "contributions": [
+    "Designed the command-line workflow, provider boundary, artifact provenance model, and deterministic indexing pipeline.",
+    "Built structured operation and field indexes over API specifications with bounded search and summary generation.",
+    "Exposed read-only tools and resources through the Model Context Protocol for engineering and AI-assisted retrieval.",
+    "Established an offline-first safety model that keeps generated documentation local and prevents provider calls during retrieval.",
+    "Added focused automated coverage and operational guidance for ingestion, indexing, search, protocol behavior, and safety constraints."
+  ],
+  "outcomes": [
+    {
+      "text": "Replaced repeated manual documentation lookup with direct local retrieval of indexed schema and documentation context.",
+      "evidenceLevel": "self-reported"
+    },
+    {
+      "text": "Reached recurring use within an internal development group, including AI-assisted engineering workflows.",
+      "evidenceLevel": "self-reported"
+    }
+  ],
+  "areas": [
+    "AI Engineering",
+    "Backend Architecture",
+    "Developer Experience",
+    "System Design",
+    "Technical Leadership"
+  ],
+  "technologies": [
+    "Python",
+    "Model Context Protocol",
+    "OpenAPI",
+    "pytest"
+  ],
+  "featured": true,
+  "significance": "notable",
+  "activityTypes": [
+    "architecture",
+    "implementation",
+    "automation",
+    "integration",
+    "testing",
+    "developer-experience",
+    "documentation",
+    "leadership"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Endpointer: busca em documentação de APIs e contexto para IA",
+      "periodLabel": "Julho de 2026–presente",
+      "summary": "Projetei e desenvolvi o pipeline de ingestão e busca do Endpointer, indexando documentação de APIs de fornecedores e oferecendo contexto de integração a engenheiros e agentes de programação com IA.",
+      "context": "O trabalho de integração depende de detalhes dispersos entre especificações de APIs e documentação de fornecedores. O Endpointer organiza essas fontes em um índice pesquisável, consultado diretamente por engenheiros e acessível a agentes de IA por MCP.",
+      "contributions": [
+        "Projetei o fluxo de linha de comando, os limites dos provedores, o modelo de origem dos artefatos e o pipeline determinístico de indexação.",
+        "Criei índices estruturados de operações e campos das especificações de APIs, com busca delimitada e geração de resumos.",
+        "Expus ferramentas e recursos somente leitura por MCP para consultas de engenharia e fluxos assistidos por IA.",
+        "Estabeleci um modelo offline-first que mantém a documentação gerada localmente e evita chamadas a provedores durante a consulta.",
+        "Adicionei testes automatizados e orientações de operação para ingestão, indexação, busca, comportamento do protocolo e limites de segurança."
+      ],
+      "outcomes": [
+        "Substituí buscas manuais repetidas por consultas locais ao contexto indexado de schemas e documentação.",
+        "A ferramenta passou a ser usada de forma recorrente por um grupo interno de desenvolvimento, inclusive em fluxos assistidos por IA."
+      ],
+      "links": []
+    }
+  }
+}

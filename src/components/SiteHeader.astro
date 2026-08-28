@@ -1,5 +1,6 @@
 ---
 import type { CareerDataset, UrlContext, SiteCopy } from '../lib/types';
+import { portfolioCopy } from '../lib/portfolio-copy';
 interface Props {
   data: CareerDataset;
   urls: UrlContext;
@@ -10,20 +11,23 @@ interface Props {
 }
 
 const { data, urls, copy, locale, active, path } = Astro.props;
+const p = portfolioCopy(locale);
 const experienceHref = data.resume ? `${urls.href('')}#experience` : urls.href('timeline/');
 const alternateLocale = locale === 'pt-BR' ? 'en' : 'pt-BR';
 const alternateLabel = locale === 'pt-BR' ? 'EN' : 'PT';
 ---
 
-<header class="site-header shell" data-site-header>
-  <a class="site-mark" href={urls.href('')}>
-    <span class="site-mark__name">{data.profile.name}</span>
-    <span class="site-mark__role">{data.profile.headline}</span>
-  </a>
-  <nav class="primary-nav" aria-label={copy.primaryNavigation}>
-    <a href={experienceHref} aria-current={active === 'timeline' ? 'page' : undefined}>{copy.navigation.experience}</a>
-    <a href={urls.href('projects/')} aria-current={active === 'projects' ? 'page' : undefined}>{copy.navigation.projects}</a>
-    <a href={urls.href('about/')} aria-current={active === 'about' ? 'page' : undefined}>{copy.navigation.about}</a>
-    <a class="language-link" href={urls.alternateHref(alternateLocale, path)} lang={alternateLocale}>{alternateLabel}</a>
-  </nav>
-</header>
+<div class="site-header-frame">
+  <header class="site-header shell" data-site-header>
+    <a class="site-mark" href={urls.href('')}>
+      <span class="site-mark__name">{data.profile.name}</span>
+      <span class="site-mark__role">{data.profile.headline}</span>
+    </a>
+    <nav class="primary-nav" aria-label={copy.primaryNavigation}>
+      <a href={active === 'home' ? '#work' : urls.href('projects/')} aria-current={active === 'projects' ? 'page' : undefined}><span class="primary-nav__index" aria-hidden="true">01</span>{p.sections[1]}</a>
+      <a href={experienceHref} aria-current={active === 'timeline' ? 'page' : undefined}><span class="primary-nav__index" aria-hidden="true">02</span>{copy.navigation.experience}</a>
+      <a href={urls.href('about/')} aria-current={active === 'about' ? 'page' : undefined}><span class="primary-nav__index" aria-hidden="true">03</span>{copy.navigation.about}</a>
+      <a class="language-link" href={urls.alternateHref(alternateLocale, path)} lang={alternateLocale}>{alternateLabel}</a>
+    </nav>
+  </header>
+</div>

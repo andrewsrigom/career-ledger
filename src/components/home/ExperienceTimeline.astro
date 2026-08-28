@@ -23,10 +23,11 @@ const experiences = data.resume?.experiences ?? [];
   {experiences.length ? (
     <ol class="experience-timeline" id="experience-records">
       {experiences.map((experience) => (
-        <li data-reveal>
-          <div class="experience-timeline__date">
+        <li data-experience-row>
+          <span class="experience-timeline__segment" aria-hidden="true"></span>
+          <div class="experience-timeline__date" aria-label={experience.period.label}>
             <span>{experience.period.start.slice(0, 4)}</span>
-            <small>{experience.period.end ? experience.period.end.slice(0, 4) : copy.active}</small>
+            <small>— {experience.period.end ? experience.period.end.slice(0, 4) : copy.active}</small>
           </div>
           <article>
             <div class="experience-timeline__role">
@@ -34,14 +35,19 @@ const experiences = data.resume?.experiences ?? [];
               <h3>{experience.role}</h3>
               <p>{experience.domain} · {experience.location}</p>
             </div>
-            <p class="experience-timeline__summary">{experience.summary}</p>
-            <details>
-              <summary>{copy.keyWork}</summary>
-              <ul>
-                {experience.contributions.map((item: string) => <li>{item}</li>)}
-                {experience.outcomes.map((outcome) => <li>{outcome.text}</li>)}
-              </ul>
-            </details>
+            <div class="experience-timeline__body">
+              <p class="experience-timeline__summary">{experience.summary}</p>
+              {experience.outcomes[0] && <p class="experience-timeline__outcome"><span>{copy.results}</span>{experience.outcomes[0].text}</p>}
+              {(experience.contributions.length > 0 || experience.outcomes.length > 1) && (
+                <details>
+                  <summary>{copy.keyWork}</summary>
+                  <ul>
+                    {experience.contributions.map((item: string) => <li>{item}</li>)}
+                    {experience.outcomes.slice(1).map((outcome) => <li>{outcome.text}</li>)}
+                  </ul>
+                </details>
+              )}
+            </div>
           </article>
         </li>
       ))}

@@ -1,5 +1,7 @@
 ---
 import type { CareerDataset, UrlContext, SiteCopy } from '../lib/types';
+import { portfolioCopy } from '../lib/portfolio-copy';
+import { hasContact } from '../../scripts/lib/contact';
 interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; }
 const { data, urls, copy } = Astro.props;
 ---
@@ -10,6 +12,7 @@ const { data, urls, copy } = Astro.props;
     <p>{data.profile.headline}</p>
   </div>
   <div class="site-footer__links">
+    {hasContact(data.resume?.contact, data.profile.links) && <a href={`${urls.href('')}#contact`}>{portfolioCopy(urls.locale).contactKicker}</a>}
     <a href={urls.href('feed.xml')}>RSS</a>
     <a href={urls.href('data/career.json')}>{data.preview ? copy.previewJson : copy.publicJson}</a>
     <span>{copy.updated} {data.updatedAt}</span>

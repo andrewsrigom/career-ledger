@@ -37,6 +37,8 @@ Read these documents when the task touches their scope:
 - Run `npm run career:audit` before any public-content change is considered complete.
 - Never weaken, bypass, or silently allowlist a privacy finding to make a task pass.
 
+The owner may explicitly authorize particular public project/company identities, recommendation authors, contact channels, screenshots and reviewed metrics. Preserve that authorization in a private review record and promote only the reviewed presentation. This is not permission to expose raw evidence, credentials, customer identities, internal paths or unreviewed screenshots. The 2026-08-28 portfolio release has such explicit approval, including the existing portfolio drafts; future drafts still need approval.
+
 ## Attribution rules
 
 - Code proves that an implementation exists. It does not prove who designed the entire system.
@@ -74,6 +76,7 @@ Read these documents when the task touches their scope:
 - Support Windows, WSL, macOS, and Linux paths where practical.
 - Prefer full, readable functions over clever abstractions.
 - Preserve accessibility, responsive behavior, and GitHub Pages base-path support.
+- Cloudflare Pages is the current production target. Deployment stays manual and owner-approved. The only approved external runtime service is Cloudflare Web Analytics, injected by Pages after deployment; local builds and previews remain offline and tracker-free. Do not embed a second beacon or commit deployment credentials.
 - Do not redesign the site into a SaaS dashboard. The visual language is editorial, calm, and evidence-focused.
 
 ## Required commands

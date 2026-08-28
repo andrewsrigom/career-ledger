@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "human-controlled-automation-tools",
+  "slug": "human-controlled-automation-tools",
+  "title": "Built Human-Controlled Browser and Mailbox Automation Tools",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-08-26",
+    "end": null,
+    "label": "August 2026–present"
+  },
+  "summary": "Built guarded automation foundations for job-application preparation and review-first mailbox operations while preserving explicit user control over consequential actions.",
+  "context": "The private workspace separates browser interfaces, durable backend services, sensitive data, and public release boundaries. Product adoption is not claimed; the candidate focuses on architecture and safety controls.",
+  "contributions": [
+    "Implemented browser-assisted job discovery and application preparation with explicit user control over uploads and submission.",
+    "Built durable profile, resume, extraction, fit-analysis, and application-package services behind typed contracts.",
+    "Created review-first mailbox workflows with authenticated operations, durable jobs, immutable plans, fresh-state checks, backup, and bounded cleanup.",
+    "Protected sensitive credentials and data through encryption, retention rules, confirmation boundaries, and reversible operations.",
+    "Established fail-closed workspace separation, extensive automated tests, extension builds, schema checks, and proportional CI controls."
+  ],
+  "outcomes": [],
+  "areas": [
+    "Product Engineering",
+    "Frontend Architecture",
+    "Backend Architecture",
+    "AI Engineering",
+    "Authentication & Security"
+  ],
+  "technologies": [
+    "TypeScript",
+    "React",
+    "Browser Extensions",
+    "Node.js",
+    "Model Context Protocol",
+    "PostgreSQL"
+  ],
+  "featured": false,
+  "significance": "notable",
+  "activityTypes": [
+    "product",
+    "architecture",
+    "implementation",
+    "security",
+    "automation",
+    "testing",
+    "integration"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": []
+}

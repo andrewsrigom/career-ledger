@@ -9,9 +9,10 @@ const number = new Intl.NumberFormat(locale, { maximumFractionDigits: 1, minimum
 
 <aside class="activity-mix" aria-labelledby={id}>
   <div>
-    <h3 id={id}>{p.mixTitle}</h3>
-    <p>{p.mixNote}</p>
-    <p class="activity-mix__sample">{p.mixSample(mix.activityCount)}</p>
+    <h3 id={id}>{mix.basis === 'owner-estimate' ? p.ownerWorkTitle : p.mixTitle}</h3>
+    {mix.basis === 'owner-estimate' ? <p>{p.ownerWorkSource}</p> : (
+      <><p>{p.mixNote}</p><p class="activity-mix__sample">{p.mixSample(mix.activityCount)}</p></>
+    )}
   </div>
   <ol>
     {mix.items.map((item) => (

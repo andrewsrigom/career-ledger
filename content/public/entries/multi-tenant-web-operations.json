@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "multi-tenant-web-operations",
+  "slug": "multi-tenant-web-operations",
+  "title": "Implemented Backend Workflows and AI Integration for Rebolt",
+  "kind": "project",
+  "status": "completed",
+  "period": {
+    "start": "2025-11-26",
+    "end": "2026-01-22",
+    "label": "November 2025–January 2026"
+  },
+  "summary": "Contributed authenticated APIs, transactional data workflows, cached analytics, and managed AI prompt integration to Rebolt's multi-tenant platform.",
+  "context": "The shared product required editor and renderer changes to remain consistent across repository boundaries while authenticated APIs, persistence, automation, and customer communication evolved in parallel.",
+  "contributions": [
+    "Integrated managed prompts for voice transcription and structured extraction, including input mapping, response parsing, and error handling.",
+    "Connected administrative analytics presentation to authenticated aggregation, database queries, and cache-first retrieval.",
+    "Built configurable automatic responses across settings UI, authenticated APIs, persistence, validation, and managed scheduling.",
+    "Implemented redirect-aware deletion with guarded UI, relationship rewiring, validation, and transactional data updates.",
+    "Delivered cross-page section inspection, seven presentation variants across five section families, responsive behavior, and persisted widget theming.",
+    "Expanded social-automation onboarding, notification integrity, customer follow-up, and project-posting guidance."
+  ],
+  "outcomes": [],
+  "areas": [
+    "Backend Architecture",
+    "AI Engineering",
+    "Data & Databases",
+    "Product Engineering",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "Node.js",
+    "TypeScript",
+    "PostgreSQL",
+    "Prisma",
+    "Next.js",
+    "React"
+  ],
+  "featured": true,
+  "significance": "milestone",
+  "activityTypes": [
+    "implementation",
+    "integration",
+    "automation",
+    "reliability",
+    "product",
+    "design",
+    "testing"
+  ],
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "title": "Fluxos backend e integração de IA no Rebolt",
+      "periodLabel": "Novembro de 2025–janeiro de 2026",
+      "summary": "Contribuí com APIs autenticadas, fluxos transacionais de dados, analytics com cache e integração de prompts de IA gerenciados na plataforma multi-tenant do Rebolt.",
+      "context": "O produto compartilhado exigia que mudanças no editor e na renderização permanecessem consistentes entre repositórios enquanto APIs autenticadas, persistência, automação e comunicação com clientes evoluíam em paralelo.",
+      "contributions": [
+        "Integrei prompts gerenciados para transcrição de voz e extração estruturada, incluindo mapeamento de entradas, interpretação de respostas e tratamento de erros.",
+        "Conectei a apresentação de analytics administrativos à agregação autenticada, consultas de banco de dados e busca com prioridade de cache.",
+        "Desenvolvi respostas automáticas configuráveis, abrangendo interface de configurações, APIs autenticadas, persistência, validação e agendamento gerenciado.",
+        "Implementei exclusão com tratamento de redirecionamentos, proteção na interface, atualização de relacionamentos, validação e alterações transacionais nos dados.",
+        "Entreguei inspeção de seções entre páginas, sete variantes visuais em cinco famílias de seções, comportamento responsivo e temas de widgets persistidos.",
+        "Ampliei o onboarding de automação social, a integridade de notificações, o acompanhamento de clientes e as orientações de publicação de projetos."
+      ],
+      "outcomes": [],
+      "links": []
+    }
+  }
+}

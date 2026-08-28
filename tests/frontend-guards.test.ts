@@ -28,7 +28,7 @@ test('images require owner approval, safe encoding, and a bounded file size', as
   const directory = await workspace(context);
   await fs.mkdir(path.join(directory, 'assets', 'projects'), { recursive: true });
   await fs.writeFile(path.join(directory, 'assets', 'favicon.svg'), '<svg/>');
-  const preview: { kind: 'image'; src: string; approval?: { approvedBy: string; reviewedAt: string } } = { kind: 'image', src: 'assets/projects/reviewed.webp' };
+  const preview: { kind: 'image'; src: string; width: number; height: number; approval?: { approvedBy: string; reviewedAt: string } } = { kind: 'image', src: 'assets/projects/reviewed.webp', width: 320, height: 180 };
   const project = { presentation: { preview } };
   const destination = path.join(directory, 'staged');
   await assert.rejects(stagePublicAssets([project], directory, destination), /owner-approved/);

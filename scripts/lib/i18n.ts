@@ -35,9 +35,9 @@ const COPY = {
     navigation: { experience: 'Experience', projects: 'Projects', about: 'About' },
     skipToContent: 'Skip to content',
     homeLabel: (name: string) => `${name} home`,
-    reviewBannerLabel: 'Private review preview',
-    reviewBannerTitle: 'Draft portfolio preview',
-    reviewBannerText: 'Not published. These records still require your explicit approval.',
+    reviewBannerLabel: 'Local preview',
+    reviewBannerTitle: 'Local preview',
+    reviewBannerText: 'Not published. Waiting for your approval.',
     publicJson: 'Public JSON',
     previewJson: 'Preview JSON',
     updated: 'Updated',
@@ -46,19 +46,19 @@ const COPY = {
     homeEyebrowFallback: 'Senior software engineer',
     homeTitle: 'I build complex web products from interface to infrastructure.',
     selectedWork: 'Selected work',
-    homeSummaryFallback: 'Senior full-stack engineering across products, platforms, and developer systems.',
-    viewSelectedWork: 'Explore selected work',
+    homeSummaryFallback: '10+ years building product experiences, platforms, and the systems behind them.',
+    viewSelectedWork: 'Selected work',
     viewAllProjects: 'View all projects',
     viewTimeline: 'View timeline',
-    selectedWorkIntro: 'Products and platforms where architecture, product thinking, and hands-on delivery meet.',
+    selectedWorkIntro: "The products, platforms, and tools I've built or contributed to — from interfaces to the services behind them.",
     projects: 'Projects',
     selectedCount: (count: number) => `${count} selected`,
     noFeaturedProjects: 'No featured projects yet.',
-    chronologicalRecord: 'Chronological record',
+    chronologicalRecord: 'My work over time',
     timeline: 'Timeline',
-    timelineIntro: 'Meaningful activity and workstream progression, organized chronologically. Commits and tickets remain private supporting evidence.',
+    timelineIntro: "What I've built, changed, and learned along the way.",
     timelineFilters: 'Timeline filters',
-    searchRecord: 'Search the record',
+    searchRecord: 'Search my work',
     searchPlaceholder: 'Architecture, authentication, Node.js…',
     filterByType: 'Filter by type',
     filterBySignificance: 'Filter by significance',
@@ -66,10 +66,10 @@ const COPY = {
     all: 'All',
     entryCount: (count: number) => `${count} ${count === 1 ? 'entry' : 'entries'}`,
     noFilterResults: 'No entries match the current filters.',
-    timelineDescription: (name: string) => `A chronological record of ${name}'s engineering activity, workstream progression, milestones, and outcomes.`,
+    timelineDescription: (name: string) => `${name}'s projects, contributions, and results over time.`,
     engineeringCoverage: 'Engineering coverage',
     areas: 'Areas',
-    areasIntro: 'Browse the record by the kind of engineering problem involved, rather than by job title or repository.',
+    areasIntro: 'Explore my work in frontend, backend, AI, and more.',
     recordCount: (count: number) => `${count} ${count === 1 ? 'record' : 'records'}`,
     areasDescription: (name: string) => `Engineering areas represented in ${name}'s career ledger.`,
     breadcrumb: 'Breadcrumb',
@@ -77,32 +77,28 @@ const COPY = {
     entries: 'Entries',
     noAreaEntries: 'No published entries in this area yet.',
     productsAndPlatforms: 'Products and platforms',
-    projectsIntro: 'Coherent bodies of work that connect multiple engineering workstreams over time.',
+    projectsIntro: "The projects I've worked on, what I did, and the technologies I used.",
     noPublicProjects: 'No public projects yet.',
-    projectsDescription: (name: string) => `Products, platforms, tools, and research projects built by ${name}.`,
+    projectsDescription: (name: string) => `Projects ${name} has built or contributed to.`,
     aboutProject: 'About the project',
-    relatedRecord: 'Related record',
+    relatedRecord: 'More about my work on this project',
     status: 'Status',
     context: 'Context',
-    contributions: 'Contributions',
+    contributions: 'What I did',
     outcomes: 'Outcomes',
-    candidateNote: 'Candidate note',
-    publicationNote: 'Publication note',
-    candidateNoteText: 'This candidate has been sanitized for review but is not public. Raw evidence remains private, and publication still requires owner approval.',
-    publicationNoteText: 'This record was selected and sanitized before publication. Raw repository evidence and confidential project details remain private.',
     aboutEyebrow: 'About',
-    aboutTitle: 'Full-stack engineering with product depth.',
-    aboutIntro: 'I work across frontend, backend, architecture, and delivery to turn complex requirements into products people can use and teams can extend.',
+    aboutTitle: (name: string) => `I'm ${name}.`,
+    aboutIntro: 'I build web products, from the interface people use to the APIs, data, and infrastructure behind it.',
     basedIn: 'Based in',
     coreFocus: 'Core focus',
     howIContribute: 'How I contribute',
-    strengthsTitle: 'From product questions to durable systems.',
-    strengthsIntro: 'My strongest work sits at the intersection of product judgment, technical architecture, and hands-on implementation.',
-    aboutCtaTitle: 'See the systems behind the experience.',
-    aboutCtaText: 'Explore selected products and the chronological record of the engineering work behind them.',
+    strengthsTitle: 'How I work.',
+    strengthsIntro: 'A few things that guide my decisions, whether I am planning a feature or writing the code.',
+    aboutCtaTitle: 'Take a look at my work.',
+    aboutCtaText: "See what I've built and contributed to, with details about my role in each project.",
     aboutDescription: (name: string) => `About ${name}, a senior full-stack engineer working across products, platforms, and delivery systems.`,
-    notFoundTitle: 'This record does not exist.',
-    notFoundText: 'The page may have moved, or the entry may never have been published.',
+    notFoundTitle: 'Page not found.',
+    notFoundText: 'This link may be out of date. Head back to the homepage to explore my work.',
     returnHighlights: 'Return to highlights',
     notFound: 'Not found',
     notFoundDescription: 'The requested Career Ledger page was not found.',
@@ -173,9 +169,9 @@ const COPY = {
     navigation: { experience: 'Experiência', projects: 'Projetos', about: 'Sobre' },
     skipToContent: 'Ir para o conteúdo',
     homeLabel: (name: string) => `Início — ${name}`,
-    reviewBannerLabel: 'Prévia privada para revisão',
-    reviewBannerTitle: 'Prévia do portfólio',
-    reviewBannerText: 'Ainda não publicado. Estes registros aguardam sua aprovação explícita.',
+    reviewBannerLabel: 'Prévia local',
+    reviewBannerTitle: 'Prévia local',
+    reviewBannerText: 'Ainda não publicado. Aguardando sua aprovação.',
     publicJson: 'JSON público',
     previewJson: 'JSON da prévia',
     updated: 'Atualizado em',
@@ -184,17 +180,17 @@ const COPY = {
     homeEyebrowFallback: 'Engenheiro de software sênior',
     homeTitle: 'Construo produtos web complexos, da interface à infraestrutura.',
     selectedWork: 'Trabalhos selecionados',
-    homeSummaryFallback: 'Engenharia full-stack sênior aplicada a produtos, plataformas e sistemas para desenvolvedores.',
-    viewSelectedWork: 'Ver trabalhos selecionados',
+    homeSummaryFallback: 'Mais de 10 anos construindo experiências de produto, plataformas e os sistemas por trás delas.',
+    viewSelectedWork: 'Trabalhos selecionados',
     viewAllProjects: 'Ver todos os projetos',
     viewTimeline: 'Ver linha do tempo',
-    selectedWorkIntro: 'Produtos e plataformas onde arquitetura, visão de produto e implementação prática se encontram.',
+    selectedWorkIntro: 'Produtos, plataformas e ferramentas que construí ou ajudei a desenvolver — das interfaces aos serviços que as sustentam.',
     projects: 'Projetos',
     selectedCount: (count: number) => `${count} em destaque`,
     noFeaturedProjects: 'Nenhum projeto em destaque ainda.',
-    chronologicalRecord: 'Registro cronológico',
+    chronologicalRecord: 'Meu trabalho ao longo do tempo',
     timeline: 'Linha do tempo',
-    timelineIntro: 'Atividades relevantes e a evolução de frentes de trabalho, organizadas cronologicamente. Commits e tickets permanecem como evidências privadas.',
+    timelineIntro: 'O que construí, mudei e aprendi pelo caminho.',
     timelineFilters: 'Filtros da linha do tempo',
     searchRecord: 'Buscar no histórico',
     searchPlaceholder: 'Arquitetura, autenticação, Node.js…',
@@ -204,10 +200,10 @@ const COPY = {
     all: 'Todos',
     entryCount: (count: number) => `${count} ${count === 1 ? 'registro' : 'registros'}`,
     noFilterResults: 'Nenhum registro corresponde aos filtros atuais.',
-    timelineDescription: (name: string) => `Registro cronológico das atividades, frentes de trabalho, marcos e resultados de engenharia de ${name}.`,
+    timelineDescription: (name: string) => `Projetos, contribuições e resultados de ${name} ao longo do tempo.`,
     engineeringCoverage: 'Atuação em engenharia',
     areas: 'Áreas',
-    areasIntro: 'Explore o histórico pelo tipo de problema de engenharia, não pelo cargo ou repositório.',
+    areasIntro: 'Explore meu trabalho em frontend, backend, IA e outras áreas.',
     recordCount: (count: number) => `${count} ${count === 1 ? 'registro' : 'registros'}`,
     areasDescription: (name: string) => `Áreas de engenharia presentes no portfólio de ${name}.`,
     breadcrumb: 'Navegação estrutural',
@@ -215,32 +211,28 @@ const COPY = {
     entries: 'Registros',
     noAreaEntries: 'Ainda não há registros publicados nesta área.',
     productsAndPlatforms: 'Produtos e plataformas',
-    projectsIntro: 'Projetos que reúnem diferentes frentes de trabalho de engenharia ao longo do tempo.',
+    projectsIntro: 'Os projetos em que trabalhei, o que fiz e as tecnologias que usei.',
     noPublicProjects: 'Ainda não há projetos públicos.',
-    projectsDescription: (name: string) => `Produtos, plataformas, ferramentas e pesquisas desenvolvidos por ${name}.`,
+    projectsDescription: (name: string) => `Projetos criados por ${name} ou que contaram com sua contribuição.`,
     aboutProject: 'Sobre o projeto',
-    relatedRecord: 'Registro relacionado',
+    relatedRecord: 'Mais sobre meu trabalho neste projeto',
     status: 'Status',
     context: 'Contexto',
-    contributions: 'Contribuições',
+    contributions: 'O que eu fiz',
     outcomes: 'Resultados',
-    candidateNote: 'Nota da prévia',
-    publicationNote: 'Nota de publicação',
-    candidateNoteText: 'Este candidato foi preparado para revisão, mas ainda não está público. As evidências brutas permanecem privadas e a publicação exige aprovação do proprietário.',
-    publicationNoteText: 'Este registro foi selecionado e revisado antes da publicação. Evidências brutas dos repositórios e detalhes confidenciais permanecem privados.',
     aboutEyebrow: 'Sobre',
-    aboutTitle: 'Engenharia full-stack com profundidade de produto.',
-    aboutIntro: 'Atuo entre frontend, backend, arquitetura e entrega para transformar requisitos complexos em produtos que as pessoas conseguem usar e as equipes conseguem evoluir.',
+    aboutTitle: (name: string) => `Sou o ${name}.`,
+    aboutIntro: 'Construo produtos web, da interface que as pessoas usam às APIs, aos dados e à infraestrutura por trás dela.',
     basedIn: 'Localização',
     coreFocus: 'Focos principais',
     howIContribute: 'Como eu contribuo',
-    strengthsTitle: 'De questões de produto a sistemas duradouros.',
-    strengthsIntro: 'Meu trabalho mais forte está na interseção entre visão de produto, arquitetura técnica e implementação prática.',
-    aboutCtaTitle: 'Veja os sistemas por trás da experiência.',
-    aboutCtaText: 'Explore os produtos selecionados e o registro cronológico do trabalho de engenharia por trás deles.',
+    strengthsTitle: 'Como eu trabalho.',
+    strengthsIntro: 'Algumas coisas que guiam minhas decisões, seja planejando uma funcionalidade ou escrevendo o código.',
+    aboutCtaTitle: 'Conheça meus projetos.',
+    aboutCtaText: 'Veja o que construí e onde contribuí, com detalhes sobre minha atuação em cada projeto.',
     aboutDescription: (name: string) => `Sobre ${name}, engenheiro full-stack sênior com atuação em produtos, plataformas e sistemas de entrega.`,
-    notFoundTitle: 'Este registro não existe.',
-    notFoundText: 'A página pode ter mudado ou o registro ainda não foi publicado.',
+    notFoundTitle: 'Página não encontrada.',
+    notFoundText: 'Este link pode estar desatualizado. Volte à página inicial para conhecer meus projetos.',
     returnHighlights: 'Voltar aos destaques',
     notFound: 'Página não encontrada',
     notFoundDescription: 'A página solicitada não foi encontrada.',
@@ -341,7 +333,8 @@ function localizeProject(project: Project, locale: LocaleCode, areaLabels: Map<s
   const base = withoutLocalizations(project);
   const translated = localizationOf(project, locale);
   const presentation = base.presentation && translated?.previewAlt
-    ? { ...base.presentation, preview: { ...base.presentation.preview, alt: translated.previewAlt } }
+    ? { ...base.presentation, preview: { ...base.presentation.preview, alt: translated.previewAlt },
+      ...(base.presentation.gallery ? { gallery: base.presentation.gallery.map((image, index) => ({ ...image, ...translated.gallery?.[index] })) } : {}) }
     : base.presentation;
   return {
     ...base,
@@ -364,8 +357,13 @@ function localizeResume(resume: Resume | null, locale: LocaleCode): Resume | nul
 
   const experiences = new Map(translated.experiences.map((item) => [item.id, item]));
   const education = new Map(translated.education.map((item) => [item.id, item]));
+  const recommendations = new Map((translated.recommendations ?? []).map((item) => [item.id, item]));
   return {
     ...base,
+    ...(base.recommendations ? { recommendations: base.recommendations.map((item) => {
+      const translation = recommendations.get(item.id);
+      return translation ? { ...item, ...translation, translated: true as const } : item;
+    }) } : {}),
     summary: translated.summary,
     highlights: localizeOutcomes(base.highlights, translated.highlights),
     skills: translated.skills,
@@ -437,6 +435,22 @@ export function localizeCareerDataset(data: CareerDataset, locale: string = DEFA
     entries: data.entries.map((entry) => localizeEntry(entry, definition.code, areaLabels)),
     projects: data.projects.map((project) => localizeProject(project, definition.code, areaLabels))
   };
+
+  if (data.preview && data.reviewMedia) {
+    localized.reviewMedia = Object.fromEntries(Object.entries(data.reviewMedia).map(([id, images]) => [
+      id, images.map((image) => {
+        const { localizations, ...base } = image;
+        return { ...base, ...(definition.code === 'pt-BR' ? localizations?.['pt-BR'] : {}) };
+      })
+    ]));
+  }
+
+  if (data.preview && data.reviewPortraits) {
+    localized.reviewPortraits = Object.fromEntries(Object.entries(data.reviewPortraits).map(([id, image]) => {
+      const { localizations, ...base } = image;
+      return [id, { ...base, ...(definition.code === 'pt-BR' ? localizations?.['pt-BR'] : {}) }];
+    }));
+  }
 
   return localized;
 }

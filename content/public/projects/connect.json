@@ -1,0 +1,103 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "connect",
+  "ownership": "end-to-end",
+  "slug": "connect",
+  "name": "Connect",
+  "kind": "platform",
+  "status": "completed",
+  "workContext": "professional",
+  "summary": "Accounting and financial reporting for more than 600 client companies, built from database queries and integrations through APIs and the user interface.",
+  "description": "I created Connect from scratch at JCA Contadores, writing complex database queries, integrating third-party systems, building API endpoints, and developing charts, reports, and financial-statement interfaces. The platform was used by more than 600 client companies. Alongside implementation, I worked directly with company directors, planned tickets, managed the engineering team, and maintained the delivery board.",
+  "areas": [
+    "Backend Architecture",
+    "Data & Databases",
+    "Technical Leadership",
+    "System Design",
+    "Product Engineering",
+    "Frontend Architecture"
+  ],
+  "technologies": [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "MySQL",
+    "Vue",
+    "Redis"
+  ],
+  "relatedEntries": [],
+  "featured": true,
+  "activityMix": {
+    "basis": "owner-estimate",
+    "items": [
+      {
+        "domain": "backend",
+        "percentage": 35
+      },
+      {
+        "domain": "frontend",
+        "percentage": 50
+      },
+      {
+        "domain": "devops",
+        "percentage": 15
+      }
+    ]
+  },
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [],
+  "localizations": {
+    "pt-BR": {
+      "links": [],
+      "name": "Connect",
+      "summary": "Contabilidade e relatórios financeiros para mais de 600 empresas clientes, das consultas e integrações de dados às APIs e à interface.",
+      "description": "Criei o Connect do zero na JCA Contadores, escrevendo consultas complexas no banco de dados, integrando sistemas de terceiros, criando endpoints de API e desenvolvendo interfaces de gráficos, relatórios e demonstrações financeiras. A plataforma foi utilizada por mais de 600 empresas clientes. Além da implementação, trabalhei diretamente com a diretoria, planejei tickets, gerenciei a equipe de engenharia e mantive o board de entregas.",
+      "previewAlt": "Interface contábil JCA Connect com gráfico mensal de liquidez e navegação para demonstrações financeiras e relatórios.",
+      "gallery": [
+        {
+          "alt": "Interface contábil JCA Connect com gráfico mensal de liquidez e navegação para demonstrações financeiras e relatórios.",
+          "caption": "Connect: indicadores financeiros, relatórios contábeis e demonstrações financeiras."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/connect-financial-reports.webp",
+      "width": 1440,
+      "height": 641,
+      "alt": "JCA Connect accounting interface with a monthly liquidity chart and navigation for financial statements and reports.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/connect-financial-reports.webp",
+        "width": 1440,
+        "height": 641,
+        "source": {
+          "kind": "owner-provided",
+          "providedAt": "2026-08-27"
+        },
+        "alt": "JCA Connect accounting interface with a monthly liquidity chart and navigation for financial statements and reports.",
+        "caption": "Connect: financial indicators, accounting reports, and financial statements.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}

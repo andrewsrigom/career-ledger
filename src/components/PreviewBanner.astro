@@ -1,10 +1,16 @@
 ---
 import type { SiteCopy } from '../lib/types';
-interface Props { copy: SiteCopy; }
-const { copy } = Astro.props;
+import { portfolioCopy } from '../lib/portfolio-copy';
+interface Props { copy: SiteCopy; preview: boolean; updatedAt: string; locale: 'en' | 'pt-BR'; }
+const { copy, preview, updatedAt, locale } = Astro.props;
+const p = portfolioCopy(locale);
+const month = new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : locale, {
+  month: 'short', year: 'numeric', timeZone: 'UTC'
+}).format(new Date(`${updatedAt}T00:00:00Z`));
 ---
 
-<aside class="preview-banner" aria-label={copy.reviewBannerLabel}>
-  <span>{copy.reviewBannerTitle}</span>
-  <p>{copy.reviewBannerText}</p>
+<aside class:list={['record-bar', preview ? 'preview-banner' : 'record-bar--public']}
+  aria-label={preview ? copy.reviewBannerLabel : p.recordTitle} data-record-mode={preview ? 'draft' : 'public'}>
+  <span>{preview ? copy.reviewBannerTitle : p.recordTitle}</span>
+  {preview ? <p>{copy.reviewBannerText}</p> : <p>{p.recordUpdated} <time datetime={updatedAt}>{month}</time></p>}
 </aside>

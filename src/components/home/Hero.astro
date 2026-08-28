@@ -2,37 +2,65 @@
 import type { CareerDataset, UrlContext, SiteCopy } from '../../lib/types';
 import ArchitectureScene from './ArchitectureScene.astro';
 import { portfolioCopy } from '../../lib/portfolio-copy';
+import { hasContact } from '../../../scripts/lib/contact';
 
 interface Props { data: CareerDataset; urls: UrlContext; copy: SiteCopy; locale: 'en' | 'pt-BR'; }
-const { data, copy, locale } = Astro.props;
+const { data, urls, copy, locale } = Astro.props;
 const p = portfolioCopy(locale);
+const contactAvailable = hasContact(data.resume?.contact, data.profile.links);
+const titleWords = copy.homeTitle.split(' ');
+const titleLines = p.heroLineStarts.map((start, index) => titleWords.slice(start, p.heroLineStarts[index + 1]));
 ---
 
-<section class="hero shell" id="intro" aria-labelledby="portfolio-heading" data-hero>
-  <div class="hero__editorial">
-    <div class="hero__kicker" data-reveal>
-      <span>{data.profile.headline}</span>
-      <span>{data.profile.location}</span>
-    </div>
-    <h1 id="portfolio-heading" data-hero-title>{copy.homeTitle}</h1>
-    <p class="hero__summary" data-reveal>{data.profile.intro || copy.homeSummaryFallback}</p>
-    <a class="text-link hero__cta" href="#work" data-reveal>
-      {copy.viewSelectedWork}<span aria-hidden="true">↘</span>
-    </a>
-  </div>
-  <div class="hero__system" data-hero-system>
+<section class="hero" id="intro" aria-labelledby="portfolio-heading" data-hero data-hero-inverted data-active-layer="0" data-progress="0">
+  <div class="hero__scene" aria-hidden="true">
     <ArchitectureScene locale={locale} />
-    <ol class="hero-layers" aria-label={p.architectureLabel}>
+  </div>
+  <div class="hero__inner shell">
+    <div class="hero__kicker">
+      <span>{data.profile.headline}</span>
+      <span aria-hidden="true">/</span>
+      <span>{p.heroFocus}</span>
+    </div>
+    <h1 id="portfolio-heading" data-hero-title>
+      {titleLines.map((words, lineIndex) => (
+        <>
+          <span class="hero-line">
+            {words.map((word, index) => (
+              <>
+                <span class="hero-word" data-hero-word={(p.heroLineStarts[lineIndex] ?? 0) + index}><span>{word}</span></span>
+                {index < words.length - 1 && ' '}
+              </>
+            ))}
+          </span>{lineIndex < titleLines.length - 1 && ' '}
+        </>
+      ))}
+    </h1>
+    <p class="hero__summary">{data.profile.intro || copy.homeSummaryFallback}</p>
+    <div class="hero__actions">
+      <a class="text-link hero__cta" href="#work">
+        {copy.viewSelectedWork}<span aria-hidden="true">→</span>
+      </a>
+      <a class="text-link hero__cta hero__cta--ghost" href={contactAvailable ? '#contact' : data.resume ? '#experience' : urls.href('timeline/')}>
+        {contactAvailable ? p.contactAction : copy.navigation.experience}<span aria-hidden="true">↓</span>
+      </a>
+    </div>
+    <ol class="hero-ribbon" aria-label={p.architectureLabel}>
+      <li class="hero-ribbon__lead" aria-hidden="true">
+        <span>{p.ribbonLead}</span>
+      </li>
       {p.layers.map((layer, index) => (
-        <li data-hero-layer={index}>
-          <span>{String(index + 1).padStart(2, '0')}</span>
-          <div>
-            <strong>{layer}</strong>
-            <p>{p.layerDescriptions[index]}</p>
-          </div>
+        <li>
+          <button type="button" class:list={['hero-ribbon__layer', { 'is-current': index === 0 }]}
+            data-hero-layer={index} disabled aria-pressed={index === 0}
+            aria-labelledby={`hero-layer-${index}`} aria-describedby={`hero-layer-description-${index}`}>
+            <span class="hero-ribbon__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <strong id={`hero-layer-${index}`}>{layer}</strong>
+            <span class="hero-ribbon__desc" id={`hero-layer-description-${index}`}>{p.layerDescriptions[index]}</span>
+          </button>
         </li>
       ))}
     </ol>
+    <p class="hero__scroll" aria-hidden="true"><span></span>{p.scrollPrompt}</p>
   </div>
-  <p class="hero__scroll" aria-hidden="true"><span></span>{p.scrollPrompt}</p>
 </section>

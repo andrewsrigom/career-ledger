@@ -1,0 +1,89 @@
+{
+  "$schema": "../../../schemas/public-entry.schema.json",
+  "schemaVersion": 1,
+  "recordType": "entry",
+  "id": "vaultmind-self-hosted-rag",
+  "slug": "vaultmind-self-hosted-rag",
+  "title": "Built a Self-Hosted Knowledge System with Cited Retrieval",
+  "kind": "project",
+  "status": "active",
+  "period": {
+    "start": "2026-08-24",
+    "end": null,
+    "label": "August 2026–present"
+  },
+  "summary": "Conceived and built VaultMind from scratch, combining multi-source ingestion, scoped vector retrieval, cited answers, and read-only agent access in one self-hosted application.",
+  "context": "Useful knowledge is often split across source repositories, workspace tools, drive files, and authored documents. VaultMind creates one inspectable retrieval layer while keeping deployment and source control with the operator.",
+  "contributions": [
+    "Defined the product direction, system boundaries, technical architecture, data model, interface, testing strategy, and public release.",
+    "Built source adapters, synchronization workflows, Markdown-aware chunking, embeddings, scoped pgvector retrieval, ranking, persisted citations, and evidence-aware answer generation.",
+    "Created knowledge spaces and a normalized document boundary so different providers feed the same indexing and retrieval pipeline.",
+    "Added a bounded read-only MCP interface that makes the indexed knowledge available to agent workflows without exposing mutation operations.",
+    "Implemented credential protection, prompt-injection handling, synchronization leases, input limits, deterministic demo data, automated tests, and smoke checks."
+  ],
+  "outcomes": [
+    {
+      "text": "Published a complete MIT-licensed implementation that can be self-hosted and inspected end to end.",
+      "evidenceLevel": "public"
+    },
+    {
+      "text": "Made one cited knowledge index available through both the application and a read-only MCP interface.",
+      "evidenceLevel": "observed"
+    }
+  ],
+  "areas": [
+    "AI Engineering",
+    "System Design",
+    "Data & Databases",
+    "Backend Architecture",
+    "Authentication & Security",
+    "Product Engineering"
+  ],
+  "technologies": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "PostgreSQL",
+    "pgvector",
+    "Drizzle ORM",
+    "OpenAI",
+    "Model Context Protocol",
+    "Vitest",
+    "Playwright"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "View VaultMind on GitHub",
+      "href": "https://github.com/andrewsrigom/vaultmind"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "title": "Criei um Sistema de Conhecimento Self-Hosted com Respostas Citadas",
+      "periodLabel": "Agosto de 2026–presente",
+      "summary": "Concebi e desenvolvi o VaultMind do zero, reunindo ingestão de múltiplas fontes, busca vetorial com escopo, respostas citadas e acesso somente leitura para agentes em uma aplicação self-hosted.",
+      "context": "Conhecimento útil costuma ficar disperso entre repositórios, ferramentas de trabalho, arquivos em drives e documentos autorais. O VaultMind cria uma camada única e inspecionável de recuperação, mantendo o deploy e o código sob controle do operador.",
+      "contributions": [
+        "Defini a direção do produto, os limites do sistema, a arquitetura técnica, o modelo de dados, a interface, a estratégia de testes e o lançamento público.",
+        "Implementei adaptadores de fontes, sincronização, divisão orientada a Markdown, embeddings, busca com pgvector e escopo, ranking, citações persistidas e geração de respostas baseada em evidências.",
+        "Criei espaços de conhecimento e uma fronteira normalizada de documentos para que diferentes provedores utilizem o mesmo pipeline de indexação e recuperação.",
+        "Adicionei uma interface MCP limitada e somente leitura que disponibiliza o conhecimento indexado para agentes sem expor operações de alteração.",
+        "Implementei proteção de credenciais, tratamento de prompt injection, leases de sincronização, limites de entrada, dados de demonstração determinísticos, testes automatizados e smoke checks."
+      ],
+      "outcomes": [
+        "Publiquei uma implementação completa sob licença MIT que pode ser hospedada e inspecionada de ponta a ponta.",
+        "Disponibilizei um único índice de conhecimento com citações tanto pela aplicação quanto por uma interface MCP somente leitura."
+      ],
+      "links": [
+        "Ver o VaultMind no GitHub"
+      ]
+    }
+  }
+}

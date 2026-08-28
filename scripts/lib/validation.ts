@@ -250,7 +250,7 @@ function validateEntryLocalizations(value: Record<string, unknown>, source: stri
 
 function validateProjectLocalizations(value: Record<string, unknown>, source: string, issues: string[]) {
   validateLocalizationMap(value.localizations, `${source}.localizations`, issues, (translation, location) => {
-    const allowed = new Set(['name', 'summary', 'description', 'previewAlt', 'links']);
+    const allowed = new Set(['name', 'summary', 'description', 'previewAlt', 'gallery', 'links']);
     const requiredFields = ['name', 'summary', 'description', 'links'];
     if (value.presentation) requiredFields.push('previewAlt');
     required(translation, requiredFields, location, issues);
@@ -259,6 +259,20 @@ function validateProjectLocalizations(value: Record<string, unknown>, source: st
     stringValue(translation.summary, `${location}.summary`, issues, { min: 30, max: 400 });
     stringValue(translation.description, `${location}.description`, issues, { min: 40, max: 1500 });
     if ('previewAlt' in translation) stringValue(translation.previewAlt, `${location}.previewAlt`, issues, { min: 8, max: 240 });
+    const gallery = isObject(value.presentation) ? value.presentation.gallery : undefined;
+    if (gallery !== undefined || translation.gallery !== undefined) {
+      if (!Array.isArray(gallery)) issue(issues, `${location}.gallery`, 'requires a source gallery');
+      if (arrayValue(translation.gallery, `${location}.gallery`, issues, { min: 1, max: 6 })) {
+        requireMatchingLength(translation.gallery, gallery, `${location}.gallery`, issues);
+        translation.gallery.forEach((image, index) => {
+          const imageLocation = `${location}.gallery[${index}]`;
+          if (!isObject(image)) { issue(issues, imageLocation, 'must be an object'); return; }
+          exactKeys(image, new Set(['alt', 'caption']), imageLocation, issues);
+          stringValue(image.alt, `${imageLocation}.alt`, issues, { min: 8, max: 240 });
+          stringValue(image.caption, `${imageLocation}.caption`, issues, { min: 8, max: 500 });
+        });
+      }
+    }
     validateStringList(translation.links, `${location}.links`, issues, { max: 8, itemMin: 1, itemMax: 80 });
     requireMatchingLength(translation.links, value.links, `${location}.links`, issues);
   });
@@ -269,7 +283,7 @@ function validatePresentation(value: unknown, location: string, issues: string[]
     issue(issues, location, 'must be an object');
     return;
   }
-  const allowed = new Set(['preview']);
+  const allowed = new Set(['preview', 'gallery']);
   required(value, ['preview'], location, issues);
   exactKeys(value, allowed, location, issues);
   const preview = value.preview;
@@ -299,6 +313,33 @@ function validatePresentation(value: unknown, location: string, issues: string[]
   } else if (preview.kind === 'diagram' && ['src', 'width', 'height', 'approval'].some((key) => key in preview)) {
     issue(issues, `${location}.preview`, 'abstract diagrams accept only kind and alt');
   }
+  if ('gallery' in value && arrayValue(value.gallery, `${location}.gallery`, issues, { min: 1, max: 6 })) {
+    const sources = new Set<unknown>();
+    value.gallery.forEach((image, index) => {
+      const itemLocation = `${location}.gallery[${index}]`;
+      if (!isObject(image)) { issue(issues, itemLocation, 'must be an object'); return; }
+      const { caption, source, ...visual } = image;
+      if (visual.kind !== 'image') issue(issues, `${itemLocation}.kind`, 'must equal "image"');
+      validatePresentation({ preview: visual }, itemLocation, issues);
+      stringValue(caption, `${itemLocation}.caption`, issues, { min: 8, max: 500 });
+      if (sources.has(visual.src)) issue(issues, `${itemLocation}.src`, 'must be unique within the gallery');
+      sources.add(visual.src);
+      if (!isObject(source)) { issue(issues, `${itemLocation}.source`, 'requires reviewed provenance'); return; }
+      const sourceLocation = `${itemLocation}.source`;
+      const kind = source.kind;
+      enumValue(kind, new Set(['web', 'owner-provided', 'local-capture', 'project-asset']), `${sourceLocation}.kind`, issues);
+      const dateKey = kind === 'owner-provided' ? 'providedAt' : kind === 'project-asset' ? 'collectedAt' : 'capturedAt';
+      exactKeys(source, new Set(['kind', dateKey, ...(kind === 'web' ? ['url'] : [])]), sourceLocation, issues);
+      validateDate(source[dateKey], `${sourceLocation}.${dateKey}`, issues);
+      if (kind === 'web' && source.url !== null) {
+        try {
+          if (typeof source.url !== 'string' || source.url.length > 500) throw new Error('Invalid URL');
+          const url = new URL(source.url);
+          if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash) throw new Error('Invalid URL');
+        } catch { issue(issues, `${sourceLocation}.url`, 'must be null or a public HTTPS URL without credentials, queries or fragments'); }
+      }
+    });
+  }
 }
 
 function validateActivityMix(value: unknown, location: string, issues: string[]) {
@@ -307,10 +348,16 @@ function validateActivityMix(value: unknown, location: string, issues: string[])
     return;
   }
   const allowed = new Set(['basis', 'activityCount', 'items']);
-  required(value, [...allowed], location, issues);
+  required(value, ['basis', 'items'], location, issues);
   exactKeys(value, allowed, location, issues);
-  if (value.basis !== 'recorded-activities') issue(issues, `${location}.basis`, 'must equal "recorded-activities"');
-  integerValue(value.activityCount, `${location}.activityCount`, issues, { min: 1 });
+  if (value.basis === 'recorded-activities') {
+    required(value, ['activityCount'], location, issues);
+    integerValue(value.activityCount, `${location}.activityCount`, issues, { min: 1 });
+  } else if (value.basis === 'owner-estimate') {
+    if ('activityCount' in value) issue(issues, `${location}.activityCount`, 'is not allowed for an owner estimate');
+  } else {
+    issue(issues, `${location}.basis`, 'must equal "recorded-activities" or "owner-estimate"');
+  }
   const domains = new Set<unknown>();
   if (arrayValue(value.items, `${location}.items`, issues, { min: 1, max: ACTIVITY_DOMAINS.length })) {
     let total = 0;
@@ -446,7 +493,7 @@ export function validateProject(value: unknown, options: RecordOptions = {}) {
 
   const allowed = new Set([
     '$schema', 'schemaVersion', 'recordType', 'id', 'slug', 'name', 'kind', 'status', 'summary', 'description',
-    'areas', 'technologies', 'relatedEntries', 'featured', 'presentation', 'activityMix', 'publication', 'links', 'localizations'
+    'areas', 'technologies', 'relatedEntries', 'featured', 'workContext', 'ownership', 'presentation', 'activityMix', 'publication', 'links', 'localizations'
   ]);
   required(value, ['schemaVersion', 'recordType', 'id', 'slug', 'name', 'kind', 'status', 'summary', 'description', 'areas', 'technologies', 'relatedEntries', 'featured', 'publication', 'links'], source, issues);
   exactKeys(value, allowed, source, issues);
@@ -459,6 +506,8 @@ export function validateProject(value: unknown, options: RecordOptions = {}) {
   stringValue(value.name, `${source}.name`, issues, { min: 2, max: 100 });
   enumValue(value.kind, PROJECT_KINDS, `${source}.kind`, issues);
   enumValue(value.status, PROJECT_STATUSES, `${source}.status`, issues);
+  if ('workContext' in value) enumValue(value.workContext, new Set(['professional', 'independent']), `${source}.workContext`, issues);
+  if ('ownership' in value) enumValue(value.ownership, new Set(['end-to-end', 'shared']), `${source}.ownership`, issues);
   stringValue(value.summary, `${source}.summary`, issues, { min: 30, max: 400 });
   stringValue(value.description, `${source}.description`, issues, { min: 40, max: 1500 });
   validateStringList(value.areas, `${source}.areas`, issues, { min: 1, max: 20, itemMin: 2, itemMax: 80 });
@@ -502,15 +551,120 @@ function objectItems(value: unknown): Record<string, unknown>[] {
 }
 function arrayItems(value: unknown): unknown[] { return Array.isArray(value) ? value : []; }
 
+function validateRecommendationUrl(value: unknown, location: string, issues: string[]) {
+  stringValue(value, location, issues, { min: 12, max: 300 });
+  if (typeof value !== 'string') return;
+  try {
+    const url = new URL(value);
+    if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash
+      || !['www.linkedin.com', 'linkedin.com'].includes(url.hostname)
+      || !/^\/in\/[a-zA-Z0-9%-]+\/(?:details\/recommendations\/)?$/.test(url.pathname)) {
+      issue(issues, location, 'must be a canonical public LinkedIn profile or recommendations URL');
+    }
+  } catch { issue(issues, location, 'must be a valid HTTPS URL'); }
+}
+
+function validateContact(value: unknown, source: string, issues: string[]) {
+  if (!isObject(value)) { issue(issues, source, 'must be an object'); return; }
+  exactKeys(value, new Set(['email', 'phone', 'whatsapp', 'links']), source, issues);
+  required(value, ['links'], source, issues);
+  if ('email' in value) stringValue(value.email, `${source}.email`, issues, { max: 254,
+    pattern: /^[a-zA-Z0-9.!#$&'*+\/=^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$/ });
+  if ('phone' in value) stringValue(value.phone, `${source}.phone`, issues, { pattern: /^\+[1-9][0-9]{6,14}$/ });
+  for (const key of ['email', 'phone']) {
+    if (typeof value[key] === 'string' && /\s/.test(value[key])) issue(issues, `${source}.${key}`, 'must not contain whitespace');
+  }
+  if ('whatsapp' in value) {
+    booleanValue(value.whatsapp, `${source}.whatsapp`, issues);
+    required(value, ['phone'], source, issues);
+  }
+  if (arrayValue(value.links, `${source}.links`, issues, { max: 8 })) {
+    const hrefs = new Set<string>();
+    value.links.forEach((link, index) => {
+      const location = `${source}.links[${index}]`;
+      if (!isObject(link)) { issue(issues, location, 'must be an object'); return; }
+      exactKeys(link, new Set(['label', 'href']), location, issues);
+      required(link, ['label', 'href'], location, issues);
+      stringValue(link.label, `${location}.label`, issues, { min: 1, max: 80 });
+      stringValue(link.href, `${location}.href`, issues, { min: 12, max: 300 });
+      if (typeof link.href !== 'string') return;
+      try {
+        const url = new URL(link.href);
+        if (url.protocol !== 'https:' || !url.hostname.includes('.') || url.username || url.password || url.search || url.hash || /\s/.test(link.href)) {
+          issue(issues, `${location}.href`, 'must be a public HTTPS profile URL without credentials or tracking parameters');
+        }
+      } catch { issue(issues, `${location}.href`, 'must be a valid HTTPS URL'); }
+      if (hrefs.has(link.href)) issue(issues, `${location}.href`, 'must be unique');
+      hrefs.add(link.href);
+    });
+  }
+}
+
+function validateRecommendations(value: unknown, source: string, issues: string[]) {
+  if (!arrayValue(value, source, issues, { max: 12 })) return;
+  const ids = new Set<unknown>();
+  value.forEach((item, index) => {
+    const location = `${source}[${index}]`;
+    if (!isObject(item)) { issue(issues, location, 'must be an object'); return; }
+    const fields = ['id', 'name', 'relationship', 'quote', 'profileUrl', 'sourceUrl'];
+    required(item, fields, location, issues);
+    exactKeys(item, new Set([...fields, 'portrait']), location, issues);
+    stringValue(item.id, `${location}.id`, issues, { min: 1, max: 100, pattern: SLUG });
+    if (ids.has(item.id)) issue(issues, `${location}.id`, 'must be unique');
+    ids.add(item.id);
+    stringValue(item.name, `${location}.name`, issues, { min: 2, max: 120 });
+    stringValue(item.relationship, `${location}.relationship`, issues, { min: 4, max: 160 });
+    stringValue(item.quote, `${location}.quote`, issues, { min: 30, max: 700 });
+    validateRecommendationUrl(item.profileUrl, `${location}.profileUrl`, issues);
+    validateRecommendationUrl(item.sourceUrl, `${location}.sourceUrl`, issues);
+    if ('portrait' in item) {
+      const portrait = item.portrait;
+      if (!isObject(portrait)) { issue(issues, `${location}.portrait`, 'must be an object'); return; }
+      const portraitLocation = `${location}.portrait`;
+      const keys = new Set(['src', 'width', 'height', 'approval']);
+      required(portrait, [...keys], portraitLocation, issues);
+      exactKeys(portrait, keys, portraitLocation, issues);
+      stringValue(portrait.src, `${portraitLocation}.src`, issues, { min: 1, max: 160, pattern: /^assets\/portraits\/[a-z0-9][a-z0-9._-]*\.webp$/ });
+      integerValue(portrait.width, `${portraitLocation}.width`, issues, { min: 64, max: 512 });
+      integerValue(portrait.height, `${portraitLocation}.height`, issues, { min: 64, max: 512 });
+      if (portrait.width !== portrait.height) issue(issues, portraitLocation, 'must be square');
+      if (!isObject(portrait.approval)) { issue(issues, `${portraitLocation}.approval`, 'must be an object'); return; }
+      exactKeys(portrait.approval, new Set(['approvedBy', 'reviewedAt']), `${portraitLocation}.approval`, issues);
+      if (portrait.approval.approvedBy !== 'owner') issue(issues, `${portraitLocation}.approval`, 'requires owner approval');
+      validateDate(portrait.approval.reviewedAt, `${portraitLocation}.approval.reviewedAt`, issues);
+    }
+  });
+}
+
 function validateResumeLocalizations(value: Record<string, unknown>, source: string, issues: string[]) {
   validateLocalizationMap(value.localizations, `${source}.localizations`, issues, (translation, location) => {
-    const allowed = new Set(['summary', 'highlights', 'skills', 'experiences', 'education']);
-    required(translation, [...allowed], location, issues);
+    const allowed = new Set(['summary', 'highlights', 'skills', 'experiences', 'education', 'recommendations']);
+    required(translation, ['summary', 'highlights', 'skills', 'experiences', 'education'], location, issues);
     exactKeys(translation, allowed, location, issues);
     stringValue(translation.summary, `${location}.summary`, issues, { min: 50, max: 800 });
     validateStringList(translation.highlights, `${location}.highlights`, issues, { max: 10, itemMin: 15, itemMax: 300 });
     validateStringList(translation.skills, `${location}.skills`, issues, { min: 3, max: 40, itemMin: 1, itemMax: 80 });
     requireMatchingLength(translation.highlights, value.highlights, `${location}.highlights`, issues);
+
+    // Optional translations fall back to the English original, never a fabricated quote.
+    if ('recommendations' in translation && arrayValue(translation.recommendations, `${location}.recommendations`, issues, { max: 12 })) {
+      const sourceIds = new Set(objectItems(value.recommendations).map((item) => item.id));
+      const translatedIds = new Set<unknown>();
+      translation.recommendations.forEach((item, index) => {
+        const itemLocation = `${location}.recommendations[${index}]`;
+        if (!isObject(item)) { issue(issues, itemLocation, 'must be an object'); return; }
+        const keys = new Set(['id', 'quote', 'relationship']);
+        required(item, [...keys], itemLocation, issues);
+        exactKeys(item, keys, itemLocation, issues);
+        stringValue(item.id, `${itemLocation}.id`, issues, { min: 1, max: 100, pattern: SLUG });
+        stringValue(item.quote, `${itemLocation}.quote`, issues, { min: 30, max: 700 });
+        stringValue(item.relationship, `${itemLocation}.relationship`, issues, { min: 4, max: 160 });
+        if (!sourceIds.has(item.id)) issue(issues, `${itemLocation}.id`, 'must reference a source recommendation');
+        if (translatedIds.has(item.id)) issue(issues, `${itemLocation}.id`, 'must be unique');
+        translatedIds.add(item.id);
+      });
+      requireMatchingLength(translation.recommendations, arrayItems(value.recommendations), `${location}.recommendations`, issues);
+    }
 
     const sourceExperiences = new Map(objectItems(value.experiences).map((item) => [item.id, item]));
     const translatedExperienceIds = new Set<unknown>();
@@ -579,7 +733,7 @@ export function validateResume(value: unknown, options: RecordOptions = {}) {
 
   const allowed = new Set([
     '$schema', 'schemaVersion', 'recordType', 'id', 'slug', 'experienceStart', 'summary', 'highlights',
-    'skills', 'activityMix', 'experiences', 'education', 'publication', 'localizations'
+    'skills', 'activityMix', 'experiences', 'education', 'recommendations', 'contact', 'publication', 'localizations'
   ]);
   required(value, ['schemaVersion', 'recordType', 'id', 'slug', 'experienceStart', 'summary', 'highlights', 'skills', 'experiences', 'education', 'publication'], source, issues);
   exactKeys(value, allowed, source, issues);
@@ -593,6 +747,9 @@ export function validateResume(value: unknown, options: RecordOptions = {}) {
   validateOutcomeList(value.highlights, `${source}.highlights`, issues, { max: 10 });
   validateStringList(value.skills, `${source}.skills`, issues, { min: 3, max: 40, itemMin: 1, itemMax: 80 });
   if ('activityMix' in value) validateActivityMix(value.activityMix, `${source}.activityMix`, issues);
+
+  if ('recommendations' in value) validateRecommendations(value.recommendations, `${source}.recommendations`, issues);
+  if ('contact' in value) validateContact(value.contact, `${source}.contact`, issues);
 
   const experienceIds = new Set<unknown>();
   if (arrayValue(value.experiences, `${source}.experiences`, issues, { min: 1, max: 20 })) {

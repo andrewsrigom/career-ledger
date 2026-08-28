@@ -69,6 +69,8 @@ export type ProjectRecord = {
   name: string;
   kind: "application" | "open-source" | "platform" | "product" | "research" | "tool";
   status: "active" | "completed" | "archived" | "paused";
+  workContext?: "professional" | "independent";
+  ownership?: "end-to-end" | "shared";
   summary: string;
   description: string;
   areas: Array<string>;
@@ -103,6 +105,8 @@ export type ResumeRecord = {
   activityMix?: PresentationActivityMix;
   experiences: Array<ResumeRecordExperience>;
   education: Array<ResumeRecordEducation>;
+  recommendations?: RecommendationRecord[];
+  contact?: ContactRecord;
   publication: ResumeRecordPublication;
   localizations?: LocalizationsResume;
 };
@@ -112,6 +116,30 @@ export type ResumeRecordPeriod = {
   end: string | null;
   label: string;
 };
+
+export interface RecommendationRecord {
+  id: string;
+  name: string;
+  relationship: string;
+  quote: string;
+  profileUrl: string;
+  sourceUrl: string;
+  portrait?: {
+    src: string;
+    width: number;
+    height: number;
+    approval: { approvedBy: 'owner'; reviewedAt: string };
+  };
+}
+
+export interface ContactRecord {
+  email?: string;
+  phone?: string;
+  whatsapp?: boolean;
+  links: Array<{ label: string; href: string }>;
+}
+
+export type LocalizedRecommendation = Pick<RecommendationRecord, 'id' | 'quote' | 'relationship'>;
 
 export type ResumeRecordOutcome = {
   text: string;
@@ -382,6 +410,7 @@ export type LocalizationsProject = {
     summary: string;
     description: string;
     previewAlt?: string;
+    gallery?: Array<{ alt: string; caption: string }>;
     links: LocalizationsTranslatedTextList;
   };
 };
@@ -411,6 +440,7 @@ export type LocalizationsResume = {
     skills: LocalizationsTranslatedTextList;
     experiences: Array<LocalizationsLocalizedExperience>;
     education: Array<LocalizationsLocalizedEducation>;
+    recommendations?: LocalizedRecommendation[];
   };
 };
 
@@ -433,16 +463,17 @@ export type LocalizationsTaxonomy = {
   };
 };
 
-export type PresentationPresentation = { preview: ProjectVisual };
+export type PresentationPresentation = { preview: ProjectVisual; gallery?: ProjectGalleryImage[] };
 
 export type PresentationActivityMix = {
-  basis: "recorded-activities";
-  activityCount: number;
   items: Array<{
     domain: "frontend" | "backend" | "devops" | "infrastructure" | "data" | "ai-ml" | "mobile" | "desktop" | "embedded" | "quality-engineering" | "security" | "developer-experience" | "product-design" | "other";
     percentage: number;
   }>;
-};
+} & (
+  | { basis: "recorded-activities"; activityCount: number }
+  | { basis: "owner-estimate"; activityCount?: never }
+);
 
 export type LocaleCode = 'en' | 'pt-BR';
 export type Period = EntryRecord['period'];
@@ -456,10 +487,31 @@ export type ProjectVisual = { kind: 'diagram'; alt: string } | {
   approval: { approvedBy: 'owner'; reviewedAt: string };
 };
 export type Project = ProjectRecord;
+export type ProjectGalleryImage = Extract<ProjectVisual, { kind: 'image' }> & {
+  caption: string;
+  source: ReviewImage['source'];
+};
+// Local review media is deliberately not part of ProjectRecord or its public schema.
+export interface ReviewImage {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  source: { kind: 'web'; url: string | null; capturedAt: string }
+    | { kind: 'owner-provided'; providedAt: string }
+    | { kind: 'local-capture'; capturedAt: string }
+    | { kind: 'project-asset'; collectedAt: string };
+  localizations?: { 'pt-BR': { alt: string; caption: string } };
+}
+export interface ReviewAsset { src: string; bytes: Uint8Array; }
 export type Profile = ProfileRecord;
 export type Entry = EntryRecord & { significance: NonNullable<EntryRecord['significance']>; activityTypes: string[] };
 export type Experience = ResumeRecord['experiences'][number];
-export type Resume = ResumeRecord & { experienceYears: number | null };
+export type Resume = Omit<ResumeRecord, 'recommendations'> & {
+  experienceYears: number | null;
+  recommendations?: Array<RecommendationRecord & { translated?: true }>;
+};
 export type PublicRecord = EntryRecord | ProjectRecord | ResumeRecord;
 export type ConfiguredProject = LocalConfig['projects'][number];
 export interface FileRecord<T> { file: string; value: T; }
@@ -480,6 +532,8 @@ export type DatasetArea = TaxonomyRecord['areas'][number] & {
 export interface CareerDataset {
   schemaVersion: number;
   preview?: true;
+  reviewMedia?: Record<string, ReviewImage[]>;
+  reviewPortraits?: Record<string, ReviewImage>;
   updatedAt: string;
   profile: Profile;
   resume: Resume | null;

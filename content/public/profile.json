@@ -4,51 +4,51 @@
   "name": "Andrews",
   "headline": "Senior Full-Stack Software Engineer",
   "location": "Maricá, Rio de Janeiro, Brazil",
-  "intro": "Senior full-stack engineering across products, platforms, and developer systems.",
+  "intro": "10+ years building product experiences, platforms, and the systems behind them.",
   "bio": [
-    "I am a senior full-stack software engineer focused on building web products, shared platforms, and the engineering systems that support them.",
-    "I move between product discovery, architecture, hands-on implementation, and delivery—connecting interface quality with backend behavior, automation, and long-term maintainability."
+    "I'm a senior full-stack engineer. My work includes interfaces, APIs, shared components, and the tools teams use to build and ship software.",
+    "I work on architecture and product decisions, and I stay involved in the implementation. That means writing code, connecting services, testing changes, and working on how they reach production."
   ],
   "links": [],
   "principles": [
     {
-      "title": "Product thinking, end to end",
-      "description": "I connect user journeys, business constraints, and technical decisions instead of treating the interface and the system behind it as separate problems."
+      "title": "Understand the problem",
+      "description": "I work through what people need from the product and what the business needs from it. Those questions guide what I build, from the screen to the API."
     },
     {
-      "title": "Architecture teams can extend",
-      "description": "I turn repeated needs into shared components, platform capabilities, and clear boundaries that support continued product development."
+      "title": "Make the next change easier",
+      "description": "When the same need comes up across a product, I look for what can be shared: a component, an API, or a tool. I keep the boundaries clear so the team can keep building on it."
     },
     {
-      "title": "Delivery across the stack",
-      "description": "I stay hands-on across frontend, backend, data, testing, automation, and operations while keeping the product outcome in view."
+      "title": "Stay close to the code",
+      "description": "I work on planning and architecture, but I also implement, test, and help ship the changes. I follow the work across frontend, backend, data, and deployment."
     }
   ],
   "localizations": {
     "pt-BR": {
       "headline": "Engenheiro de Software Full-Stack Sênior",
       "location": "Maricá, Rio de Janeiro, Brasil",
-      "intro": "Engenharia full-stack sênior aplicada a produtos, plataformas e sistemas para desenvolvedores.",
+      "intro": "Mais de 10 anos construindo experiências de produto, plataformas e os sistemas por trás delas.",
       "bio": [
-        "Sou engenheiro de software full-stack sênior, com foco na construção de produtos web, plataformas compartilhadas e sistemas de engenharia que dão suporte a eles.",
-        "Atuo entre descoberta de produto, arquitetura, implementação prática e entrega, conectando a qualidade da interface ao comportamento do backend, à automação e à manutenção de longo prazo."
+        "Sou engenheiro full-stack sênior. Meu trabalho inclui interfaces, APIs, componentes compartilhados e ferramentas que as equipes usam para desenvolver e publicar software.",
+        "Participo das decisões de arquitetura e produto e continuo envolvido na implementação. Isso inclui escrever código, integrar serviços, testar mudanças e trabalhar em como elas chegam à produção."
       ],
       "links": [],
       "principles": [
         {
-          "title": "Visão de produto de ponta a ponta",
-          "description": "Conecto jornadas de usuário, restrições do negócio e decisões técnicas em vez de tratar a interface e o sistema por trás dela como problemas separados."
+          "title": "Entender o problema",
+          "description": "Procuro entender o que as pessoas precisam do produto e o que o negócio espera dele. Essas perguntas guiam o que construo, da tela à API."
         },
         {
-          "title": "Arquitetura que a equipe consegue evoluir",
-          "description": "Transformo necessidades recorrentes em componentes compartilhados, capacidades de plataforma e limites claros que sustentam a evolução do produto."
+          "title": "Facilitar a próxima mudança",
+          "description": "Quando a mesma necessidade aparece em várias partes do produto, procuro o que pode ser compartilhado: um componente, uma API ou uma ferramenta. Mantenho os limites claros para a equipe conseguir evoluir o projeto."
         },
         {
-          "title": "Entrega em toda a stack",
-          "description": "Mantenho atuação prática em frontend, backend, dados, testes, automação e operações sem perder de vista o resultado do produto."
+          "title": "Continuar perto do código",
+          "description": "Participo do planejamento e da arquitetura, mas também implemento, testo e ajudo a colocar as mudanças no ar. Acompanho o trabalho entre frontend, backend, dados e deploy."
         }
       ]
     }
   },
-  "updatedAt": "2026-08-26"
+  "updatedAt": "2026-08-27"
 }

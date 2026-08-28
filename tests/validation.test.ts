@@ -22,10 +22,30 @@ test('included public content is valid', async () => {
   assert.deepEqual(result.issues, []);
 });
 
+test('project work context is optional and accepts only the canonical classifications', async () => {
+  const project = parseProject(await readJson(`${PATHS.publicProjects}/career-ledger.json`));
+  assert.deepEqual(validateProject(project), []);
+  assert.deepEqual(validateProject({ ...project, workContext: 'professional' }), []);
+  assert.deepEqual(validateProject({ ...project, workContext: 'independent' }), []);
+  for (const workContext of ['company-name', '', null, true, {}]) {
+    assert.ok(validateProject({ ...project, workContext }).some((item) => item.includes('workContext')));
+  }
+});
+
+test('project ownership is optional, explicit and bounded to the reviewed scope', async () => {
+  const project = parseProject(await readJson(`${PATHS.publicProjects}/career-ledger.json`));
+  assert.deepEqual(validateProject({ ...project, ownership: 'end-to-end' }), []);
+  assert.deepEqual(validateProject({ ...project, ownership: 'shared' }), []);
+  for (const ownership of ['sole-author', 100, null, true, {}]) {
+    assert.ok(validateProject({ ...project, ownership }).some((issue) => issue.includes('ownership')));
+  }
+});
+
 test('project presentation and recorded activity mix are explicit and bounded', async () => {
   const project = parseProject(await readJson(`${PATHS.publicProjects}/career-ledger.json`));
   project.presentation = { preview: { kind: 'image', src: 'assets/projects/career-ledger.webp', alt: 'Career Ledger project overview', width: 1280, height: 800, approval: { approvedBy: 'owner', reviewedAt: '2026-08-26' } } };
   assert.ok(project.localizations?.['pt-BR']);
+  delete project.localizations['pt-BR'].gallery;
   project.localizations['pt-BR'].previewAlt = 'Visão geral do projeto Career Ledger';
   project.activityMix = { basis: 'recorded-activities', activityCount: 10, items: [{ domain: 'frontend', percentage: 60 }, { domain: 'backend', percentage: 40 }] };
   assert.deepEqual(validateProject(project), []);
@@ -34,6 +54,24 @@ test('project presentation and recorded activity mix are explicit and bounded', 
   assert.equal(project.presentation.preview.kind, 'image');
   project.presentation.preview.src = 'https://example.com/image.webp';
   assert.ok(validateProject(project).some((item) => item.includes('preview.src')));
+});
+
+test('owner work estimates cannot masquerade as recorded activity samples', async () => {
+  const project = parseProject(await readJson(`${PATHS.publicProjects}/career-ledger.json`));
+  const activityMix = { basis: 'owner-estimate', items: [
+    { domain: 'backend', percentage: 35 }, { domain: 'frontend', percentage: 50 }, { domain: 'devops', percentage: 15 }
+  ] };
+  assert.deepEqual(validateProject({ ...project, activityMix }), []);
+  assert.equal(parseProject({ ...project, activityMix }).activityMix?.basis, 'owner-estimate');
+  for (const activityCount of [0, 10, undefined]) {
+    assert.ok(validateProject({ ...project, activityMix: { ...activityMix, activityCount } }).some((issue) => issue.includes('activityCount')));
+  }
+  assert.ok(validateProject({ ...project, activityMix: { ...activityMix, basis: 'recorded-activities' } }).some((issue) => issue.includes('activityCount')));
+  assert.ok(validateProject({ ...project, activityMix: { ...activityMix, items: [{ domain: 'backend', percentage: 90 }] } }).some((issue) => issue.includes('total 100')));
+  assert.ok(validateProject({ ...project, activityMix: { ...activityMix, items: [{ domain: 'backend', percentage: 50 }, { domain: 'backend', percentage: 50 }] } }).some((issue) => issue.includes('unique')));
+  const candidate = { ...project, activityMix, publication: { status: 'candidate', sanitized: true, reviewedAt: null, approvedBy: null } };
+  assert.deepEqual(validateProject(candidate, { mode: 'candidate' }), []);
+  assert.ok(validateProject(candidate, { mode: 'public' }).some((issue) => issue.includes('publication')));
 });
 
 test('candidate and public publication modes are distinct', async () => {

@@ -3,6 +3,7 @@ import type { SiteContext } from '../../lib/types';
 import BaseLayout from '../BaseLayout.astro';
 import TagList from '../TagList.astro';
 import ProjectSummary from '../ProjectSummary.astro';
+import { orderTechnologies } from '../../lib/technology-presentation';
 interface Props { context: SiteContext; slug: string; }
 const { context, slug } = Astro.props;
 const { data, urls, copy, locale } = context;
@@ -26,11 +27,10 @@ const projects = data.projects.filter((project) => project.relatedEntries.includ
     </header>
     <div class="detail-grid">
       {entry.context && <section><h2>{copy.context}</h2><p>{entry.context}</p></section>}
-      <aside><div><span>{copy.technologies}</span><p>{entry.technologies.join(' · ')}</p></div></aside>
+      <aside><div><span>{copy.technologies}</span><p>{orderTechnologies(entry.technologies).join(' · ')}</p></div></aside>
     </div>
     <section class="detail-section prose-list"><h2>{copy.contributions}</h2><ul>{entry.contributions.map((item: string) => <li>{item}</li>)}</ul></section>
     {entry.outcomes.length > 0 && <section class="detail-section prose-list"><h2>{copy.outcomes}</h2><ul>{entry.outcomes.map((item) => <li>{item.text}</li>)}</ul></section>}
     {projects.length > 0 && <section class="detail-section"><h2>{copy.relatedProjects}</h2><div class="directory-list directory-list--compact">{projects.map((project, index: number) => <ProjectSummary project={project} urls={urls} copy={copy} index={index} />)}</div></section>}
-    <footer class="record-note"><strong>{data.preview ? copy.candidateNote : copy.publicationNote}</strong><p>{data.preview ? copy.candidateNoteText : copy.publicationNoteText}</p></footer>
   </article>
 </BaseLayout>

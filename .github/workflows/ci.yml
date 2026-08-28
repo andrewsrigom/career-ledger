@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - portfolio-interactive-redesign
 
 permissions:
   contents: read
@@ -37,6 +38,7 @@ jobs:
 
       - name: Verify public browser behavior
         run: |
+          npm run check:browser
           CAREER_BROWSER_BASE_PATH=/career-ledger npm run check:browser
           CAREER_BROWSER_BASE_PATH=/test-repository npm run check:browser
         env:

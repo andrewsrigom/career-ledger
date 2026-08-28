@@ -628,10 +628,6 @@ export function renderEntry(data: CareerDataset, urls: UrlContext, entry: Entry)
       <h2>${escapeHtml(context.copy.relatedProjects)}</h2>
       <div class="project-grid">${relatedProjects.map((project) => renderProjectCard(project, context)).join('')}</div>
     </section>` : ''}
-    <footer class="record-note">
-      <strong>${escapeHtml(data.preview ? context.copy.candidateNote : context.copy.publicationNote)}</strong>
-      <p>${escapeHtml(data.preview ? context.copy.candidateNoteText : context.copy.publicationNoteText)}</p>
-    </footer>
   </article>`;
 
   return renderLayout({
@@ -660,7 +656,7 @@ export function renderAbout(data: CareerDataset, urls: UrlContext) {
   const body = `<header class="about-hero shell">
     <span class="eyebrow">${escapeHtml(context.copy.aboutEyebrow)}</span>
     <div class="about-hero__grid">
-      <h1>${escapeHtml(context.copy.aboutTitle)}</h1>
+      <h1>${escapeHtml(context.copy.aboutTitle(data.profile.name))}</h1>
       <p>${escapeHtml(context.copy.aboutIntro)}</p>
     </div>
   </header>

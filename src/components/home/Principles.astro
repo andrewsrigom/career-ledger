@@ -8,7 +8,7 @@ const p = portfolioCopy(locale);
 
 <section class="principles-section shell" id="about" aria-labelledby="principles-heading" data-section="about">
   <header class="section-heading principles-section__heading" data-reveal>
-    <span class="eyebrow">05 / {p.principlesKicker}</span>
+    <span class="eyebrow">{data.resume?.recommendations?.length ? '06' : '05'} / {p.principlesKicker}</span>
     <h2 id="principles-heading">{p.principlesTitle}</h2>
   </header>
   <ol class="principle-list">

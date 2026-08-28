@@ -105,15 +105,52 @@ A project represents a product, platform, open-source tool, experiment, or other
 
 Schema: `schemas/public-project.schema.json`
 
+### Work context and ordering
+
+Optional `workContext` is `professional` for confirmed client/company work or `independent` for an independent project. Omit it when the context is unknown. Project status describes the owner's contribution, not whether a product's website is still available.
+
+Optional `ownership` is `end-to-end` or `shared`. It records explicitly supported responsibility across the product lifecycle, not sole authorship or a percentage. Omit it when scope is unconfirmed. Independent context, stack size, Git authorship and activity percentages never imply end-to-end ownership. Like all candidate metadata, it remains in the existing approval workflow.
+
+The homepage, directories, taxonomy project lists and localized datasets share the deterministic editorial order from `scripts/lib/project-ranking.ts`. All available projects render in one sequence. The legacy `featured` flag is retained for compatibility but does not hide records or override ranking. Four internal treatments (flagship, featured, standard, compact) vary typography, context and image size; neither numeric scores nor diagnostic signals are serialized into JSON or client scripts.
+
+The heuristic uses existing taxonomy slugs from projects and related entries, explicit ownership, recorded contribution/outcome items, and usable images. It does not parse marketing copy or count technologies. Current weights:
+
+| Signal | Points |
+| --- | --- |
+| Frontend and backend areas together | +24 |
+| Backend / backend plus systems, data, security or infrastructure | +18 / +28 |
+| Systems/data/security/infrastructure without backend | +14 |
+| AI area | +24 |
+| Explicit end-to-end scope | +24 |
+| Recency: at most 90 / 180 / 365 days / 3 years | +12 / +10 / +8 / +3 |
+| Older than 3 / 5 years | −8 / −18 |
+| One usable image / more than one | +18 / +22 (capped) |
+| Explicit abstract diagram without an image | +4 |
+| Recorded contributions | +4 each, capped at +12 |
+| Outcomes: self-reported / observed or measured | +5 / +8 each, capped at +10 |
+| No contributions, outcomes or explicit ownership | −16 |
+| At least 75% shared entry IDs with a higher-ranked project | −24 once |
+| One substantive active professional project tied to a current resume role | +50 |
+
+The anchor bonus applies only to the strongest qualifying candidate with a pre-bonus score of at least 65; no general company/client priority exists. Highest score leads; remaining scores of 105+ receive featured treatment, 48+ standard, and lower scores compact. Every record remains visible. Overlap is compared by referenced entry IDs, not common stacks or industries. Recency uses the latest related entry end/start date, falling back to an explicitly related resume period only when no entry date exists. The reference date is the dataset's validated update date, never the build clock. Dates and stable IDs resolve ties without translated names. Role dates do not assert project inception or duration.
+
+Ranking never reads repositories, Git history, private storage, environment secrets or network APIs. Public generation evaluates only approved data and approved visuals. The existing preview adapter may re-rank its already validated candidate dataset after attaching isolated review images; those images never influence the public build. Image presence is a bounded editorial proxy, not an automated quality assessment or proof of authorship. Incomplete records can rank lower until their scope, dates, contributions or images are reviewed through the existing workflow.
+
 ### Optional project presentation
 
 `presentation.preview` is either an abstract diagram (`kind: "diagram"`, `alt`) or an explicitly owner-approved local image. Image metadata requires `src`, `alt`, `width`, `height`, and `approval: { approvedBy: "owner", reviewedAt: "YYYY-MM-DD" }`. This image review is separate from approval to publish the candidate.
 
+`presentation.gallery` optionally contains 1–6 approved images with the same visual fields plus `caption` and a bounded `source` (web, owner-provided, local-capture or project-asset). It preserves the reviewed screenshot sequence on the public project page; the first image supplies the homepage caption. Each image has its own approval and unique source path. PT-BR galleries require a matching `localizations.pt-BR.gallery` array of `alt`/`caption` pairs. All images are staged from explicitly referenced public assets, never from the private manifest; encoded WebP dimensions must match the declaration. Original private evidence locations remain excluded.
+
 Image paths must match `assets/projects/<safe-name>.webp` or `.avif`. Width is 320–2400 px; height is 180–1800 px. The build checks actual encoding, regular-file status, symlink components, and the 250 KiB size cap. A project with PT-BR localization and explicit presentation metadata also needs `localizations.pt-BR.previewAlt`.
 
-No preview metadata is required to make a project usable. Missing approved imagery produces an authored, clearly abstract editorial diagram. A private inventory under `.career/private/media-review/` stores references and review status only; discovery never copies source assets.
+No preview metadata is required to make a project usable. Missing imagery can use a typographic row without an empty image slot; the opening project and explicitly authored diagram previews retain the clearly abstract editorial composition. A private inventory under `.career/private/media-review/` stores references and review status only; discovery never copies source assets.
 
-### Optional recorded activity mix
+Owner-requested screenshot preparation may additionally store selected WebP derivatives in `.career/private/media-review/images/` and describe them in `preview.json`. This manifest is independent of public project records: a preview-only `reviewMedia` projection adds localized alternative text, captions, dimensions, and source provenance to the isolated dataset. Web captures record their source URL and capture date; supplied images record their provision date without inventing a capture date. A `local-capture` source records only `capturedAt`; a `project-asset` source records only `collectedAt`, not an assumed historical capture date. These local source kinds reject URLs and paths; original locations remain in separate private review notes. No approval metadata is inferred. Unknown projects, unsafe paths, symlinks, private text, mismatched dimensions, and images over 250 KB are rejected. Public schemas reject this review-media field.
+
+For a web review image, `source.url` is required but may be explicitly `null` to withhold the source location. Its actual address remains in private review notes, while the gallery renders the capture date without a source link. Non-null URLs still require the same public HTTPS format and full privacy audit; omission, empty strings, and invalid dates are rejected.
+
+### Optional work distribution
 
 Project and resume candidates accept an optional `activityMix`:
 
@@ -128,9 +165,13 @@ Project and resume candidates accept an optional `activityMix`:
 }
 ```
 
-The basis and positive sample count are mandatory. Domains are unique and normalized; percentages must total 100 within rounding tolerance. Values never stand for hours, effort, code share, or ownership.
+The basis is mandatory. For `recorded-activities`, a positive sample count is mandatory; values describe activity distribution, not hours, effort, code share, or ownership. Domains are unique and normalized; percentages must total 100 within rounding tolerance.
+
+An explicitly owner-supplied work distribution uses the same field with `basis: "owner-estimate"` and `items`, but must not include `activityCount`. The frontend labels that source in the portfolio's first-person voice as “My estimate.” / “Minha estimativa.” and omits the recorded-activity count and weighting explanation. Preserve the owner's exact percentages, keep the confirmation in private context, and never overwrite an owner estimate with a later automatic projection. This source distinction does not grant publication approval or turn an estimate into measured hours.
 
 The localhost candidate preview can derive a portfolio-wide mix from private activity domain tags, showing only the aggregate, the sample count, and the weighting explanation. A public build never performs that calculation or reads those activity records. A public mix must be explicitly reviewed and approved as part of its project or resume record.
+
+For an owner-requested project work-distribution chart, a private projection may focus on the recorded `frontend`, `backend`, and delivery (`devops`/`infrastructure`) surfaces. Collapse delivery tags before weighting, then divide one unit per qualifying activity equally among its distinct surfaces. Cross-cutting tags remain in the canonical activity but do not introduce extra slices in this focused projection; activities without a selected surface are outside its sample. Store only the resulting percentages, qualifying activity count, and `recorded-activities` basis in the existing candidate `activityMix`. Keep the project-to-source mapping, record selection, and method in private review notes. Never infer a distribution from technology counts, repository size, or role titles, and never change canonical tags to obtain a preferred percentage.
 
 Schema definitions: `schemas/public-presentation.schema.json`
 
@@ -150,6 +191,22 @@ The resume record includes:
 The build uses the dataset `updatedAt` value when calculating completed experience years. It never uses the current build clock.
 
 Schema: `schemas/public-resume.schema.json`
+
+### Contact channels
+
+The optional resume `contact` object holds the owner's selected `email`, international `phone` (E.164, including `+`), optional `whatsapp` flag, and a required `links` array (up to eight HTTPS social profiles). Every field is optional except the array; absent channels produce no placeholder or inactive control. The WhatsApp flag requires a phone and must never be inferred. Email URI characters are encoded, phone links use `tel:`, and social links have no credentials or tracking query. Both languages keep identical contact destinations.
+
+Keep new contact details in the existing resume candidate until owner review; do not recover personal details from Git identities or guess social usernames. The frontend may also use already-approved `profile.links` when no resume contact object exists. An empty contact section is omitted.
+
+### Recommendation excerpts
+
+The optional resume `recommendations` list holds up to twelve attributed LinkedIn excerpts: stable `id`, `name`, historical work `relationship`, exact English `quote` (30–700 characters), canonical HTTPS `profileUrl` and `sourceUrl`. Quotes are not converted into owner-authored impact or leadership claims. Publication dates are not presentation fields.
+
+`localizations.pt-BR.recommendations` contains only `id`, `quote`, and `relationship`; when supplied it must match every source ID exactly once. The renderer labels translations, retaining canonical authors and links. Missing translations fall back to English and retain `lang="en"`. A derived `translated` flag exists only in localized output, never in source records.
+
+An optional public `portrait` requires a square 64–512px local WebP under `assets/portraits/`, declared `width`/`height`, and `approval: { approvedBy: "owner", reviewedAt: "YYYY-MM-DD" }`. Only referenced, approved portraits are staged; encoded dimensions must match and files must not exceed 50 KB. Absent portraits use initials.
+
+Before approval, use the existing resume candidate and optional `portraits` entries in the private media-review manifest: `{ recommendationId, image }`. The image uses the same provenance and bilingual text contract as project review media, with independent portrait bounds. Its ID must refer to a loaded recommendation. The preview adapter supplies validated bytes and `reviewPortraits`; public builds reject that field, including an empty map. This does not relax project image limits or authorize publication.
 
 ## Localized public copy
 

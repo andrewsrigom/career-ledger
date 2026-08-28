@@ -1,0 +1,101 @@
+{
+  "$schema": "../../../schemas/public-project.schema.json",
+  "schemaVersion": 1,
+  "recordType": "project",
+  "id": "caderno-ui",
+  "ownership": "end-to-end",
+  "slug": "caderno-ui",
+  "name": "Caderno UI",
+  "kind": "open-source",
+  "status": "active",
+  "summary": "A notebook-inspired component system built as standards-based custom elements with thin React and Astro integrations.",
+  "description": "I conceived, designed, and built Caderno UI from scratch as a framework-agnostic interface system. Its canonical Lit custom elements expose typed events, tokens, slots, CSS properties, and shadow parts, while thin React and Astro layers reuse the same behavior. Accessibility, keyboard interaction, resilient pre-upgrade content, documentation, compatibility testing, and package releases are part of the system rather than downstream additions.",
+  "areas": [
+    "Frontend Architecture",
+    "Accessibility",
+    "Developer Experience",
+    "System Design",
+    "Product Engineering"
+  ],
+  "technologies": [
+    "Lit",
+    "Web Components",
+    "TypeScript",
+    "React",
+    "Astro",
+    "GSAP",
+    "Playwright",
+    "Changesets",
+    "GitHub Actions"
+  ],
+  "relatedEntries": [
+    "caderno-ui-component-system"
+  ],
+  "featured": true,
+  "publication": {
+    "status": "approved",
+    "sanitized": true,
+    "reviewedAt": "2026-08-28",
+    "approvedBy": "owner"
+  },
+  "links": [
+    {
+      "label": "Documentation",
+      "href": "https://andrewsrigom.github.io/caderno-ui/"
+    },
+    {
+      "label": "GitHub repository",
+      "href": "https://github.com/andrewsrigom/caderno-ui"
+    }
+  ],
+  "localizations": {
+    "pt-BR": {
+      "name": "Caderno UI",
+      "summary": "Um sistema de componentes inspirado em cadernos, construído com custom elements baseados em padrões web e integrações leves para React e Astro.",
+      "description": "Concebi, projetei e desenvolvi o Caderno UI do zero como um sistema de interfaces independente de framework. Seus custom elements canônicos em Lit expõem eventos tipados, tokens, slots, propriedades CSS e shadow parts, enquanto camadas leves para React e Astro reutilizam o mesmo comportamento. Acessibilidade, interação por teclado, conteúdo resiliente antes do upgrade, documentação, testes de compatibilidade e publicação de pacotes fazem parte do sistema.",
+      "links": [
+        "Documentação",
+        "Repositório no GitHub"
+      ],
+      "previewAlt": "Documentação do Caderno UI com tipografia manuscrita, nota, instruções de instalação e exemplos de componentes.",
+      "gallery": [
+        {
+          "alt": "Documentação do Caderno UI com tipografia manuscrita, nota, instruções de instalação e exemplos de componentes.",
+          "caption": "Documentação pública do Caderno UI, mostrando a linguagem visual inspirada em cadernos e os componentes reutilizáveis de interface."
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "preview": {
+      "src": "assets/projects/caderno-ui-home-2026-08-27.webp",
+      "width": 1440,
+      "height": 1006,
+      "alt": "Caderno UI documentation with handwritten typography, a note, installation instructions, and component examples.",
+      "kind": "image",
+      "approval": {
+        "approvedBy": "owner",
+        "reviewedAt": "2026-08-28"
+      }
+    },
+    "gallery": [
+      {
+        "src": "assets/projects/caderno-ui-home-2026-08-27.webp",
+        "width": 1440,
+        "height": 1006,
+        "source": {
+          "kind": "web",
+          "url": "https://andrewsrigom.github.io/caderno-ui/",
+          "capturedAt": "2026-08-27"
+        },
+        "alt": "Caderno UI documentation with handwritten typography, a note, installation instructions, and component examples.",
+        "caption": "The public Caderno UI documentation, showing the notebook-inspired design language and reusable interface components.",
+        "kind": "image",
+        "approval": {
+          "approvedBy": "owner",
+          "reviewedAt": "2026-08-28"
+        }
+      }
+    ]
+  }
+}
