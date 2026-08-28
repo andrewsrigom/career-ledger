@@ -7,6 +7,7 @@ const { data, locale } = Astro.props;
 const p = portfolioCopy(locale);
 const contact = data.resume?.contact;
 const links = contactLinks(contact, data.profile.links);
+const [emailName, emailDomain] = contact?.email?.split('@') ?? [];
 ---
 
 {hasContact(contact, data.profile.links) && (
@@ -20,7 +21,7 @@ const links = contactLinks(contact, data.profile.links);
       {contact?.email && (
         <a class="contact-channel contact-channel--email" href={emailHref(contact.email)}>
           <span class="eyebrow">{p.contactEmail}</span>
-          <strong>{contact.email}</strong><span class="contact-arrow" aria-hidden="true">↗</span>
+          <strong>{emailName}<wbr /><span class="contact-email-domain">@{emailDomain}</span></strong><span class="contact-arrow" aria-hidden="true">↗</span>
         </a>
       )}
       {contact?.phone && (
@@ -45,10 +46,13 @@ const links = contactLinks(contact, data.profile.links);
   .contact-section { border-top: 1px solid var(--line); padding-block: clamp(4rem, 8vw, 8rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(2rem, 7vw, 8rem); }
   .contact-heading h2 { font: 400 clamp(3rem, 6vw, 6.4rem)/1.05 var(--serif); letter-spacing: -.045em; margin: 1rem 0 1.5rem; }
   .contact-heading p { color: var(--muted); max-width: 27rem; font-size: 1.1rem; line-height: 1.7; }
-  .contact-channels { min-width: 0; align-self: center; }
+  .contact-channels { min-width: 0; align-self: center; container-type: inline-size; }
   .contact-channel { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; align-items: center; padding-block: 1.4rem; text-decoration: none; }
   .contact-channel .eyebrow { grid-column: 1 / -1; margin-bottom: .7rem; }
   .contact-channel strong { font: 400 clamp(1.35rem, 2.5vw, 2.4rem)/1.35 var(--serif); overflow-wrap: anywhere; }
+  /* Fit the actual column, including on wide screens where the page is capped. */
+  .contact-channel--email strong { font-size: clamp(1.25rem, 4.7cqi, 2.4rem); }
+  .contact-email-domain { white-space: nowrap; }
   .contact-arrow { color: var(--accent); font-size: 1.5rem; }
   .contact-channel:hover strong { text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
   .contact-channel--email, .contact-phone { border-bottom: 1px solid var(--line); }

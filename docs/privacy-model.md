@@ -90,6 +90,8 @@ private evidence
 
 No agent, script, scheduled task, or future integration may skip explicit owner approval.
 
+Deployment of already-approved public content is distinct from candidate approval. The owner authorized automatic Cloudflare deployment after a reviewed revision reaches `main` and passes the full harness. That policy neither grants agents general merge authority nor makes private drafts publishable. Feature branches and pull requests cannot use the production deployment environment.
+
 Resume, portfolio, summary, and interview drafts are projections inside the private boundary. They cannot become an alternate publication source or bypass candidate review.
 
 ## What sanitization means

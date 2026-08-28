@@ -6,7 +6,17 @@ The public portfolio uses the existing Astro static build on Cloudflare Pages at
 
 Only `dist/`, produced from validated `content/public/` and explicitly approved assets, is uploaded. Never upload `.career/reports/publication-preview/`, private candidates, the workspace root or credentials. No SSR, Worker, database, paid service or CMS is required. The prior GitHub Pages deployment is left intact.
 
-## Approved manual release
+## Automatic release from main
+
+The owner approved automatic publication of reviewed changes accepted into `main`. `.github/workflows/cloudflare-pages.yml` runs on `push` to `main`; feature branches and pull requests do not deploy. Its job repeats validation, audit, type checks, Node tests and all three browser suites, then rebuilds for the production URL, retains the artifact for 90 days and deploys that exact revision. A failed step prevents upload and leaves the previous production deployment intact.
+
+The GitHub `cloudflare-pages` environment permits only `main`. It holds `CLOUDFLARE_ACCOUNT_ID` and a dedicated `CLOUDFLARE_API_TOKEN` limited to Pages Write on the intended account. The local Wrangler OAuth login is never reused by CI. Restrict the environment to `main` without a second required-reviewer gate, since approval now happens before a change enters `main`.
+
+Private candidates still require explicit content review and approval before entering `content/public/`. This policy does not authorize bulk promotion, branch merges by an agent, or publication from feature branches. The reviewed workflow must be integrated into `main` before the trigger becomes active there.
+
+For an explicit retry, manually run **Deploy Cloudflare Pages** on `main` and check `confirm_publication`. Manual runs on other branches are rejected. Older successful Cloudflare deployments remain available for an explicitly requested rollback.
+
+## Explicit local recovery release
 
 Run in WSL or another shell with Node 24 and the owner's existing Wrangler login. Dependencies, including the deployment-only Wrangler CLI, are pinned in the lockfile.
 
@@ -29,11 +39,11 @@ WRANGLER_SEND_METRICS=false npx --no-install wrangler pages deploy dist --projec
 
 `dist/`, `.wrangler/`, `.dev.vars*` and private release manifests remain ignored. An OAuth login is not a GitHub Actions credential and must never be copied into the repository.
 
-## Optional GitHub Actions release
+## CI credential maintenance
 
-`.github/workflows/cloudflare-pages.yml` has only `workflow_dispatch`; pushes and CI success do not publish. The owner must select the reviewed branch and check the explicit publication confirmation. The workflow must be present on the repository's default branch before GitHub exposes manual dispatch; the initial branch is not merged implicitly.
+The dedicated `career-ledger-github-pages` account token has Pages Write permission only. Its configured expiry is 2027-08-28; rotate it before that date by creating a replacement with the same scope, updating the environment secret, verifying a main release, and then revoking the old token. Never print the token, store it in repository files, or grant unrelated account permissions to resolve a deployment error.
 
-To enable this optional route later, configure the `cloudflare-pages` GitHub environment with `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`, restricted to the intended account with Cloudflare Pages Edit. Keep tokens in GitHub Secrets, not files or chat. The workflow runs checks, retains the verified artifact for 90 days and deploys the exact selected revision. The first release can use the local authenticated CLI without adding a CI token.
+If credentials are absent or expired, the upload fails and the current site stays live. Fix the restricted environment secret, then explicitly retry the failed main run. The initial release used local Wrangler; routine releases now use the authenticated Actions workflow after it reaches `main`.
 
 ## Analytics
 

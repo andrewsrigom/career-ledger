@@ -54,4 +54,4 @@ npm run check:browser
 
 Also inspect the English and PT-BR home pages, the experience section when a resume exists, timeline, one area page, one project page, and one entry page locally.
 
-Candidate review also runs `CAREER_BROWSER_PREVIEW=1 npm run check:browser` locally. CI must use only public data. Verify a second base path such as `/test-repository` in addition to `/career-ledger`. Publishing remains a separate, explicitly approved manual action; a successful build does not grant publication authority.
+Candidate review also runs `CAREER_BROWSER_PREVIEW=1 npm run check:browser` locally. CI must use only public data. Verify a second base path such as `/test-repository` in addition to `/career-ledger`. The owner-approved deployment policy publishes revisions accepted into `main` only after the complete harness passes. Feature-branch CI does not publish, and a successful build never promotes private candidates. Manual redeployment is restricted to `main` with explicit confirmation.

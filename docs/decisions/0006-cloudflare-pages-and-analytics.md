@@ -2,6 +2,8 @@
 
 Status: accepted by the owner on 2026-08-28.
 
+The manual-only deployment policy is superseded by [ADR 0007](0007-automatic-main-deployment.md). The hosting, content approval and analytics decisions remain in effect.
+
 ## Context
 
 The owner approved the complete local portfolio, including drafts, reviewed imagery and contact information, and requested Cloudflare hosting with access analytics. The static-first architecture and private/public boundary remain requirements.

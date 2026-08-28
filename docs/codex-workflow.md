@@ -113,7 +113,7 @@ Approval is intentionally interactive.
 
 Explicit owner approval in the current conversation may authorize execution of that gate for the exact reviewed records. Preserve the approval scope in private review notes; this is not agent self-approval and does not authorize future drafts. The complete 2026-08-28 portfolio release includes its existing drafts, reviewed image galleries, recommendations and contact channels. With no pending candidates, the isolated local preview can still render the approved collection.
 
-Publication to Cloudflare is a separate manual operation. Follow `docs/cloudflare-release.md`; upload only the verified public `dist/` and keep credentials/private material outside Git. Never infer deployment approval from passing CI.
+Publication to Cloudflare follows the owner-approved main-branch policy: accepting a reviewed revision into `main` authorizes deployment after its validation and browser checks pass. A passing feature-branch CI run is not deployment approval. Private candidates still require the interactive content approval above. Follow `docs/cloudflare-release.md`; upload only verified public `dist/` and keep credentials/private material outside Git. Do not infer permission to merge unrelated changes.
 
 ## Agent limitations to preserve
 

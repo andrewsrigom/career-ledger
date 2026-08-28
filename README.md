@@ -26,7 +26,7 @@ static website and public JSON
 Cloudflare Pages (GitHub Pages remains available)
 ```
 
-The private ledger engine uses strict TypeScript, Node.js standard-library modules, and native type stripping, without a runtime framework or TS runner. The frontend is a static Astro + TypeScript multi-page site, with progressive GSAP motion and a lazy Three.js hero. Dependencies are installed with `npm ci`; local builds and previews load no external runtime resources. Production uses the owner-approved Cloudflare Web Analytics beacon injected by Pages. GitHub Actions verifies changes automatically, but publication is manual.
+The private ledger engine uses strict TypeScript, Node.js standard-library modules, and native type stripping, without a runtime framework or TS runner. The frontend is a static Astro + TypeScript multi-page site, with progressive GSAP motion and a lazy Three.js hero. Dependencies are installed with `npm ci`; local builds and previews load no external runtime resources. Production uses the owner-approved Cloudflare Web Analytics beacon injected by Pages. GitHub Actions automatically publishes revisions accepted into `main` after validation and browser tests pass. Private candidates still require explicit content approval; feature branches and pull requests do not deploy.
 
 Production: [andrewsrigom.pages.dev](https://andrewsrigom.pages.dev/) · [Português](https://andrewsrigom.pages.dev/pt-br/). See [Cloudflare release and analytics](docs/cloudflare-release.md) for deployment, verification and rollback.
 
@@ -187,7 +187,7 @@ In GitHub:
 1. Open **Settings → Pages**.
 2. Set **Source** to **GitHub Actions**.
 3. Review the local preview and explicitly approve the intended records.
-4. After an authorized merge to `main`, manually run **Deploy GitHub Pages** with **confirm_publication** checked. Pushing to `main` runs CI only, not deployment.
+4. GitHub Pages remains an optional manual fallback: run **Deploy GitHub Pages** with **confirm_publication** checked only when explicitly requested. The current Cloudflare production site deploys automatically after an approved update to `main` passes its checks; the GitHub Pages workflow does not run on push.
 
 The workflow automatically derives the correct base path for both project pages and `<username>.github.io` repositories.
 

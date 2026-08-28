@@ -24,15 +24,28 @@ test('local preview remains isolated after every pending draft has been approved
   assert.doesNotMatch(html, /static\.cloudflareinsights\.com/);
 });
 
-test('Cloudflare release stays manual and uploads only the verified static artifact', async () => {
+test('Cloudflare release automatically publishes only approved main revisions after every check', async () => {
   const config = JSON.parse(await fs.readFile(new URL('../wrangler.jsonc', import.meta.url), 'utf8'));
   assert.equal(config.name, 'andrewsrigom');
   assert.equal(config.pages_build_output_dir, './dist');
   const workflow = await fs.readFile(new URL('../.github/workflows/cloudflare-pages.yml', import.meta.url), 'utf8');
   assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /^  push:\n    branches:\n      - main\n/m);
+  assert.match(workflow, /if: github\.ref == 'refs\/heads\/main' && \(github\.event_name == 'push' \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.confirm_publication == true\)\)/);
   assert.match(workflow, /inputs\.confirm_publication == true/);
-  assert.doesNotMatch(workflow, /^  (?:push|pull_request|schedule|workflow_run):/m);
+  assert.doesNotMatch(workflow, /^  (?:pull_request|pull_request_target|schedule|workflow_run):/m);
+  assert.doesNotMatch(workflow, /portfolio-interactive-redesign|continue-on-error|if: always\(\)/);
   assert.match(workflow, /npm run check/);
+  assert.match(workflow, /CAREER_BROWSER_BASE_PATH=\/career-ledger npm run check:browser/);
+  assert.match(workflow, /CAREER_BROWSER_BASE_PATH=\/test-repository npm run check:browser/);
+  const uploadIndex = workflow.indexOf('pages deploy dist');
+  assert.ok(workflow.indexOf('run: npm run check') < uploadIndex);
+  assert.ok(workflow.indexOf('CAREER_BROWSER_BASE_PATH=/test-repository npm run check:browser') < uploadIndex);
+  assert.ok(workflow.indexOf('Rebuild with the production canonical URL') < uploadIndex);
+  assert.ok(workflow.indexOf('Retain the verified release for rollback') < uploadIndex);
+  assert.match(workflow, /environment:\n      name: cloudflare-pages/);
+  assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /pages deploy dist --project-name andrewsrigom/);
+  assert.match(workflow, /--branch main --commit-hash "\$GITHUB_SHA" --commit-dirty=false/);
   assert.doesNotMatch(workflow, /\.career\/|refresh_token|oauth_token/);
 });

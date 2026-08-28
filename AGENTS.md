@@ -76,7 +76,7 @@ The owner may explicitly authorize particular public project/company identities,
 - Support Windows, WSL, macOS, and Linux paths where practical.
 - Prefer full, readable functions over clever abstractions.
 - Preserve accessibility, responsive behavior, and GitHub Pages base-path support.
-- Cloudflare Pages is the current production target. Deployment stays manual and owner-approved. The only approved external runtime service is Cloudflare Web Analytics, injected by Pages after deployment; local builds and previews remain offline and tracker-free. Do not embed a second beacon or commit deployment credentials.
+- Cloudflare Pages is the current production target. The owner approved automatic deployment of revisions accepted into `main`, only after validation, privacy audit and browser checks pass. Feature branches and pull requests never deploy; a manual retry is restricted to `main`. This deployment policy does not approve private candidates or authorize agents to merge unrelated changes. The only approved external runtime service is Cloudflare Web Analytics, injected by Pages after deployment; local builds and previews remain offline and tracker-free. Do not embed a second beacon or commit deployment credentials.
 - Do not redesign the site into a SaaS dashboard. The visual language is editorial, calm, and evidence-focused.
 
 ## Required commands
