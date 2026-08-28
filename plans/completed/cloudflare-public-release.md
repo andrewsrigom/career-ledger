@@ -6,7 +6,7 @@ Publish the owner's reviewed portfolio at the preferred `andrewsrigom.pages.dev`
 
 ## Context
 
-The Astro static frontend and portfolio refinements are on `portfolio-interactive-redesign`. The local preview contains candidate projects, entries, resume/contact/recommendations and reviewed screenshots; the public dataset is still smaller. The owner explicitly approved all current portfolio content and imagery, analytics, commit, push and publication on 2026-08-28. Existing unrelated Cloudflare projects must not change.
+The Astro static frontend and portfolio refinements are on `portfolio-interactive-redesign`. Before this release, the local preview contained candidate projects, entries, resume/contact/recommendations and reviewed screenshots while the public dataset was smaller. The owner explicitly approved all current portfolio content and imagery, analytics, commit, push and publication on 2026-08-28. Existing unrelated Cloudflare projects must not change.
 
 ## Privacy impact
 
@@ -26,7 +26,10 @@ Only the reviewed presentation records and bounded images will be promoted. Raw 
 - [x] Public dataset and image promotion: 16 projects, 14 entries, resume/contact, 19 screenshots and 6 portraits. All current portfolio candidates passed the interactive gate; private evidence and original snapshots remain excluded.
 - [x] Pages project `andrewsrigom` created and Web Analytics enabled through the authenticated dashboard. Pinned deployment CLI, manual workflow, ADR and operating documentation added.
 - [x] Validation and visual review: public content, bilingual desktop/mobile layouts, 25 image files, and the browser suites reviewed. The final production-context `npm run check` passed before committing.
-- [ ] Commit, push, deployment and live verification.
+- [x] Commit and push of the approved source branch; production deployment to `andrewsrigom.pages.dev` without merging or modifying the prior live site.
+- [x] Live verification: all 141 addressable generated files pass HTTP/content checks; the excluded file is the hosting marker `.nojekyll`. Unknown routes return 404. EN/PT-BR, complete project galleries and contact channels inspected in the browser.
+- [x] Production analytics: exactly one Cloudflare beacon is injected into every HTML page and the beacon resource returns 200. The dashboard is enabled but has not yet displayed collected measurements; do not interpret its initial zero as a complete traffic count.
+- [x] GitHub CI passed, including all three complete 38-test browser suites. Localhost now serves the approved public dataset without draft banners or tracking.
 
 ## Decisions
 
@@ -56,6 +59,8 @@ Verify all portfolio projects, real images, recommendations and contact channels
 
 ## Outcome
 
-Implementation in progress. No release has been made yet.
+The complete owner-approved portfolio is public at <https://andrewsrigom.pages.dev/> and <https://andrewsrigom.pages.dev/pt-br/>. The deployed source branch is pushed, and its GitHub validation run passed. The previous GitHub Pages site and unrelated Cloudflare projects remain unchanged. Future publication remains an explicit manual action.
 
-Checks so far: full validation/audit, strict Node and 53 Astro file checks, 81 Node tests, and the root 38-test browser suite passed. The `/career-ledger` suite passed 37 checks and identified the keyboard-edge issue above; both affected tests then passed three repeats after correction. The alternate-base suite passed all 38 tests. All 25 approved WebP files contain image chunks only, without EXIF/XMP metadata. Final production-context validation passed: 142 pages/assets and 48.7 KB primary / 130.8 KB lazy architecture gzip JavaScript. Live deployment verification is pending.
+Validation: public and staged privacy audits, strict Node and 53 Astro file checks, 81 Node tests, and all three 38-test browser suites passed. The keyboard-edge regression was also repeated three times locally after correction. All 25 approved WebP files contain image chunks only, without EXIF/XMP metadata. Production output contains 142 pages/assets and 48.7 KB primary / 130.8 KB lazy architecture gzip JavaScript. The public JSON exposes 16 projects and 14 entries in both locales, without preview/review data; all deployed non-HTML bytes match the reviewed build.
+
+Analytics activation, injection and resource delivery are verified. Aggregated measurements had not yet appeared during the release check; the owner's Web Analytics dashboard is the place to review incoming traffic. The optional Actions deployment route still requires environment secrets and the workflow on the default branch, as documented in `docs/cloudflare-release.md`; the successful initial release used the existing local Wrangler login.
