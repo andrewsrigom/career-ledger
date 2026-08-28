@@ -6,7 +6,7 @@ Publish approved changes automatically after they reach `main` and pass the comp
 
 ## Context
 
-The owner requested automatic deployment on `main` on 2026-08-28, replacing the previous per-release manual gate. The reviewed portfolio lives on `portfolio-interactive-redesign`; remote `main` still contains the earlier site. The Pages project uses Direct Upload, and GitHub does not yet have its deployment environment or secrets. The contact font currently scales against the viewport instead of the narrower grid column.
+The owner requested automatic deployment on `main` on 2026-08-28, replacing the previous per-release manual gate. At the start, the reviewed portfolio lived on `portfolio-interactive-redesign`, remote `main` still contained the earlier site, and GitHub had no deployment environment or secrets. The Pages project uses Direct Upload. The contact font scaled against the viewport instead of the narrower grid column.
 
 ## Privacy impact
 
@@ -27,7 +27,10 @@ No public content promotion or additional runtime dependency. Only approved publ
 - [x] Updated approval rules, release instructions and ADR 0007 without changing candidate approval or privacy auditing.
 - [x] Created the GitHub production environment restricted to `main`, and stored its account identifier and dedicated Pages Write credential. The token expires on 2027-08-28; no secret value was printed or written to repository files.
 - [x] Verified the full validation/audit/type-check/build harness, 81 Node tests, both 38-test root and alternate-base browser suites, and the email in Windows Chrome. Desktop and mobile captures preserve the complete address.
-- [ ] Finish deployment activation or document the remaining owner action.
+- [x] 2026-08-28: Received explicit owner approval to finish the release; fast-forwarded `main` to the reviewed branch and pushed without rewriting history. The feature-branch CI passed, and the main push started the automatic Cloudflare release.
+- [x] 2026-08-28: Confirmed that Cloudflare Web Analytics is receiving visits and page views. Dashboard readings include verification traffic and are not a claim about external audience size.
+- [x] 2026-08-28: Automatic deployment run 33141547999 passed all checks and published the reviewed main revision. Independently verified all 141 addressable files against its retained artifact, both locales, contact links, the 404 response and one analytics beacon per HTML page.
+- [x] 2026-08-28: Inspected the actual production revision in Windows Chrome in EN/PT-BR at a 1718px viewport. The complete email occupies one line, stays within its column, and has no horizontal overflow. Archived this completed plan.
 
 ## Decisions
 
@@ -45,6 +48,7 @@ No public content promotion or additional runtime dependency. Only approved publ
 ```bash
 npm run check
 npm run check:browser
+CAREER_BROWSER_BASE_PATH=/career-ledger npm run check:browser
 CAREER_BROWSER_BASE_PATH=/test-repository npm run check:browser
 ```
 
@@ -52,4 +56,8 @@ Verify EN/PT-BR contact at narrow, intermediate and ultrawide sizes, including k
 
 ## Outcome
 
-The email-specific regression tests pass at 320–3440px with and without JavaScript. `npm run check` passed: 81 Node tests, zero diagnostics across 53 Astro files, and the verified 142-file static build. Both full root and alternate-base suites passed all 38 tests. Windows Chrome independently confirms the full email on one line in the desktop column. Main integration is awaiting owner direction; no feature-branch deployment has been enabled. The deployed portfolio remains unchanged until the reviewed workflow and email fix reach `main`.
+The owner-approved main integration and automatic deployment are complete. [The first automatic release](https://github.com/andrewsrigom/career-ledger/actions/runs/33141547999) passed `npm run check` (81 Node tests, zero Astro diagnostics and the 142-file static build) and all 38 browser tests in each of the three base-path configurations. Main CI also passed independently.
+
+The published revision is available at <https://133e680a.andrewsrigom.pages.dev/> and the production alias <https://andrewsrigom.pages.dev/>. HTTP verification passed for all 141 addressable files; the other artifact file is `.nojekyll`. Both public data feeds retain 16 projects and 14 entries without private preview fields. All served HTML contains exactly one analytics beacon, and the dashboard is receiving measurements. The previous successful deployment remains available for rollback.
+
+Email regression coverage passes at 320–3440px with and without JavaScript; production Windows Chrome confirms the final container-relative typography in both languages. Feature branches and pull requests cannot publish. Future approved main pushes run the same checks and deploy automatically, without promoting private drafts or requiring another manual Cloudflare action.

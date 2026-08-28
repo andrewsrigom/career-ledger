@@ -12,7 +12,7 @@ The owner approved automatic publication of reviewed changes accepted into `main
 
 The GitHub `cloudflare-pages` environment permits only `main`. It holds `CLOUDFLARE_ACCOUNT_ID` and a dedicated `CLOUDFLARE_API_TOKEN` limited to Pages Write on the intended account. The local Wrangler OAuth login is never reused by CI. Restrict the environment to `main` without a second required-reviewer gate, since approval now happens before a change enters `main`.
 
-Private candidates still require explicit content review and approval before entering `content/public/`. This policy does not authorize bulk promotion, branch merges by an agent, or publication from feature branches. The reviewed workflow must be integrated into `main` before the trigger becomes active there.
+Private candidates still require explicit content review and approval before entering `content/public/`. This policy does not authorize bulk promotion, branch merges by an agent, or publication from feature branches. The owner explicitly approved integrating the reviewed branch on 2026-08-28; the automatic trigger is now active on `main`.
 
 For an explicit retry, manually run **Deploy Cloudflare Pages** on `main` and check `confirm_publication`. Manual runs on other branches are rejected. Older successful Cloudflare deployments remain available for an explicitly requested rollback.
 
@@ -43,7 +43,7 @@ WRANGLER_SEND_METRICS=false npx --no-install wrangler pages deploy dist --projec
 
 The dedicated `career-ledger-github-pages` account token has Pages Write permission only. Its configured expiry is 2027-08-28; rotate it before that date by creating a replacement with the same scope, updating the environment secret, verifying a main release, and then revoking the old token. Never print the token, store it in repository files, or grant unrelated account permissions to resolve a deployment error.
 
-If credentials are absent or expired, the upload fails and the current site stays live. Fix the restricted environment secret, then explicitly retry the failed main run. The initial release used local Wrangler; routine releases now use the authenticated Actions workflow after it reaches `main`.
+If credentials are absent or expired, the upload fails and the current site stays live. Fix the restricted environment secret, then explicitly retry the failed main run. The initial release used local Wrangler; routine releases now use the authenticated Actions workflow on `main`.
 
 ## Analytics
 
